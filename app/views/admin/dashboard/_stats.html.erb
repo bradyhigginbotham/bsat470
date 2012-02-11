@@ -1,0 +1,69 @@
+<script>
+var chart;
+$(document).ready(function() {
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: 'stats_chart',
+			type: 'column'
+		},
+    credits: {
+        enabled: false
+    },
+		title: {
+			text: ''
+		},
+		subtitle: {
+			text: ''	
+		},
+    legend: {
+			layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+			shadow: true,
+      //backgroundColor: '#000',
+      x: -10,
+      y: 50,
+      floating: true
+    },
+		xAxis: {
+    	categories: ['']
+		},
+		yAxis: {
+			title: {
+				text: 'Totals'
+			},
+			min: 0
+		},
+		tooltip: {
+			formatter: function() {
+	                return '<b>'+ this.series.name +'</b>: ' + this.y;
+			}
+		},
+    navigation: {
+        buttonOptions: {
+            backgroundColor: {
+                linearGradient: [0, 0, 0, 20],
+                stops: [
+                   [0.4, '#606060'],
+                   [0.6, '#333333']
+                ]
+            }
+        }
+    },
+		series: [{
+			name: 'Clients',
+			data: [<%= Client.select("DISTINCT clients.client_num").count %>]
+		}, {
+			name: 'Proposals',
+			data: [<%= Proposal.select("DISTINCT proposals.proposal_num").count %>]
+		}, {
+			name: 'Work Orders',
+			data: [<%= WorkOrder.select("DISTINCT work_orders.id").count %>]
+
+		}]
+	});
+	
+	
+});
+</script>
+<div id="stats_chart"></div>
