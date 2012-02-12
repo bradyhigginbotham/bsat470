@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  assignment_num: MyString
+  finish_date: 2012-02-11
+  vehicle_id: 
+  authorization_date: 2012-02-11
+  work_order_id: 
+  employee_id: 
+  authorized_by: MyString
+
+two:
+  assignment_num: MyString
+  finish_date: 2012-02-11
+  vehicle_id: 
+  authorization_date: 2012-02-11
+  work_order_id: 
+  employee_id: 
+  authorized_by: MyString

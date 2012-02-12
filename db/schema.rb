@@ -11,10 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209050551) do
+ActiveRecord::Schema.define(:version => 20120212033830) do
 
   create_table "accounts", :force => true do |t|
+    t.string   "full_name",                              :null => false
     t.string   "email",                  :default => "", :null => false
+    t.string   "role",                                   :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -46,6 +48,18 @@ ActiveRecord::Schema.define(:version => 20120209050551) do
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
+  create_table "assignments", :force => true do |t|
+    t.string   "assignment_num",     :null => false
+    t.date     "finish_date"
+    t.integer  "vehicle_id"
+    t.date     "authorization_date"
+    t.integer  "work_order_id",      :null => false
+    t.integer  "employee_id",        :null => false
+    t.string   "authorized_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "clients", :force => true do |t|
     t.string   "client_num",      :null => false
     t.string   "full_name",       :null => false
@@ -58,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20120209050551) do
   create_table "employees", :force => true do |t|
     t.string   "full_name"
     t.string   "email"
-    t.string   "role"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20120209050551) do
     t.date     "decision_date"
     t.datetime "created_at"
     t.integer  "client_id",                            :null => false
-    t.integer  "employee_id"
+    t.integer  "account_id",                           :null => false
   end
 
   create_table "tasks", :force => true do |t|
@@ -96,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20120209050551) do
     t.date     "date_required",                        :null => false
     t.string   "notes"
     t.datetime "created_at"
-    t.integer  "employee_id",                          :null => false
+    t.integer  "account_id",                           :null => false
     t.string   "proposal_id",                          :null => false
   end
 
