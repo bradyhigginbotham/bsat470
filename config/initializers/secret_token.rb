@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Bsat470::Application.config.secret_token = '6ed69bf2813abd15252d34abd50725ab36a7dcb1de66d57b47650c1e09cca956a93706c6566e54a0a8f8ec3debb2fe62489ecb3f0474afadc3732fd78b21d275'
+Bsat470::Application.config.secret_token = '6534ffcccc201a113923fcf895bae7ec5450c4aa17003c55749bca0d0114d614807340e045d4f7db2d4a201f91a6d53cde306f3ae4a1c7004e4c52d9b9d9f023'

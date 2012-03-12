@@ -1,32 +1,19 @@
 ActiveAdmin::Dashboards.build do
 
-#  menu :if => proc{ can?(:manage, :all) }     
-#  controller.authorize_resource 
-
-  section "Statistics" do
-#  	div "Number of Clients: " do
-#			link_to("#{Client.select("DISTINCT clients.client_num").count}", admin_clients_path())
-#		end
-#  	div "Number of Proposals: " do
-#			link_to("#{Proposal.select("DISTINCT proposals.proposal_num").count}", admin_proposals_path())
-#		end
-    div :id => "chart_container" do
-      render 'stats'
-		end
-  end
-
-
-	section "Proposals", :if => Proc.new { current_admin_user.role == "Admin" } do
-		div :id => "chart_container" do
-			render 'proposals'
-		end
-	end
-
-#	section "Recent Proposals" do
-#	  Proposal.all.collect do |p|
-#	    div link_to(p.proposal_num, admin_proposal_path(p))
-#	  end
-#	end
+  # Define your dashboard sections here. Each block will be
+  # rendered on the dashboard in the context of the view. So just
+  # return the content which you would like to display.
+  
+  # == Simple Dashboard Section
+  # Here is an example of a simple dashboard section
+  #
+  #   section "Recent Posts" do
+  #     ul do
+  #       Post.recent(5).collect do |post|
+  #         li link_to(post.title, admin_post_path(post))
+  #       end
+  #     end
+  #   end
   
   # == Render Partial Section
   # The block is rendered within the context of the view, so you can

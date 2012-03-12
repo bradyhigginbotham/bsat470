@@ -78,7 +78,7 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_account_session_path
+  config.logout_link_path = :destroy_employee_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
@@ -120,13 +120,12 @@ ActiveAdmin.setup do |config|
   #
   # To load a stylesheet:
   config.register_stylesheet 'custom.css'
+  config.register_stylesheet 'proposal_forms.css'
+  
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
   #
   # To load a javascript file:
-  config.register_javascript 'highcharts/js/highcharts.js'
-  config.register_javascript 'highcharts/js/themes/gray.js'
-  config.register_javascript 'dashboard_buttons.js'
-  config.register_javascript 'ajax.js'
+  config.register_javascript 'proposal_form.js'
 end
