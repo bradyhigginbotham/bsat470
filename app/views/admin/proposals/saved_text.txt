@@ -1,7 +1,44 @@
-<%= f.input :client, :input_html => { :class => "client_id" } %>
-				<%= f.input :est_method, :label => "Method", :as => :select, :collection => ["Walk Through", "Floor Plan"], :include_blank => false %>
-  			<%= f.input :status, :as => :select, :collection => ["Pending","Accepted","Declined"], :include_blank => false %>
-				<%= f.input :customer_type, :as => :radio, :collection => ["General Contractor", "Commercial", "Government", "Residential"] %>
-				<%= f.input :location_num, :label => "No. of Locations" %>
-				<%= f.input :decision_date, :as => :string, :input_html => { :class => "datepicker" } %>
-				<%= f.input :account %>
+	<%= f.semantic_fields_for :locations do |l| %>
+    <fieldset class="inputs">
+      <legend><span>Locations</span></legend>
+      <div id="locations">
+        <div class="location_fields">
+          <ol>
+		        <%= l.input :name %>
+		        <%= l.input :address %>
+          </ol>
+        </div>
+        <div class="tasks">
+          <div class="task_labels">
+            <ol>
+              <li><label class="label">Task</label></li>
+              <li><label class="label">Square Feet</label></li>
+              <li><label class="label">Price/SqFt</label></li>
+              <li><label class="label">Est. Hours</label></li>
+            </ol>
+          </div>
+          <div class="task_fields">
+            <ol>
+		          <%= l.semantic_fields_for :tasks do |t| %>
+			          <%= t.input :title, :label => false %>
+			          <%= t.input :sqft, :label => false %>
+			          <%= t.input :price_per_sqft, :label => false %>
+			          <%= t.input :est_hours, :label => false %>
+		          <% end %>
+            </ol>
+          </div>
+          <div class="add_task">
+            <a class="button" href="#">Add Task</a>
+          </div>
+        </div>
+        <div class="add_location">
+          <ol>
+            <li>
+              <a class="button" href="#">Add Location</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+

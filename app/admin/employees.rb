@@ -1,5 +1,6 @@
 ActiveAdmin.register Employee do
-  menu :priority => 2, :label => "Administration"
+  menu :priority => 2, :label => "Administration", :if => proc{ can?(:manage, :all) }     
+  controller.authorize_resource
 
   scope :all, :default => true
   scope :management

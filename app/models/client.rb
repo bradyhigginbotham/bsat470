@@ -7,6 +7,6 @@ class Client < ActiveRecord::Base
 
   attr_accessible	        :number, :name, :email, :phone, :fax, :billing_name, :billing_address
   validates_presence_of   :number, :name, :email, :billing_address
-  validates_uniqueness_of :number
+#  validates_uniqueness_of :number
 
 end

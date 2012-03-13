@@ -1,5 +1,6 @@
 ActiveAdmin.register Material do
-  menu :parent => "Assets"
+  menu :parent => "Assets", :if => proc{ can?(:manage, Material) }     
+  controller.authorize_resource
 
   index do
     column :id

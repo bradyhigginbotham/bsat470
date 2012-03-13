@@ -1,5 +1,6 @@
 ActiveAdmin.register Client do
-  menu :priority => 3
+  menu :priority => 3, :if => proc{ can?(:manage, Client) }     
+  controller.authorize_resource
 
   index do
     column "ID", :number
@@ -7,6 +8,7 @@ ActiveAdmin.register Client do
       link_to client.name, admin_client_path(client)
     end
     column :email
+    column "Address", :billing_address
   end
 
   show :title => :name do
@@ -34,8 +36,10 @@ ActiveAdmin.register Client do
 
 		panel "Proposals" do
     	table_for client.proposals do
-				column "ID", :proposal_num
-				column :status
+				column ("ID") do |resource|
+          link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :show, Proposal
+        end
+        column("Status") {|proposal| status_tag('accepted') }
 				column :customer_type
 				column "Created On", :created_at
 				column :decision_date
@@ -51,13 +55,20 @@ ActiveAdmin.register Client do
 
   form do |f|
     f.inputs "Details" do
-      f.input :number
+      f.input :number, :as => :hidden
       f.input :name
   		f.input :email
       f.input :phone
       f.input :fax
       f.input :billing_name
       f.input :billing_address
+    end
+
+    f.semantic_fields_for :location do |p|
+      p.inputs "Locations" do
+        p.input :name
+        p.input :address
+      end
     end
 
     f.buttons

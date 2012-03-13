@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 	end
 
 	def ajax_call
-		if @client = Client.find_by_number(params[:number])
+		if @client = Client.find(params[:id])
 			render :json => @client
 		else
 			render :text => "record_not_found"

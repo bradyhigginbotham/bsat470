@@ -1,5 +1,6 @@
 ActiveAdmin.register Vehicle do
-  menu :parent => "Assets"
+  menu :parent => "Assets", :if => proc{ can?(:manage, Vehicle) }     
+  controller.authorize_resource
 
   index do
     column :id

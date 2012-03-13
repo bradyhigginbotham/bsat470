@@ -1,7 +1,13 @@
 ActiveAdmin.register Proposal do
-  menu :priority => 4
+  menu :priority => 4, :if => proc{ can?(:manage, Proposal) }     
+  controller.authorize_resource
 
-  form :partial => "form"
+  scope :all, :default => true
+  scope :pending
+  scope :accepted
+  scope :declined
+
+ form :partial => "form"
 
 
 end
