@@ -25,9 +25,9 @@ class Proposal < ActiveRecord::Base
       for i in 0...count do
         id = "0" + id
       end
-      @next_id = "P" + id
+      next_id = "P" + id
     else
-      @next_id = "P001" # first proposal
+      next_id = "P001" # first proposal
     end
   end
 

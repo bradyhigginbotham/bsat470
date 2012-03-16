@@ -46,7 +46,7 @@ class Employee < ActiveRecord::Base
       end
       next_id = "E" + id
     else
-      next_id = "E001" # first proposal
+      next_id = "E001" # first employee
     end
   end
 

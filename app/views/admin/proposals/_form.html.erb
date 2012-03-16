@@ -7,8 +7,13 @@
 		    <ol>
           <li>
             <label class="label">Proposal No.</label>
-            <span class="plain"><%= f.object.next_id %></span>
-            <input type="hidden" id="proposal_number" name="proposal[number]" value="<%= f.object.next_id %>">
+            <% if f.object.new_record? %>
+              <span class="plain"><%= @number = f.object.next_id %></span>
+              <input type="hidden" id="proposal_number" name="proposal[number]" value="<%= @number %>">
+            <% else %>
+              <span class="plain"><%= f.object.number %></span>
+              <input type="hidden" id="proposal_number" name="proposal[number]" value="<%= f.object.number %>">
+            <% end %>
           </li>
           <li>
             <label class="label">Client No.</label>
@@ -42,17 +47,22 @@
           <li>
             <label class="client_label">Client:</label>  
             <input type="radio" name="client_record" value="new" /><span class="radio_label">New</span>
-            <input type="radio" name="client_record" value="existing" /><span class="radio_label">Existing</span>
-            <%= f.input :client, :label => false, :as => :select, :collection => Client.all.collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list", :disabled => "disabled"} %>
+            <% if f.object.new_record? %>
+              <input type="radio" name="client_record" value="existing" /><span class="radio_label">Existing</span>
+              <%= f.input :client, :label => false, :as => :select, :collection => Client.all.collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list", :disabled => "disabled"} %>
+            <% else %>
+              <input type="radio" name="client_record" value="existing" checked="checked" /><span class="radio_label">Existing</span>
+              <%= f.input :client, :label => false, :as => :select, :collection => Client.all.collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list"} %>
+            <% end %>
           </li>
         </ol>
       </div>
     </div>
 
-    <div class="form_footer" style="display: none">
+    <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
       <ol>
         <%= f.input :customer_type, :label => "Customer Type", :as => :select, :collection => ["Residential", "Commercial", "Government", "General Contractor"], :include_blank => false %>
-        <%= f.input :employee, :label => "Salesperson", :required => true %>
+        <%= f.input :employee, :label => "Salesperson", :as => :select, :collection => Employee.where("department_id = 2").collect{|e| [e.name, e.id]}, :required => true %>
 		  </ol>
     </div>
 	</div>
@@ -64,3 +74,11 @@
 <% end %>
 
 <script src="/assets/proposal_form.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  if(!$("select.client_list").attr('disabled')) {
+    createClientInfoGrid();
+    ajaxCalls("client_info", $("select.client_list").val());
+  }
+});    
+</script>

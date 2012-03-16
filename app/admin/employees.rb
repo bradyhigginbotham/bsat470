@@ -8,6 +8,7 @@ ActiveAdmin.register Employee do
   scope :labor
 
   index do
+    selectable_column
     column "ID", :number
     column "Name", :sortable => :name do |emp|
       link_to emp.name, admin_employee_path(emp)
@@ -21,11 +22,13 @@ ActiveAdmin.register Employee do
 		attributes_table do
 			row ("Employee ID") {resource.number}
 			row :name
-			row :email
+      row ("Email") do |resource|
+        mail_to(resource.email)
+      end
 			row :phone
 			row ("Administrator") {resource.admin}
 			row :supervisor
-			row ("Dept.") {resource.department}
+			row ("Department") {resource.department}
       row :sign_in_count
       row :current_sign_in_at
       row :last_sign_in_at
@@ -47,6 +50,7 @@ ActiveAdmin.register Employee do
       f.input :supervisor
 			f.input :department, :required => true, :include_blank => false
       f.input :admin, :label => "Administrator"
+      f.input :number, :as => :hidden, :value => f.object.next_id
     end
     f.buttons
   end

@@ -2,6 +2,9 @@ ActiveAdmin.register Material do
   menu :parent => "Assets", :if => proc{ can?(:manage, Material) }     
   controller.authorize_resource
 
+  scope :all, :default => true
+  scope "Reorder", :low_quantity
+
   index do
     column :id
     column "Material", :sortable => :name do |mat|

@@ -1,0 +1,87 @@
+<style>
+.carousel-dots a {
+    background: url("/assets/navigator_buttons.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    font-size: 1px;
+    height: 8px;
+    margin: 3px;
+    width: 8px;
+}
+.carousel-dots a:hover {background-position: 0 -8px;}
+.carousel-dots a.current {background-position: 0 -16px;}
+</style>
+
+          <div class="carousel-dots">
+            <a class="current" href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+          </div>
+
+          <div id="myCarousel" class="carousel slide" style="margin: 100px auto; width: 870px; height: 500px">
+            <div class="carousel-inner">
+              <div class="item first active">
+                <div style="float: left;">
+                <ol style="margin: 200px auto; width: 80%;">
+                    <li>Post-Money valuations on thousands of private financing transactions</li>
+                    <li></li>
+                    <li>Specific terms & conditions of private financing transactions</li>
+                    <li></li>
+                    <li>FAQ's</li>
+                  </ol>
+                </div>
+                <div style="float: left; height: 490px">
+                  <img style="margin-top: 150px; border: 1px solid #CCC;" src="/assets/vc_homepage.png" alt="">
+                </div>
+              </div>
+              <div class="item second">
+                <div style="float: left;">
+                <ol style="margin: 200px auto; width: 80%;">
+                    <li>Post-Money valuations on thousands of private financing transactions</li>
+                    <li></li>
+                    <li>Specific terms & conditions of private financing transactions</li>
+                    <li></li>
+                    <li>FAQ's</li>
+                  </ol>
+                </div>
+                <div style="float: left; height: 490px">
+                  <img style="margin-top: 150px; border: 1px solid #CCC;" src="/assets/vc_homepage.png" alt="">
+                </div>
+              </div>
+              <div class="item third">
+                <div style="float: left;">
+                <ol style="margin: 200px auto; width: 80%;">
+                    <li>Post-Money valuations on thousands of private financing transactions</li>
+                    <li></li>
+                    <li>Specific terms & conditions of private financing transactions</li>
+                    <li></li>
+                    <li>FAQ's</li>
+                  </ol>
+                </div>
+                <div style="float: left; height: 490px">
+                  <img style="margin-top: 150px; border: 1px solid #CCC;" src="/assets/vc_homepage.png" alt="">
+                </div>
+              </div>
+            </div>
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div>
+
+<script language="JavaScript">
+  $(function() {
+    $('.carousel').bind('slid', function() {
+        alert("Slide Event");
+    });​
+
+    $(".carousel-dots a").click(function(){
+      // change current button
+      $(".carousel-dots a").removeAttr("class");
+      $(this).attr("class", "current");
+
+      // make corresponding slide active
+      var item_index = $(this).index() + 1;
+     // $(".item:nth-child(" + item_index + ")").slide('next');
+    });
+  });
+</script>

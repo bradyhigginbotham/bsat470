@@ -2,6 +2,9 @@ ActiveAdmin.register Client do
   menu :priority => 3, :if => proc{ can?(:manage, Client) }     
   controller.authorize_resource
 
+  scope :all, :default => true
+  scope :will
+
   index do
     column "ID", :number
     column "Name", :sortable => :name do |client|
@@ -15,7 +18,9 @@ ActiveAdmin.register Client do
     attributes_table do
       row :number
       row :name
-      row :email
+      row ("Email") do |resource|
+        mail_to(resource.email)
+      end
       row :phone
       row :fax
       row :billing_name

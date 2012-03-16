@@ -8,7 +8,12 @@ Bsat470::Application.routes.draw do
     get :next_id, :on => :collection
   end
 
-  resources :proposals
+  resources :proposals,
+            :materials,
+            :work_orders,
+            :assignments,
+            :material_assignments,
+            :labor_assignments
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

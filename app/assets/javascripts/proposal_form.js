@@ -1,3 +1,36 @@
+function ajaxCalls(type, value){
+  if (type === "next_id"){
+    $.ajax({
+      url: "/clients/next_id",
+	    data: 'selected=' + value,
+      type: 'get',
+      processData: false,
+	    dataType: 'html',
+      success: function(data){$("span#client_no").replaceWith('<span id="client_no" class="plain">' + data + '</span>');}
+    });
+  } else if (type === "client_info") {
+    $.ajax({
+		  url: "/clients/ajax_call?id=" + value,
+    	data: 'selected=' + value,
+		  type: 'get',
+      processData: false,
+    	dataType: 'html',
+		  success: function(data){
+        if (data == "record_not_found") {
+	        alert("An error has occurred.");
+          return;
+        } else {
+          if($("div.client_information").length == 0){
+            createClientInfoGrid();
+            showFooter();
+          }
+          updateClientInfo(data);
+        }
+      }
+	  });
+  }
+}
+
 function createClientInfoGrid(){
   $("div.proposal_middle").append(
     '<div class="client_information">' +
@@ -47,7 +80,8 @@ function updateClientInfo(data){
   $("input#proposal_clients_phone").val(client.phone);
   $("input#proposal_clients_fax").val(client.fax);
   $("input#proposal_clients_billing_name").val(client.billing_name);
-  $("input#proposal_clients_billing_address").val(client.billing_address);
+  $("input#proposal_clients_billing_address").attr("value", client.billing_address);
+  $("span#client_no").replaceWith('<span id="client_no" class="plain">' + client.number + '</span>');
 }
 
 function clearClientInfo(){
@@ -63,14 +97,7 @@ function hideFooter(){$("div.form_footer").hide();}
 
 $("form input[type=radio]").click(function() {
   if($(this).val() == "new") {
-    $.ajax({
-      url: "/clients/next_id",
-	    data: 'selected=' + $(this).val(),
-      type: 'get',
-      processData: false,
-	    dataType: 'html',
-      success: function(data){$("span#client_no").replaceWith('<span id="client_no" class="plain">' + data + '</span>');}
-    });
+    ajaxCalls("next_id", $(this).val());
 
     if(!$("select.client_list").attr('disabled'))
       $("select.client_list").attr('disabled', 'disabled');
@@ -87,7 +114,7 @@ $("form input[type=radio]").click(function() {
     $("select.client_list").removeAttr('disabled');
 
     if($("select.client_list").val())
-      $("span#client_no").replaceWith('<span id="client_no" class="plain">' + $("select.client_list").val() + '</span>');
+      ajaxCalls("client_info", $("select.client_list").val());
   }
 });
 
@@ -99,26 +126,6 @@ $("select.client_list").change(function() {
       hideFooter();
     }
   } else {
-    $("span#client_no").replaceWith('<span id="client_no" class="plain">' + $(this).val() + '</span>');
-
-    $.ajax({
-		  url: "/clients/ajax_call?id=" + $(this).val(),
-    	data: 'selected=' + $(this).val(),
-		  type: 'get',
-      processData: false,
-    	dataType: 'html',
-		  success: function(data){
-        if (data == "record_not_found") {
-	        alert("An error has occurred.");
-          return;
-        } else {
-          if($("div.client_information").length == 0){
-            createClientInfoGrid();
-            showFooter();
-          }
-          updateClientInfo(data);
-        }
-      }
-	  });
+    ajaxCalls("client_info", $(this).val());
   }
 });
