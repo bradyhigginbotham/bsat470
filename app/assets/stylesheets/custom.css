@@ -1,5 +1,6 @@
 #utility_nav span a.current_user {color:#AAA}
 .status.accepted{background:none repeat scroll 0 0 #8DAA92}
+a.button {cursor:pointer}
 
 .form_header,
 .form_header_left,

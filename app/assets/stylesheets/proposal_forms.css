@@ -2,7 +2,7 @@ form.proposal {font-size: 14px;}
 
 /*--------------------- Proposal Fields ---------------------*/
 #proposal_fields,
-#locations {
+#locations_box {
   width: 96%;
   padding: 0px 20px;
   margin: auto;
@@ -88,6 +88,10 @@ form.proposal {font-size: 14px;}
 }
 
 /*--------------------- Location Fields ---------------------*/
+div[class*='locations_']{
+  float: left;
+}
+
 .location_fields {
   float: left;
   width: 30%;
@@ -102,7 +106,7 @@ form.proposal {font-size: 14px;}
 }
 
 /*--------------------- Task Fields ---------------------*/
-.tasks {
+div[class*='tasks_'] {
   float: right;
   width: 680px;
   padding: 20px 50px;
@@ -148,11 +152,19 @@ form.proposal {font-size: 14px;}
   width: 130px;
   text-align: center;
 }
+.task_fields ol > li input[type="number"] {
+ border: 1px solid #C9D0D6;
+    border-radius: 3px 3px 3px 3px;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 0.95em;
+    outline: medium none;
+    padding: 8px 10px 7px;
+}
 
 /* Buttons */
 .add_task,
 .add_location {float:left}
-.add_location {width:100%;margin-top:10px;}
+.add_location {width:100%;margin:10px 0 0 30px;}
 
 .add_task {width:150px;margin-left:10px;text-align:center}
 .add_task .button {margin:0 !important}

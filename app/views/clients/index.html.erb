@@ -13,9 +13,9 @@
 </style>
 
           <div class="carousel-dots">
-            <a class="current" href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
+            <a data-slide-number="0" class="current" href="#"></a>
+            <a data-slide-number="1" href="#"></a>
+            <a data-slide-number="2" href="#"></a>
           </div>
 
           <div id="myCarousel" class="carousel slide" style="margin: 100px auto; width: 870px; height: 500px">
@@ -69,19 +69,14 @@
           </div>
 
 <script language="JavaScript">
-  $(function() {
-    $('.carousel').bind('slid', function() {
-        alert("Slide Event");
-    });​
-
-    $(".carousel-dots a").click(function(){
-      // change current button
-      $(".carousel-dots a").removeAttr("class");
-      $(this).attr("class", "current");
-
-      // make corresponding slide active
-      var item_index = $(this).index() + 1;
-     // $(".item:nth-child(" + item_index + ")").slide('next');
-    });
+$(function() {
+  $('.carousel').bind('slid', function(){
+ //   alert("Slide Event");
   });
+
+$(".carousel-dots a").click(function(){
+                slide_number = $(this).attr('data-slide-number');
+                $('.carousel').carousel(parseInt(slide_number));
+              });
+});
 </script>

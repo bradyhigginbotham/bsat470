@@ -2,6 +2,16 @@ ActiveAdmin.register Proposal do
   menu :priority => 4, :if => proc{ can?(:manage, Proposal) }     
   controller.authorize_resource
 
+  controller do
+    def new
+      super do
+#        resource.client.build
+        resource.locations.build
+        resource.locations.first.tasks.build
+      end
+    end
+  end
+
   scope :all, :default => true
   scope :pending
   scope :accepted

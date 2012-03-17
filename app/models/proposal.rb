@@ -8,7 +8,8 @@ class Proposal < ActiveRecord::Base
   has_many :work_orders, :dependent => :destroy
 	accepts_nested_attributes_for :work_orders, :allow_destroy => true
 
-  attr_accessible :number, :status, :est_method, :customer_type, :decision_date, :client_id, :employee_id, :locations_attributes
+  attr_accessible :number, :status, :est_method, :customer_type, :decision_date, :client_id, :employee_id, 
+                  :locations_attributes, :clients_attributes
   validates_presence_of :number, :status, :est_method, :customer_type, :client_id, :employee_id
 
   scope :pending, where("proposals.status = 'Pending'")

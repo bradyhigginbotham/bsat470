@@ -6,6 +6,7 @@
           <ol>
 		        <%= l.input :name %>
 		        <%= l.input :address %>
+            <%= l.input :client_id, :as => :hidden %>
           </ol>
         </div>
         <div class="tasks">
@@ -41,4 +42,3 @@
       </div>
     </fieldset>
   <% end %>
-
