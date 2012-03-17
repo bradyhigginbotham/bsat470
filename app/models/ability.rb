@@ -7,7 +7,8 @@ class Ability
       when 1                                                              # Management
         can :manage, :all
       when 2
-				can :manage, [Client, Proposal, Employee]                         # Sales
+				can :manage, [Client, Proposal]                                   # Sales
+        can [:read,:edit], Employee, :employees => {:id => user.id}
       when 3
         can :manage, [Assignment, MaterialAssignment, LaborAssignment]    # Labor
     end
