@@ -83,8 +83,13 @@ form.proposal {font-size: 14px;}
   padding: auto;
 }
 
-#proposal_fields .form_header span.plain {
+#proposal_fields .form_header input.plain {
+  border: none;
+  background: none;
   color: #BABDBF;
+  padding: 0;
+  width: 100px;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /*--------------------- Location Fields ---------------------*/

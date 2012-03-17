@@ -81,7 +81,13 @@ function updateClientInfo(data){
   $("input#proposal_clients_fax").val(client.fax);
   $("input#proposal_clients_billing_name").val(client.billing_name);
   $("input#proposal_clients_billing_address").attr("value", client.billing_address);
+
+  updateClientID(client.id);
   $("span#client_no").replaceWith('<span id="client_no" class="plain">' + client.number + '</span>');
+}
+
+function updateClientID(id){
+  $(".location_client_id").val(id);
 }
 
 function clearClientInfo(){

@@ -5,7 +5,7 @@ ActiveAdmin.register Proposal do
   controller do
     def new
       super do
-#        resource.client.build
+       # resource.clients.build
         resource.locations.build
         resource.locations.first.tasks.build
       end
