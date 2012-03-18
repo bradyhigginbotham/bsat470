@@ -5,10 +5,8 @@ class Client < ActiveRecord::Base
 	has_many :proposals, :dependent => :destroy
   accepts_nested_attributes_for :proposals, :allow_destroy => true
 
-  scope :will, where("clients.name = 'Will Poillion'")
-
-  attr_accessible	        :number, :name, :email, :phone, :fax, :billing_name, :billing_address
+  attr_accessible	        :number, :name, :email, :phone, :billing_name, :billing_address
   validates_presence_of   :number, :name, :email, :billing_address
-#  validates_uniqueness_of :number
+  validates_uniqueness_of :number
 
 end

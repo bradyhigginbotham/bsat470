@@ -128,6 +128,9 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript 'proposal_form.js'
+  config.register_javascript 'highcharts/js/highcharts.js'
+  config.register_javascript 'highcharts/js/themes/gray.js'
+  config.register_javascript 'dashboard_buttons.js'
 
   # Override top-right header layout
   config.view_factory.utility_navigation = CustomUtilityNav

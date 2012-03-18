@@ -7,7 +7,7 @@
             <ol>
 		          <%= l.input :name %>
 		          <%= l.input :address %>
-              <%= l.input :client_id, :as => :hidden, :input_html => {:class => "location_client_id"} %>
+              <input type="text" id="proposal_locations_attributes_0_client_id" class="location_client_id" name="proposal[locations_attributes][0][client_id]">
             </ol>
           </div>
           <div class="tasks_0">

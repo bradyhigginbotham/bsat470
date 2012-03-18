@@ -1,0 +1,59 @@
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'proposals_chart',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+		  credits: {
+		      enabled: false
+		  },
+      title: {
+         text: 'Status Percentages'
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.y + ' (' + this.percentage +'%)';
+         }
+      },
+		  legend: {
+				itemWidth: 84
+		  },
+      plotOptions: {
+         pie: {
+						size: '100%',
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: false
+            },
+            showInLegend: true
+         }
+      },
+		  navigation: {
+		      buttonOptions: {
+		          backgroundColor: {
+		              linearGradient: [0, 0, 0, 20],
+		              stops: [
+		                 [0.4, '#606060'],
+		                 [0.6, '#333333']
+		              ]
+		          }
+		      }
+		  },
+       series: [{
+         type: 'pie',
+         name: 'Status Percentages',
+         data: [
+            ['Pending',   <%= Proposal.select("DISTINCT proposals.number").where("status = 'Pending'").count.to_f %>],
+            ['Accepted',   <%= Proposal.select("DISTINCT proposals.number").where("status = 'Accepted'").count.to_f %>],
+            ['Declined',   <%= Proposal.select("DISTINCT proposals.number").where("status = 'Declined'").count.to_f %>]
+         ]
+      }]
+   });
+});
+</script>
+<div id="proposals_chart"></div>

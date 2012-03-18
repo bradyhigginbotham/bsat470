@@ -2,6 +2,19 @@
 .status.accepted{background:none repeat scroll 0 0 #8DAA92}
 a.button {cursor:pointer}
 
+/* Dashboard Charts */
+table.dashboard {
+	width: auto;
+}
+
+#records_chart,
+#proposals_chart {
+	width: 600px;
+	height: 300px;
+}
+
+/*------------------*/
+
 .form_header,
 .form_header_left,
 .form_header_right {

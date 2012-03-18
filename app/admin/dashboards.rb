@@ -1,19 +1,23 @@
 ActiveAdmin::Dashboards.build do
 
-  # Define your dashboard sections here. Each block will be
-  # rendered on the dashboard in the context of the view. So just
-  # return the content which you would like to display.
-  
-  # == Simple Dashboard Section
-  # Here is an example of a simple dashboard section
-  #
-  #   section "Recent Posts" do
-  #     ul do
-  #       Post.recent(5).collect do |post|
-  #         li link_to(post.title, admin_post_path(post))
-  #       end
-  #     end
-  #   end
+  section "Records" do
+    div :id => "chart_container" do
+      render 'records'
+		end
+  end
+
+
+	section "Proposals", :if => Proc.new { current_admin_user.department.title != "Labor" } do
+		div :id => "chart_container" do
+			render 'proposals'
+		end
+	end
+
+#	section "Recent Proposals" do
+#	  Proposal.all.collect do |p|
+#	    div link_to(p.proposal_num, admin_proposal_path(p))
+#	  end
+#	end
   
   # == Render Partial Section
   # The block is rendered within the context of the view, so you can

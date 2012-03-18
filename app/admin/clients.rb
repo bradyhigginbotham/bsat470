@@ -3,7 +3,6 @@ ActiveAdmin.register Client do
   controller.authorize_resource
 
   scope :all, :default => true
-  scope :will
 
   index do
     column "ID", :number
@@ -22,7 +21,6 @@ ActiveAdmin.register Client do
         mail_to(resource.email)
       end
       row :phone
-      row :fax
       row :billing_name
       row :billing_address
       row :created_at
@@ -64,7 +62,6 @@ ActiveAdmin.register Client do
       f.input :name
   		f.input :email
       f.input :phone
-      f.input :fax
       f.input :billing_name
       f.input :billing_address
     end

@@ -17,6 +17,19 @@ ActiveAdmin.register Proposal do
   scope :accepted
   scope :declined
 
+  action_item do
+    link_to "Print PDF", pdf_admin_proposal_path(resource)
+  end
+
+  member_action :pdf do
+    Proposal.find ( params[:id] )
+    respond_to do |format|
+        format.pdf do
+          render_to_string :pdf => "pdf"
+      end
+    end
+  end
+
   index do
     selectable_column
     column "ID", :sortable => :number do |prop|
