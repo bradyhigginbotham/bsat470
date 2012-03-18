@@ -7,18 +7,18 @@
     height: 8px;
     margin: 3px;
     width: 8px;
+    outline: none;
 }
 .carousel-dots a:hover {background-position: 0 -8px;}
 .carousel-dots a.current {background-position: 0 -16px;}
 </style>
 
+          <div id="myCarousel" class="carousel slide" style="margin: 100px auto; width: 870px; height: 500px">
           <div class="carousel-dots">
             <a data-slide-number="0" class="current" href="#"></a>
             <a data-slide-number="1" href="#"></a>
             <a data-slide-number="2" href="#"></a>
           </div>
-
-          <div id="myCarousel" class="carousel slide" style="margin: 100px auto; width: 870px; height: 500px">
             <div class="carousel-inner">
               <div class="item first active">
                 <div style="float: left;">
@@ -27,7 +27,7 @@
                     <li></li>
                     <li>Specific terms & conditions of private financing transactions</li>
                     <li></li>
-                    <li>FAQ's</li>
+                    <li>FAQ's (1)</li>
                   </ol>
                 </div>
                 <div style="float: left; height: 490px">
@@ -41,7 +41,7 @@
                     <li></li>
                     <li>Specific terms & conditions of private financing transactions</li>
                     <li></li>
-                    <li>FAQ's</li>
+                    <li>FAQ's (2)</li>
                   </ol>
                 </div>
                 <div style="float: left; height: 490px">
@@ -55,7 +55,7 @@
                     <li></li>
                     <li>Specific terms & conditions of private financing transactions</li>
                     <li></li>
-                    <li>FAQ's</li>
+                    <li>FAQ's (3)</li>
                   </ol>
                 </div>
                 <div style="float: left; height: 490px">
@@ -67,10 +67,20 @@
 
 <script language="JavaScript">
 $(function() {
+  // change navigator buttons with each "slide"
   $('.carousel').bind('slid', function(){
- //   alert("Slide Event");
+    $(".carousel-dots a").removeAttr("class");
+
+    if($(".item.active").hasClass("first")) {
+     $(".carousel-dots a:eq(0)").attr("class","current");
+    } else if($(".item.active").hasClass("second")) {
+     $(".carousel-dots a:eq(1)").attr("class","current");
+    } else if($(".item.active").hasClass("third")) {
+     $(".carousel-dots a:eq(2)").attr("class","current");
+    }
   });
 
+  // show corresponding slide on button click
   $(".carousel-dots a").click(function(){
     slide_number = $(this).attr('data-slide-number');
     $('.carousel').carousel(parseInt(slide_number));
