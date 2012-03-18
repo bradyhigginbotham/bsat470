@@ -63,9 +63,6 @@
                 </div>
               </div>
             </div>
-
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
           </div>
 
 <script language="JavaScript">
@@ -74,9 +71,12 @@ $(function() {
  //   alert("Slide Event");
   });
 
-$(".carousel-dots a").click(function(){
-                slide_number = $(this).attr('data-slide-number');
-                $('.carousel').carousel(parseInt(slide_number));
-              });
+  $(".carousel-dots a").click(function(){
+    slide_number = $(this).attr('data-slide-number');
+    $('.carousel').carousel(parseInt(slide_number));
+
+    $(".carousel-dots a").removeAttr("class");
+    $(this).attr("class","current");
+  });
 });
 </script>
