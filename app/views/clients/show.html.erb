@@ -6,6 +6,8 @@ $(document).ready(function() {
     fx: 'fade' // choose your transition type, ex: fade, scrollUp, scrollRight, shuffle
     //pager:  '#nav'
   });
+  $('#testimonials1').mouseover(function() {$('#testimonials1').cycle('pause');});
+  $('#testimonials1').mouseout(function() {$('#testimonials1').cycle('resume');});
  
   $('#testimonials2').after('<div id="nav2">').cycle({
     fx: 'scrollRight', // choose your transition type, ex: fade, scrollUp, scrollRight, shuffle
