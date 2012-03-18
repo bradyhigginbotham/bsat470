@@ -1,108 +1,87 @@
-<script src="/assets/jquery_tools.min.js"></script>
-
-<!-- standalone page styling (can be removed) -->
-  <link rel="shortcut icon" href="http://jquerytools.org/media/img/favicon.ico">
-
-  <link rel="stylesheet" type="text/css"
-        href="http://jquerytools.org/media/css/standalone.css"/>
-
-  <link rel="stylesheet" type="text/css"
-      href="http://jquerytools.org/media/css/tabs-slideshow.css"/>
-
-
-
-<a class="backward">prev</a>
-
-<!-- container for the slides -->
-<div class="images">
-
-  <!-- first slide -->
-
-  <div>
-    <h3>First pane</h3>
-    <img src="http://jquerytools.org/media/img/title/screens.png" alt="Flying screens"
-         style="float:left;margin:0 30px 20px 0" />
-
-    <p style="font-weight:bold">
-      Aenean nec imperdiet ligula. Cum sociis natoque penatibus et
-      magnis dis parturient montes, nascetur ridiculus mus.
-    </p>
-    <p>
-      Suspendisse potenti. Sed elementum risus eleifend massa
-      vestibulum consectetur. Duis massa augue, aliquam eget fringilla
-      vel, aliquam vitae arcu. Nam sed magna mi. Praesent odio neque,
-      dapibus sit amet suscipit at, tempus sed nibh. Aliquam sagittis
-      ligula in ligula faucibus cursus. Quisque vulputate pellentesque
-      facilisis.
-    </p>
-
-  </div>
-
-  <!-- second slide -->
-  <div>
-    <h3>Second pane</h3>
-    <img src="http://jquerytools.org/media/img/title/eye192.png" alt="Flying screens"
-         style="float:left;margin:0 30px 20px 0" />
-
-    <p style="font-weight:bold">
-      Consectetur adipiscing elit. Praesent bibendum eros ac
-      nulla. Integer vel lacus ac neque viverra.
-    </p>
-
-    <p>
-      Vivamus euismod euismod sagittis. Etiam cursus neque non lectus
-      mattis cursus et a libero. Vivamus condimentum hendrerit metus,
-      a sollicitudin magna vulputate eu. Donec sed tincidunt
-      lectus. Donec tellus lectus, fermentum sit amet porta non,
-      rhoncus ac mi. Quisque placerat auctor justo, a egestas urna
-      tincidunt eleifend.
-    </p>
-  </div>
-
-  <!-- third slide -->
-  <div>
-    <h3>Third pane</h3>
-    <p style="font-weight:bold">
-
-      Non lectus lacinia egestas. Nulla hendrerit, felis quis
-      elementum viverra, purus felis egestas magna.
-    </p>
-    <p>
-      Aenean elit lorem, pretium vitae dictum in, fermentum consequat
-      dolor. Proin consectetur sollicitudin tellus, non elementum
-      turpis pharetra non. Sed quis tellus quam.
-    </p>
-  </div>
-</div>
-
-<!-- "next slide" button -->
-<a class="forward">next</a>
-
-<!-- the tabs -->
-
-<div class="slidetabs">
-  <a href="#"></a>
-  <a href="#"></a>
-  <a href="#"></a>
-</div>
-
-<div style="clear:both;margin:30px 0 0;text-align:center;">
-    <button onClick='$(".slidetabs").data("slideshow").play();'>Play</button>
-  <button onClick='$(".slidetabs").data("slideshow").stop();'>Stop</button>
-  </div>
-
-<script language="JavaScript">
-  $(function() {
-      $(".slidetabs").tabs(".images > div", {
-
-    // enable "cross-fading" effect
-    effect: 'fade',
-    fadeOutSpeed: "slow",
-
-    // start from the beginning after the last tab
-    rotate: true
-
-    // use the slideshow plugin. It accepts its own configuration
-    }).slideshow();
-    });
+<!-- include Cycle plugin -->
+<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#testimonials1').cycle({
+    fx: 'fade' // choose your transition type, ex: fade, scrollUp, scrollRight, shuffle
+    //pager:  '#nav'
+  });
+ 
+  $('#testimonials2').after('<div id="nav2">').cycle({
+    fx: 'scrollRight', // choose your transition type, ex: fade, scrollUp, scrollRight, shuffle
+    pager:  '#nav2'
+  });
+});
 </script>
+
+<style>
+*{margin:0;padding:0;}
+body{
+	font-family:Tahoma, Arial, sans-serif;
+	padding:20px;
+	}
+/* testimonials: */
+#testimonials1, #testimonials2 {
+width:330px;
+background:#E7E9E6;
+border:1px solid #D8D9D6;
+margin:10px 0;
+ 
+}
+#testimonials1 blockquote, #testimonials2 blockquote{
+padding:10px;
+width:300px !important;
+font-family:Georgia, "Times New Roman", Times, serif;
+font-style:italic;
+color:#808080;
+display:block;
+}
+ 
+#testimonials1 blockquote p, #testimonials2 blockquote p{
+margin: 0 !important;padding: 5px!important;
+ 
+}
+#testimonials1 blockquote cite, #testimonials2 blockquote cite {
+font-style: normal;
+display: block;
+ 
+text-transform: uppercase;
+font-weight: bold;
+font-style:italic;
+color: #555;
+padding-left:5px;
+margin-top:10px;
+}
+</style>
+
+
+<h2>Testimonials With Fade Effect</h2>
+<div id="testimonials1">
+ 
+ <blockquote><p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                <cite>&ndash;Martin - NY</cite></p></blockquote>
+ 
+                <blockquote><p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                <cite>&ndash;Sandra - LA</cite></p></blockquote>
+ 
+                <blockquote><p>"Duis aute irure dolor in reprehenderit in voluptate nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                <cite>&ndash;Jason - MA</cite></p></blockquote>
+ 
+</div><!--end .testimonials1-->
+ 
+<br />
+ 
+ 
+<h2>Testimonials with ScrollRight Effect</h2>
+<div id="testimonials2">
+ 
+ <blockquote><p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                <cite>&ndash;Martin - NY</cite></p></blockquote>
+ 
+                <blockquote><p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                <cite>&ndash;Sandra - LA</cite></p></blockquote>
+ 
+                <blockquote><p>"Duis aute irure dolor in reprehenderit in voluptate nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                <cite>&ndash;Jason - MA</cite></p></blockquote>
+ 
+</div><!--end .testimonials2-->
