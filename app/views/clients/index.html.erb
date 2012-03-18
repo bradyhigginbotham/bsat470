@@ -1,4 +1,11 @@
 <style>
+#carousel-container {margin:40px 0 0 40px}
+
+.carousel-dots { 
+  float: left;
+  width: 100%;
+}
+
 .carousel-dots a {
     background: url("/assets/navigator_buttons.png") no-repeat scroll 0 0 transparent;
     display: block;
@@ -11,59 +18,69 @@
 }
 .carousel-dots a:hover {background-position: 0 -8px;}
 .carousel-dots a.current {background-position: 0 -16px;}
-</style>
 
-          <div id="myCarousel" class="carousel slide" style="margin: 100px auto; width: 870px; height: 500px">
-          <div class="carousel-dots">
-            <a data-slide-number="0" class="current" href="#"></a>
-            <a data-slide-number="1" href="#"></a>
-            <a data-slide-number="2" href="#"></a>
-          </div>
-            <div class="carousel-inner">
-              <div class="item first active">
-                <div style="float: left;">
-                <ol style="margin: 200px auto; width: 80%;">
-                    <li>Post-Money valuations on thousands of private financing transactions</li>
-                    <li></li>
-                    <li>Specific terms & conditions of private financing transactions</li>
-                    <li></li>
-                    <li>FAQ's (1)</li>
-                  </ol>
-                </div>
-                <div style="float: left; height: 490px">
-                  <img style="margin-top: 150px; border: 1px solid #CCC;" src="/assets/vc_homepage.png" alt="">
-                </div>
-              </div>
-              <div class="item second">
-                <div style="float: left;">
-                <ol style="margin: 200px auto; width: 80%;">
-                    <li>Post-Money valuations on thousands of private financing transactions</li>
-                    <li></li>
-                    <li>Specific terms & conditions of private financing transactions</li>
-                    <li></li>
-                    <li>FAQ's (2)</li>
-                  </ol>
-                </div>
-                <div style="float: left; height: 490px">
-                  <img style="margin-top: 150px; border: 1px solid #CCC;" src="/assets/vc_homepage.png" alt="">
-                </div>
-              </div>
-              <div class="item third">
-                <div style="float: left;">
-                <ol style="margin: 200px auto; width: 80%;">
-                    <li>Post-Money valuations on thousands of private financing transactions</li>
-                    <li></li>
-                    <li>Specific terms & conditions of private financing transactions</li>
-                    <li></li>
-                    <li>FAQ's (3)</li>
-                  </ol>
-                </div>
-                <div style="float: left; height: 490px">
-                  <img style="margin-top: 150px; border: 1px solid #CCC;" src="/assets/vc_homepage.png" alt="">
-                </div>
-              </div>
-            </div>
-          </div>
+#myCarousel {
+  float: left; 
+  border: 1px solid #C9D0D6;
+  border-radius: 10px;
+  padding: 10px;
+}
+</style>
+<div id="carousel-container">
+  <div class="carousel-dots">
+    <a data-slide-number="0" class="current" href="#"></a>
+    <a data-slide-number="1" href="#"></a>
+    <a data-slide-number="2" href="#"></a>
+  </div>
+  <div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="item first active">
+        <div style="float: left;">
+          <ol style="width: 80%;">
+            <li>Post-Money valuations on thousands of private financing transactions</li>
+            <li></li>
+            <li>Specific terms & conditions of private financing transactions</li>
+            <li></li>
+            <li>FAQ's (1)</li>
+          </ol>
+        </div>
+        <div style="float: left;">
+          <img style="border: 1px solid #000;" src="/assets/vc_homepage.png" alt="">
+        </div>
+      </div>
+      <div class="item second">
+        <div style="float: left;">
+          <ol style="width: 80%;">
+            <li>Post-Money valuations on thousands of private financing transactions</li>
+            <li></li>
+            <li>Specific terms & conditions of private financing transactions</li>
+            <li></li>
+            <li>FAQ's (2)</li>
+          </ol>
+        </div>
+        <div style="float: left;">
+          <img style="border: 1px solid #000;" src="/assets/vc_homepage.png" alt="">
+        </div>
+      </div>
+        <div class="item third">
+        <div style="float: left;">
+        <ol style="width: 80%;">
+            <li>Post-Money valuations on thousands of private financing transactions</li>
+            <li></li>
+            <li>Specific terms & conditions of private financing transactions</li>
+            <li></li>
+            <li>FAQ's (3)</li>
+          </ol>
+        </div>
+        <div style="float: left;">
+          <img style="border: 1px solid #000;" src="/assets/vc_homepage.png" alt="">
+        </div>
+      </div>
+    </div>
+    <!--<a class="left carousel-control" data-slide="prev" href="#myCarousel">‹</a> -->
+    <!--<a class="right carousel-control" data-slide="next" href="#myCarousel">›</a> -->
+  </div>
+</div>
 
 <script language="JavaScript">
 $(function() {
