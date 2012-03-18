@@ -6,7 +6,7 @@ function ajaxCalls(type, value){
       type: 'get',
       processData: false,
 	    dataType: 'html',
-      success: function(data){$("span#client_no").replaceWith('<span id="client_no" class="plain">' + data + '</span>');}
+      success: function(data){$("input#proposal_clients_number").val(data);}
     });
   } else if (type === "client_info") {
     $.ajax({
@@ -38,15 +38,15 @@ function createClientInfoGrid(){
         '<ol>' +
           '<li id="client_header" class="string optional stringish">' +
             '<h6>Contact Information</h6>' +
+          '</li><li id="client_name_input" class="string input optional stringish">' +
+	          '<label class="label" for="client_name">Name</label>' +
+	          '<input type="text" id="proposal_clients_name" name="proposal[clients_attributes][0][name]">' +
           '</li><li id="client_email_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_email">Email<abbr title="required">*</abbr></label>' +
 	          '<input type="text" id="proposal_clients_email" name="proposal[clients_attributes][0][email]">' +
           '</li><li id="client_phone_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_phone">Phone</label>' +
 	          '<input type="text" id="proposal_clients_phone" name="proposal[clients_attributes][0][phone]">' +
-          '</li><li id="client_fax_input" class="string input optional stringish">' +
-	          '<label class="label" for="client_fax">Fax</label>' +
-	          '<input type="text" id="proposal_clients_fax" name="proposal[clients_attributes][0][fax]">' +
           '</li>' +
         '</ol>' +
       '</div>' +
@@ -64,8 +64,6 @@ function createClientInfoGrid(){
         '</ol>' +
       '</div>' +
       '<input type="hidden" id="proposal_clients_id" name="proposal[clients_attributes][0][id]">' +
-      '<input type="hidden" id="proposal_clients_number" name="proposal[clients_attributes][0][number]">' +
-      '<input type="hidden" id="proposal_clients_name" name="proposal[clients_attributes][0][name]">' +
     '</div>'
   );
 }
@@ -78,12 +76,11 @@ function updateClientInfo(data){
   $("input#proposal_clients_name").val(client.name);
   $("input#proposal_clients_email").val(client.email);
   $("input#proposal_clients_phone").val(client.phone);
-  $("input#proposal_clients_fax").val(client.fax);
   $("input#proposal_clients_billing_name").val(client.billing_name);
   $("input#proposal_clients_billing_address").attr("value", client.billing_address);
 
   updateClientID(client.id);
-  $("span#client_no").replaceWith('<span id="client_no" class="plain">' + client.number + '</span>');
+  $("input#proposal_clients_number").val(client.number);
 }
 
 function updateClientID(id){
@@ -91,11 +88,11 @@ function updateClientID(id){
 }
 
 function clearClientInfo(){
-  $("input#client_email").val('');
-  $("input#client_phone").val('');
-  $("input#client_fax").val('');
-  $("input#client_billing_name").val('');
-  $("input#client_billing_address").val('');
+  $("input#proposal_clients_name").val('');
+  $("input#proposal_clients_email").val('');
+  $("input#proposal_clients_phone").val('');
+  $("input#proposal_clients_billing_name").val('');
+  $("input#proposal_clients_billing_address").val('');
 }
 
 function showFooter(){$("div.form_footer").show().delay(4000);}
@@ -126,7 +123,7 @@ $("form input[type=radio]").click(function() {
 
 $("select.client_list").change(function() {    
   if(!$(this).val()) {
-    $("span#client_no").replaceWith('<span id="client_no" class="plain">-</span>');
+    $("input#proposal_clients_number").val("-");
     if($("div.client_information").length > 0) {
       $("div.client_information").remove();
       hideFooter();

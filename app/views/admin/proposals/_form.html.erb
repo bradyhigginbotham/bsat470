@@ -10,13 +10,12 @@
             <% if f.object.new_record? %>
               <input class="plain" disabled="disabled" id="proposal_number" name="proposal[number]" value="<%= f.object.next_id %>">
             <% else %>
-              <span class="plain"><%= f.object.number %></span>
-              <input type="hidden" id="proposal_number" name="proposal[number]" value="<%= f.object.number %>">
+              <input class="plain" disabled="disabled" id="proposal_number" name="proposal[number]" value="<%= f.object.number %>">
             <% end %>
           </li>
           <li>
             <label class="label">Client No.</label>
-            <span id="client_no" class="plain">-</span>
+            <input class="plain" id="proposal_clients_number" name="proposal[clients_attributes][0][number]" value="-">
           </li>
           <%= f.input :est_method, :label => "Est. Method" %>
           <li></li>
@@ -67,52 +66,6 @@
 	</div>
 <% end %>
 
-	<%= f.semantic_fields_for :locations do |l| %>
-    <fieldset class="inputs">
-      <legend><span>Locations</span></legend>
-      <div id="locations_box">
-        <div class="locations_0">
-          <div class="location_fields">
-            <ol>
-		          <%= l.input :name %>
-		          <%= l.input :address %>
-              <%= l.input :client_id, :as => :hidden, :input_html => {:class => "location_client_id"} %>
-            </ol>
-          </div>
-          <div class="tasks_0">
-            <div class="task_labels">
-              <ol>
-                <li><label class="label">Task</label></li>
-                <li><label class="label">Square Feet</label></li>
-                <li><label class="label">Price/SqFt</label></li>
-                <li><label class="label">Est. Hours</label></li>
-              </ol>
-            </div>
-            <div class="task_fields">
-              <ol>
-		            <%= l.semantic_fields_for :tasks do |t| %>
-			            <%= t.input :title, :label => false %>
-			            <%= t.input :sqft, :label => false %>
-			            <%= t.input :price_per_sqft, :label => false %>
-			            <%= t.input :est_hours, :label => false %>
-		            <% end %>
-              </ol>
-            </div>
-            <div class="add_task">
-              <a class="button task_button_0" onClick="addTask(0, 1);">Add Task</a>
-            </div>
-          </div>
-        </div>
-      </div>
-          <div class="add_location">
-            <ol>
-              <li>
-                <a class="button" onClick="addLocation(1);">Add Location</a>
-              </li>
-            </ol>
-          </div>
-    </fieldset>
-  <% end %>
 
 <%= f.buttons :commit %>
 <% end %>
