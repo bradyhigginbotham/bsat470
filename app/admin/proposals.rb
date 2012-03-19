@@ -49,7 +49,7 @@ ActiveAdmin.register Proposal do
       super
     end
 
-    def save
+    def update
       @client = Client.find(params[:client][:id])
       @client.update_attributes(
         :number => params[:client][:number],

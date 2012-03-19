@@ -32,4 +32,8 @@ ActiveAdmin.register Material do
     f.buttons
   end
 
+  filter :name
+  filter :unit_cost
+  filter :quantity
+
 end
