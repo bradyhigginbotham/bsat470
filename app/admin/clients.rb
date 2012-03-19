@@ -30,19 +30,26 @@ ActiveAdmin.register Client do
 
 		panel "Locations" do
     	table_for client.locations do
+				column("") do |resource| 
+          link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_location_path(resource))	if controller.current_ability.can? :edit, Location
+        end
 				column :name
 				column :address
         column :city
         column :state
         column :zip
-				column("") do |resource| 
- #         link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_location_path(resource))	if controller.current_ability.can? :edit, Location
-        end
     	end
+
+      div do
+        link_to "Add Location", new_admin_location_path().to_s + "?&location[client_id]=#{client.id}", :class => "panel_button"
+      end
   	end
 
 		panel "Proposals" do
     	table_for client.proposals do
+				column("") do |resource| 
+          link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :edit, WorkOrder
+        end
 				column ("ID") do |resource|
           link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :show, Proposal
         end
@@ -50,11 +57,11 @@ ActiveAdmin.register Client do
 				column :customer_type
 				column "Created On", :created_at
 				column :decision_date
-				column("") do |resource| 
-   #       link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :edit, WorkOrder
-        end
     	end
-			link_to "Add Proposal", new_admin_proposal_path().to_s + "?&proposal[client_id]=#{client.id}", :class => "panel_button"
+
+      div do
+        link_to "Add Proposal", new_admin_proposal_path().to_s + "?&proposal[client_id]=#{client.id}", :class => "panel_button"
+      end
   	end
 
     active_admin_comments

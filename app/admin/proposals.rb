@@ -4,6 +4,13 @@ ActiveAdmin.register Proposal do
 
 
   controller do
+    def new
+      super do
+        resource.locations.build
+        resource.locations.first.tasks.build
+      end
+    end
+
     def create
       if params[:client_record] == 'new'
         @client = Client.create!(
@@ -16,7 +23,16 @@ ActiveAdmin.register Proposal do
           :zip => params[:client][:zip]
         )
 
-        #params[:client_id] = @client.id
+        @proposal = Proposal.create!(
+          :number => params[:proposal][:number],
+          :status => params[:proposal][:status],
+          :decision_date => params[:proposal][:decision_date],
+          :est_method => params[:proposal][:est_method],
+          :customer_type => params[:proposal][:customer_type],
+          :client_id => @client.id,
+          :employee_id => params[:proposal][:employee_id]
+        )
+
       else # existing
         @client = Client.find(params[:client][:id])
         @client.update_attributes(
@@ -32,12 +48,20 @@ ActiveAdmin.register Proposal do
 
       super
     end
-        
-    def new
-      super do
-        resource.locations.build
-        resource.locations.first.tasks.build
-      end
+
+    def save
+      @client = Client.find(params[:client][:id])
+      @client.update_attributes(
+        :number => params[:client][:number],
+        :name => params[:client][:name],
+        :email => params[:client][:email],
+        :billing_address => params[:client][:billing_address],
+        :city => params[:client][:city],
+        :state => params[:client][:state],
+        :zip => params[:client][:zip]
+      )
+
+      super
     end
   end
 
@@ -74,7 +98,7 @@ ActiveAdmin.register Proposal do
       link_to prop.number, admin_proposal_path(prop)
     end
     column :client
-    column "State", :status
+    column("Status") {|proposal| status_tag(proposal.status) }
     column "Method", :est_method
     column :customer_type
     column "Salesperson", :employee

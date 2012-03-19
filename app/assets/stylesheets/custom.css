@@ -1,5 +1,6 @@
 #utility_nav span a.current_user {color:#AAA}
 .status.accepted{background:none repeat scroll 0 0 #8DAA92}
+.status.declined{background:none repeat scroll 0 0 #CC0000}
 a.button {cursor:pointer}
 
 /* Dashboard Charts */
@@ -13,7 +14,42 @@ table.dashboard {
 	height: 300px;
 }
 
-/*------------------*/
+/* Panel Buttons */
+
+.panel_contents a.panel_button {
+  -moz-border-bottom-colors: none;
+  -moz-border-image: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: -moz-linear-gradient(-90deg, #FDFDFD, #E8E8E8) repeat scroll 0 0 transparent;
+  border-color: #D3D3D3 #C7C7C7 #C2C2C2;
+  border-radius: 200px 200px 200px 200px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  color: #777777;
+  display: inline-block;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 12px;
+  margin: 0;
+  padding: 12px 17px 10px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 white;
+}
+
+.panel_contents a.panel_button:hover {
+  background: -moz-linear-gradient(-90deg, #FDFDFD, #EAEAEA) repeat scroll 0 0 transparent;
+  color: #444;
+}
+
+.panel_contents a.panel_button:active {
+  background: -moz-linear-gradient(-90deg, #FCFCFC, #E5E4E5) repeat scroll 0 0 transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18) inset, 0 1px 0 0 #EEEEEE;
+}
+/* Form Stuff */
 
 .form_header,
 .form_header_left,
