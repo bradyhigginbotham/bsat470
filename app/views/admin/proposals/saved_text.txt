@@ -1,13 +1,28 @@
 	<%= f.semantic_fields_for :locations do |l| %>
     <fieldset class="inputs">
-      <legend><span>Locations</span></legend>
+      <legend><span>Location 1</span></legend>
       <div id="locations_box">
         <div class="locations_0">
           <div class="location_fields">
             <ol>
 		          <%= l.input :name %>
 		          <%= l.input :address %>
-              <input type="text" id="proposal_locations_attributes_0_client_id" class="location_client_id" name="proposal[locations_attributes][0][client_id]">
+              <li id="proposal_locations_attributes_0_city_input" class="string input required stringish">
+                <label for="proposal_locations_attributes_0_city" class="label">City<abbr title="required">*</abbr></label>
+                <br />
+                <input type="text" name="proposal[locations_attributes][0][city]" id="proposal_locations_attributes_0_city" class="city">
+              </li>
+		          <li id="proposal_locations_attributes_0_state_input" class="string input required stringish">
+                <label for="proposal_locations_attributes_0_state" class="label">State<abbr title="required">*</abbr></label>
+                <br />
+                <input type="text" name="proposal[locations_attributes][0][state]" maxlength="2" id="proposal_locations_attributes_0_state" class="state">
+              </li>
+		          <li id="proposal_locations_attributes_0_zip_input" class="string input required stringish">
+                <label for="proposal_locations_attributes_0_zip" class="label">Zip<abbr title="required">*</abbr></label>
+                <br />
+                <input type="text" name="proposal[locations_attributes][0][zip]" maxlength="5" id="proposal_locations_attributes_0_zip" class="zip">
+              </li>
+              <!-- <input type="text" id="proposal_locations_attributes_0_client_id" class="location_client_id" name="proposal[locations_attributes][0][client_id]"> -->
             </ol>
           </div>
           <div class="tasks_0">
@@ -35,13 +50,14 @@
           </div>
         </div>
       </div>
-          <div class="add_location">
-            <ol>
-              <li>
-                <a class="button" onClick="addLocation(1);">Add Location</a>
-              </li>
-            </ol>
-          </div>
     </fieldset>
+
+    <div class="add_location">
+      <ol>
+        <li>
+          <a class="button" onClick="addLocation(1);">Add Location</a>
+        </li>
+      </ol>
+    </div>
   <% end %>
 

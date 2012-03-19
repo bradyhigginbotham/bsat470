@@ -2,9 +2,8 @@ ActiveAdmin.register Client do
   menu :priority => 3, :if => proc{ can?(:manage, Client) }     
   controller.authorize_resource
 
-  scope :all, :default => true
-
   index do
+    selectable_column
     column "ID", :number
     column "Name", :sortable => :name do |client|
       link_to client.name, admin_client_path(client)
@@ -47,7 +46,7 @@ ActiveAdmin.register Client do
 				column ("ID") do |resource|
           link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :show, Proposal
         end
-        column("Status") {|proposal| status_tag('accepted') }
+        column("Status") {|proposal| status_tag(proposal.status) }
 				column :customer_type
 				column "Created On", :created_at
 				column :decision_date

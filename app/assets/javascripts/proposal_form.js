@@ -40,13 +40,13 @@ function createClientInfoGrid(){
             '<h6>Contact Information</h6>' +
           '</li><li id="client_name_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_name">Name<abbr title="required">*</abbr></label>' +
-	          '<input type="text" id="proposal_clients_name" name="proposal[clients_attributes][0][name]">' +
+	          '<input type="text" id="proposal_clients_name" name="client[name]">' +
           '</li><li id="client_email_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_email">Email<abbr title="required">*</abbr></label>' +
-	          '<input type="text" id="proposal_clients_email" name="proposal[clients_attributes][0][email]">' +
+	          '<input type="text" id="proposal_clients_email" name="client[email]">' +
           '</li><li id="client_phone_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_phone">Phone</label>' +
-	          '<input type="text" id="proposal_clients_phone" name="proposal[clients_attributes][0][phone]">' +
+	          '<input type="text" id="proposal_clients_phone" name="client[phone]">' +
           '</li>' +
         '</ol>' +
       '</div>' +
@@ -56,22 +56,22 @@ function createClientInfoGrid(){
             '<h6>Billing Information</h6>' +
           '<li id="client_billing_name_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_billing_name">Name</label>' +
-	          '<input type="text" id="proposal_clients_billing_name" name="proposal[clients_attributes][0][billing_name]">' +
+	          '<input type="text" id="proposal_clients_billing_name" name="client[billing_name]">' +
           '</li><li id="client_billing_address_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_billing_address">Address<abbr title="required">*</abbr></label>' +
-	          '<input type="text" id="proposal_clients_billing_address" name="proposal[clients_attributes][0][billing_address]">' +
+	          '<input type="text" id="proposal_clients_billing_address" name="client[billing_address]">' +
           '</li><li id="client_city_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_city">City<abbr title="required">*</abbr></label>' +
-	          '<input class="city" type="text" id="proposal_clients_city" name="proposal[clients_attributes][0][city]">' +
+	          '<input class="city" type="text" id="proposal_clients_city" name="client[city]">' +
           '</li><li id="client_state_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_state">State<abbr title="required">*</abbr></label>' +
-	          '<input class="state" maxlength="2" type="text" id="proposal_clients_state" name="proposal[clients_attributes][0][state]">' +
+	          '<input class="state" maxlength="2" type="text" id="proposal_clients_state" name="client[state]">' +
           '</li><li id="client_zip_input" class="string input optional stringish">' +
 	          '<label class="label zip" for="client_zip">Zip<abbr title="required">*</abbr></label>' +
-	          '<input class="zip" maxlength="5" type="text" id="proposal_clients_zip" name="proposal[clients_attributes][0][zip]">' +
+	          '<input class="zip" maxlength="5" type="text" id="proposal_clients_zip" name="client[zip]">' +
         '</ol>' +
       '</div>' +
-      '<input type="hidden" id="proposal_clients_id" name="proposal[clients_attributes][0][id]">' +
+      '<input type="hidden" id="proposal_clients_id" name="client[id]">' +
     '</div>'
   );
 }

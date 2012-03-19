@@ -8,14 +8,14 @@
           <li>
             <label class="label">Proposal No.</label>
             <% if f.object.new_record? %>
-              <input class="plain" disabled="disabled" id="proposal_number" name="proposal[number]" value="<%= f.object.next_id %>">
+              <input class="plain" readonly="true" id="proposal_number" name="proposal[number]" value="<%= f.object.next_id %>">
             <% else %>
-              <input class="plain" disabled="disabled" id="proposal_number" name="proposal[number]" value="<%= f.object.number %>">
+              <input class="plain" readonly="true" id="proposal_number" name="proposal[number]" value="<%= f.object.number %>">
             <% end %>
           </li>
           <li>
             <label class="label">Client No.</label>
-            <input class="plain" id="proposal_clients_number" name="proposal[clients_attributes][0][number]" value="-">
+            <input class="plain" readonly="true" id="proposal_clients_number" name="client[number]" value="-">
           </li>
           <%= f.input :est_method, :label => "Est. Method" %>
           <li></li>
@@ -67,68 +67,6 @@
 <% end %>
 
 
-	<%= f.semantic_fields_for :locations do |l| %>
-    <fieldset class="inputs">
-      <legend><span>Location 1</span></legend>
-      <div id="locations_box">
-        <div class="locations_0">
-          <div class="location_fields">
-            <ol>
-		          <%= l.input :name %>
-		          <%= l.input :address %>
-              <li id="proposal_locations_attributes_0_city_input" class="string input required stringish">
-                <label for="proposal_locations_attributes_0_city" class="label">City<abbr title="required">*</abbr></label>
-                <br />
-                <input type="text" name="proposal[locations_attributes][0][city]" id="proposal_locations_attributes_0_city" class="city">
-              </li>
-		          <li id="proposal_locations_attributes_0_state_input" class="string input required stringish">
-                <label for="proposal_locations_attributes_0_state" class="label">State<abbr title="required">*</abbr></label>
-                <br />
-                <input type="text" name="proposal[locations_attributes][0][state]" maxlength="2" id="proposal_locations_attributes_0_state" class="state">
-              </li>
-		          <li id="proposal_locations_attributes_0_zip_input" class="string input required stringish">
-                <label for="proposal_locations_attributes_0_zip" class="label">Zip<abbr title="required">*</abbr></label>
-                <br />
-                <input type="text" name="proposal[locations_attributes][0][zip]" maxlength="5" id="proposal_locations_attributes_0_zip" class="zip">
-              </li>
-              <!-- <input type="text" id="proposal_locations_attributes_0_client_id" class="location_client_id" name="proposal[locations_attributes][0][client_id]"> -->
-            </ol>
-          </div>
-          <div class="tasks_0">
-            <div class="task_labels">
-              <ol>
-                <li><label class="label">Task</label></li>
-                <li><label class="label">Square Feet</label></li>
-                <li><label class="label">Price/SqFt</label></li>
-                <li><label class="label">Est. Hours</label></li>
-              </ol>
-            </div>
-            <div class="task_fields">
-              <ol>
-		            <%= l.semantic_fields_for :tasks do |t| %>
-			            <%= t.input :title, :label => false %>
-			            <%= t.input :sqft, :label => false %>
-			            <%= t.input :price_per_sqft, :label => false %>
-			            <%= t.input :est_hours, :label => false %>
-		            <% end %>
-              </ol>
-            </div>
-            <div class="add_task">
-              <a class="button task_button_0" onClick="addTask(0, 1);">Add Task</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <div class="add_location">
-      <ol>
-        <li>
-          <a class="button" onClick="addLocation(1);">Add Location</a>
-        </li>
-      </ol>
-    </div>
-  <% end %>
 
 
 <%= f.buttons :commit %>
@@ -139,6 +77,7 @@
 $(document).ready(function(){
   if(!$("select.client_list").attr('disabled')) {
     createClientInfoGrid();
+  //  showFooter();
     ajaxCalls("client_info", $("select.client_list").val());
   }
 });    

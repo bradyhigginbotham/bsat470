@@ -6,10 +6,31 @@ ActiveAdmin.register Proposal do
   controller do
     def create
       if params[:client_record] == 'new'
-        @client = Client.create
-        params[:proposal][:client_id] = @client.id
-      else
+        @client = Client.create!(
+          :number => params[:client][:number],
+          :name => params[:client][:name],
+          :email => params[:client][:email],
+          :billing_address => params[:client][:billing_address],
+          :city => params[:client][:city],
+          :state => params[:client][:state],
+          :zip => params[:client][:zip]
+        )
+
+        #params[:client_id] = @client.id
+      else # existing
+        @client = Client.find(params[:client][:id])
+        @client.update_attributes(
+          :number => params[:client][:number],
+          :name => params[:client][:name],
+          :email => params[:client][:email],
+          :billing_address => params[:client][:billing_address],
+          :city => params[:client][:city],
+          :state => params[:client][:state],
+          :zip => params[:client][:zip]
+        )
       end
+
+      super
     end
         
     def new
