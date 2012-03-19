@@ -92,6 +92,17 @@ form.proposal {font-size: 14px;}
   font-family: Helvetica, Arial, sans-serif;
 }
 
+#proposal_fields .client_information #client_city_input,
+#proposal_fields .client_information #client_state_input,
+#proposal_fields .client_information #client_zip_input {float: left;}
+
+#proposal_fields .client_information #client_state_input label,
+#proposal_fields .client_information #client_zip_input label {width: auto; margin: 0 10px;}
+
+#proposal_fields .client_information input.city {width: 170px !important;}
+#proposal_fields .client_information input.state {width: 20px !important;}
+#proposal_fields .client_information input.zip {width: 40px !important;}
+
 /*--------------------- Location Fields ---------------------*/
 div[class*='locations_']{
   float: left;
@@ -104,11 +115,25 @@ div[class*='locations_']{
 
 .location_fields ol > li label.label {
   width: 100px;
+  margin-left: 8px
 }
 
 .location_fields ol > li input {
   width: 300px;
 }
+
+.location_fields ol > li[id*= '_city_input'],
+.location_fields ol > li[id*= '_state_input'],
+.location_fields ol > li[id*= '_zip_input'] {float: left;}
+
+.location_fields ol > li[id*='_city_input'] label,
+.location_fields ol > li[id*='_state_input'] label,
+.location_fields ol > li[id*='_zip_input'] label {width: auto;}
+
+.location_fields ol > li input.city {width: 136px !important;}
+.location_fields ol > li input.state {width: 40px !important;}
+.location_fields ol > li input.zip {width: 40px !important;}
+
 
 /*--------------------- Task Fields ---------------------*/
 div[class*='tasks_'] {
@@ -169,7 +194,7 @@ div[class*='tasks_'] {
 /* Buttons */
 .add_task,
 .add_location {float:left}
-.add_location {width:100%;margin:10px 0 0 30px;}
+.add_location {width:100%;}
 
 .add_task {width:150px;margin-left:10px;text-align:center}
 .add_task .button {margin:0 !important}

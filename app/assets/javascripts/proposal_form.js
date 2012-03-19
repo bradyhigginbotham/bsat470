@@ -39,7 +39,7 @@ function createClientInfoGrid(){
           '<li id="client_header" class="string optional stringish">' +
             '<h6>Contact Information</h6>' +
           '</li><li id="client_name_input" class="string input optional stringish">' +
-	          '<label class="label" for="client_name">Name</label>' +
+	          '<label class="label" for="client_name">Name<abbr title="required">*</abbr></label>' +
 	          '<input type="text" id="proposal_clients_name" name="proposal[clients_attributes][0][name]">' +
           '</li><li id="client_email_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_email">Email<abbr title="required">*</abbr></label>' +
@@ -60,7 +60,15 @@ function createClientInfoGrid(){
           '</li><li id="client_billing_address_input" class="string input optional stringish">' +
 	          '<label class="label" for="client_billing_address">Address<abbr title="required">*</abbr></label>' +
 	          '<input type="text" id="proposal_clients_billing_address" name="proposal[clients_attributes][0][billing_address]">' +
-          '</li>' +
+          '</li><li id="client_city_input" class="string input optional stringish">' +
+	          '<label class="label" for="client_city">City<abbr title="required">*</abbr></label>' +
+	          '<input class="city" type="text" id="proposal_clients_city" name="proposal[clients_attributes][0][city]">' +
+          '</li><li id="client_state_input" class="string input optional stringish">' +
+	          '<label class="label" for="client_state">State<abbr title="required">*</abbr></label>' +
+	          '<input class="state" maxlength="2" type="text" id="proposal_clients_state" name="proposal[clients_attributes][0][state]">' +
+          '</li><li id="client_zip_input" class="string input optional stringish">' +
+	          '<label class="label zip" for="client_zip">Zip<abbr title="required">*</abbr></label>' +
+	          '<input class="zip" maxlength="5" type="text" id="proposal_clients_zip" name="proposal[clients_attributes][0][zip]">' +
         '</ol>' +
       '</div>' +
       '<input type="hidden" id="proposal_clients_id" name="proposal[clients_attributes][0][id]">' +
@@ -77,7 +85,10 @@ function updateClientInfo(data){
   $("input#proposal_clients_email").val(client.email);
   $("input#proposal_clients_phone").val(client.phone);
   $("input#proposal_clients_billing_name").val(client.billing_name);
-  $("input#proposal_clients_billing_address").attr("value", client.billing_address);
+  $("input#proposal_clients_billing_address").val(client.billing_address);
+  $("input#proposal_clients_city").val(client.city);
+  $("input#proposal_clients_state").val(client.state);
+  $("input#proposal_clients_zip").val(client.zip);
 
   updateClientID(client.id);
   $("input#proposal_clients_number").val(client.number);
@@ -93,6 +104,10 @@ function clearClientInfo(){
   $("input#proposal_clients_phone").val('');
   $("input#proposal_clients_billing_name").val('');
   $("input#proposal_clients_billing_address").val('');
+  $("input#proposal_clients_city").val('');
+  $("input#proposal_clients_state").val('');
+  $("input#proposal_clients_zip").val('');
+
 }
 
 function showFooter(){$("div.form_footer").show().delay(4000);}
@@ -138,49 +153,61 @@ $("select.client_list").change(function() {
 
 // Locations and Tasks
 function addLocation(index){
-  $("#locations_box").append(
-    '<div class="locations_' + index + '">' +
-      '<div class="location_fields">' +
-        '<ol>' +
-		      '<li id="proposal_locations_attributes_' + index + '_name_input" class="string input optional stringish">' +
-            '<label for="proposal_locations_attributes_' + index + '_name" class=" label">Name</label>' +
-            '<input type="text" name="proposal[locations_attributes][' + index + '][name]" maxlength="255" id="proposal_locations_attributes_' + index + '_name">' +
-          '</li>' +
-		      '<li id="proposal_locations_attributes_' + index + '_address_input" class="string input required stringish">' +
-            '<label for="proposal_locations_attributes_' + index + '_address" class=" label">Address<abbr title="required">*</abbr></label>' +
-            '<input type="text" name="proposal[locations_attributes][' + index + '][address]" maxlength="255" id="proposal_locations_attributes_' + index + '_address">' +
-          '</li>' +
-          '<li id="proposal_locations_attributes_' + index + '_client_id_input" class="hidden input optional">' +
-            '<input type="hidden" name="proposal[locations_attributes][' + index + '][client_id]" id="proposal_locations_attributes_' + index + '_client_id">' +
-          '</li>' +
-        '</ol>' +
+  $("div.add_location").before(
+    '<fieldset class="inputs">' +
+      '<legend><span>Location ' + (index+1) + '</span></legend>' +
+      '<div id="locations_box">' +
+        '<div class="locations_' + index + '">' +
+          '<div class="location_fields">' +
+            '<ol>' +
+		          '<li id="proposal_locations_attributes_' + index + '_name_input" class="string input optional stringish">' +
+                '<label for="proposal_locations_attributes_' + index + '_name" class=" label">Name</label>' +
+                '<input type="text" name="proposal[locations_attributes][' + index + '][name]" maxlength="255" id="proposal_locations_attributes_' + index + '_name">' +
+              '</li><li id="proposal_locations_attributes_' + index + '_address_input" class="string input required stringish">' +
+                '<label for="proposal_locations_attributes_' + index + '_address" class=" label">Address<abbr title="required">*</abbr></label>' +
+                '<input type="text" name="proposal[locations_attributes][' + index + '][address]" maxlength="255" id="proposal_locations_attributes_' + index + '_address">' +
+              '</li><li id="proposal_locations_attributes_' + index + '_city_input" class="string input required stringish">' +
+                '<label for="proposal_locations_attributes_' + index + '_city" class="label">City<abbr title="required">*</abbr></label><br />' +
+                '<input type="text" name="proposal[locations_attributes][' + index + '][city]" maxlength="255" id="proposal_locations_attributes_' + index + '_city" class="city">' +
+              '</li><li id="proposal_locations_attributes_' + index + '_state_input" class="string input required stringish">' +
+                '<label for="proposal_locations_attributes_' + index + '_state" class="label">State<abbr title="required">*</abbr></label><br />' +
+                '<input type="text" name="proposal[locations_attributes][' + index + '][state]" maxlength="2" id="proposal_locations_attributes_' + index + '_state" class="state">' +
+              '</li><li id="proposal_locations_attributes_' + index + '_zip_input" class="string input required stringish">' +
+                '<label for="proposal_locations_attributes_' + index + '_zip" class="label">Zip<abbr title="required">*</abbr></label><br />' +
+                '<input type="text" name="proposal[locations_attributes][' + index + '][zip]" maxlength="5" id="proposal_locations_attributes_' + index + '_zip" class="zip">' +
+              '</li><li id="proposal_locations_attributes_' + index + '_client_id_input" class="hidden input optional">' +
+                '<input type="hidden" name="proposal[locations_attributes][' + index + '][client_id]" id="proposal_locations_attributes_' + index + '_client_id">' +
+              '</li>' +
+            '</ol>' +
+          '</div>' +
+          '<div class="tasks_' + index + '">' +
+            '<div class="task_labels">' +
+              '<ol>' +
+                '<li><label class="label">Task</label></li>' +
+                '<li><label class="label">Square Feet</label></li>' +
+                '<li><label class="label">Price/SqFt</label></li>' +
+                '<li><label class="label">Est. Hours</label></li>' +
+              '</ol>' +
+            '</div>' +
+            '<div class="task_fields">' +
+              '<ol>' +
+		            '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_title_input" class="string input required stringish">' +
+                  '<input type="text" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][title]" maxlength="255" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_title"></li>' +
+			          '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_sqft_input" class="number input optional numeric stringish">' +
+                  '<input type="number" step="any" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][sqft]" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_sqft"></li>' +
+			          '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_price_per_sqft_input" class="number input optional numeric stringish">' +
+                  '<input type="number" step="any" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][price_per_sqft]" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_price_per_sqft"></li>' +
+			          '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_est_hours_input" class="number input optional numeric stringish">' +
+                  '<input type="number" step="any" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][est_hours]" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_est_hours"></li>' +
+              '</ol>' +
+            '</div>' +
+            '<div class="add_task">' +
+              '<a class="button task_button_' + index + '" onClick="addTask(' + index + ', 1);">Add Task</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
-      '<div class="tasks_' + index + '">' +
-        '<div class="task_labels">' +
-          '<ol>' +
-            '<li><label class="label">Task</label></li>' +
-            '<li><label class="label">Square Feet</label></li>' +
-            '<li><label class="label">Price/SqFt</label></li>' +
-            '<li><label class="label">Est. Hours</label></li>' +
-          '</ol>' +
-        '</div>' +
-        '<div class="task_fields">' +
-          '<ol>' +
-		        '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_title_input" class="string input required stringish">' +
-              '<input type="text" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][title]" maxlength="255" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_title"></li>' +
-			      '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_sqft_input" class="number input optional numeric stringish">' +
-              '<input type="number" step="any" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][sqft]" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_sqft"></li>' +
-			      '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_price_per_sqft_input" class="number input optional numeric stringish">' +
-              '<input type="number" step="any" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][price_per_sqft]" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_price_per_sqft"></li>' +
-			      '<li id="proposal_locations_attributes_' + index + '_tasks_attributes_0_est_hours_input" class="number input optional numeric stringish">' +
-              '<input type="number" step="any" name="proposal[locations_attributes][' + index + '][tasks_attributes][0][est_hours]" id="proposal_locations_attributes_' + index + '_tasks_attributes_0_est_hours"></li>' +
-          '</ol>' +
-        '</div>' +
-        '<div class="add_task">' +
-          '<a class="button task_button_' + index + '" onClick="addTask(' + index + ', 1);">Add Task</a>' +
-        '</div>' +
-      '</div>' +
-    '</div>'
+    '</fieldset>'
   );
 
   $(".add_location a.button").attr("onClick", "addLocation(" + (index+1) + ");");

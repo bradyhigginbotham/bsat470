@@ -2,10 +2,18 @@ ActiveAdmin.register Proposal do
   menu :priority => 4, :if => proc{ can?(:manage, Proposal) }     
   controller.authorize_resource
 
+
   controller do
+    def create
+      if params[:client_record] == 'new'
+        @client = Client.create
+        params[:proposal][:client_id] = @client.id
+      else
+      end
+    end
+        
     def new
       super do
-       # resource.clients.build
         resource.locations.build
         resource.locations.first.tasks.build
       end

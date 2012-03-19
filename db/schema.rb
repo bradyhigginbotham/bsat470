@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318221350) do
+ActiveRecord::Schema.define(:version => 20120319032511) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -40,14 +40,17 @@ ActiveRecord::Schema.define(:version => 20120318221350) do
   end
 
   create_table "clients", :force => true do |t|
-    t.string   "number",          :null => false
-    t.string   "name",            :null => false
-    t.string   "email",           :null => false
+    t.string   "number",                       :null => false
+    t.string   "name",                         :null => false
+    t.string   "email",                        :null => false
     t.string   "phone"
     t.string   "billing_name"
-    t.string   "billing_address", :null => false
+    t.string   "billing_address",              :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city",                         :null => false
+    t.string   "state",           :limit => 2, :null => false
+    t.string   "zip",             :limit => 5, :null => false
   end
 
   create_table "departments", :force => true do |t|
@@ -94,11 +97,14 @@ ActiveRecord::Schema.define(:version => 20120318221350) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
-    t.string   "address",     :null => false
-    t.integer  "client_id",   :null => false
+    t.string   "address",                  :null => false
+    t.integer  "client_id",                :null => false
     t.integer  "proposal_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city",                     :null => false
+    t.string   "state",       :limit => 2, :null => false
+    t.string   "zip",         :limit => 5, :null => false
   end
 
   create_table "material_assignments", :id => false, :force => true do |t|

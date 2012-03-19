@@ -22,7 +22,9 @@ ActiveAdmin.register Client do
       end
       row :phone
       row :billing_name
-      row :billing_address
+      row ("Billing Address") do |resource|
+        raw resource.billing_address + "<br />" + "#{resource.city}, #{resource.state} #{resource.zip}"
+      end
       row :created_at
       row :updated_at
     end
@@ -31,6 +33,9 @@ ActiveAdmin.register Client do
     	table_for client.locations do
 				column :name
 				column :address
+        column :city
+        column :state
+        column :zip
 				column("") do |resource| 
  #         link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_location_path(resource))	if controller.current_ability.can? :edit, Location
         end
@@ -64,12 +69,18 @@ ActiveAdmin.register Client do
       f.input :phone
       f.input :billing_name
       f.input :billing_address
+      f.input :city
+      f.input :state
+      f.input :zip
     end
 
-    f.semantic_fields_for :location do |p|
+    f.semantic_fields_for :locations do |p|
       p.inputs "Locations" do
         p.input :name
         p.input :address
+        p.input :city
+        p.input :state
+        p.input :zip
       end
     end
 
