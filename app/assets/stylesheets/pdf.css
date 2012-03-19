@@ -1,0 +1,66 @@
+#document {
+  width: 760px;
+  height: 1040px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.labels {
+  float: left;
+  font-weight: bold;
+  width: 120px;
+  height: auto;
+}
+
+.inputs {
+  float: left;
+  margin-left: 10px;
+}
+
+/* Proposal PDF */
+
+.header {
+  float: left;
+  width: 760px;
+  height: 100px;
+}
+
+.header .left {
+  float: left;
+  width: 510px;
+  height: 100px;
+}
+
+.header .right {
+  float: left;
+  width: 250px;
+  height: 100px;
+}
+
+.billing {
+  float: left;
+  width: 760px;
+  height: 80px;
+}
+
+.customer_type {
+  float: left;
+  width: 760px;
+}
+
+.customer_type .types {
+  width: 500px;
+}
+
+.customer_type .types .type {
+  float: left;
+  width: 200px;
+}
+
+.salesperson {
+  float: left;
+  width: 760px;
+}

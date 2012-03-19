@@ -1,0 +1,81 @@
+  <div class="header">
+    <div class="left">
+      <div class="labels">
+        <ul>
+          <li>
+            <label>Proposal No.</label>
+          </li>
+          <li>
+            <label>Client Name</label>
+          </li>
+          <li>
+            <label>Est. Method</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @proposal.number %>
+          </li>
+          <li>
+            <%= @proposal.client.name %>
+          </li>
+          <li>
+            <%= @proposal.est_method %>
+          </li>
+        <ul>
+      </div>
+    </div>
+    <div class="right">
+      <div class="labels">
+        <ul>
+          <li>
+            <label>Date Written</label>
+          </li>
+          <li>
+            <label>Status</label>
+          </li>
+          <li>
+            <label>Decision Date</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @proposal.created_at.strftime("%B %d, %Y") %>
+          </li>
+          <li>
+            <%= @proposal.status %>
+          </li>
+          <li>
+            <%= !@proposal.decision_date.nil? ? @proposal.decision_date.strftime("%B %d, %Y") : " " %>
+          </li>
+        <ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+.header {
+  float: left;
+  width: 760px;
+  height: 100px;
+}
+
+.header .left {
+  float: left;
+  width: 500px;
+  height: 100px;
+}
+
+.header .right {
+  width: 200px;
+  height: 100px;
+}

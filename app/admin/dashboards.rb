@@ -1,6 +1,6 @@
 ActiveAdmin::Dashboards.build do
 
-  section "Records" do
+  section "Records", :if => Proc.new { current_admin_user.department.title != "Labor" } do
     div :id => "chart_container" do
       render 'records'
 		end
@@ -12,6 +12,25 @@ ActiveAdmin::Dashboards.build do
 			render 'proposals'
 		end
 	end
+
+	section "Account Information", :if => Proc.new { current_admin_user.department.title == "Labor" } do
+    div :style => "width: 625px" do
+      ul :style => "list-style-type: none" do
+        li raw "<b>ID:</b> " + current_employee.number
+        li raw "<b>Name:</b> " + current_employee.name
+        li raw "<b>Phone:</b> " + current_employee.phone
+        li raw "<b>Department:</b> " + current_employee.department.title
+        li raw "<b>Supervisor:</b> " + current_employee.supervisor.name
+      end
+    end
+  end
+
+  section "Current Assignments", :priority => 2, :if => Proc.new { current_admin_user.department.title == "Labor" } do
+    table_for LaborAssignment.where("labor_assignments.employee_id, ?", current_employee.id).order('assignment_id desc').each do |assignment|
+      column :rate
+    end
+  end
+
 
 #	section "Recent Proposals" do
 #	  Proposal.all.collect do |p|

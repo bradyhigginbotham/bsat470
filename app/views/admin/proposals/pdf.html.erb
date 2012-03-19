@@ -1,1 +1,122 @@
-<h1>Hello</h1>
+<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+
+<div id="document" class="proposal_pdf">
+  <div class="header">
+    <div class="left">
+      <div class="labels">
+        <ul>
+          <li>
+            <label>Proposal No.</label>
+          </li>
+          <li>
+            <label>Client Name</label>
+          </li>
+          <li>
+            <label>Est. Method</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @proposal.number %>
+          </li>
+          <li>
+            <%= @proposal.client.name %>
+          </li>
+          <li>
+            <%= @proposal.est_method %>
+          </li>
+        <ul>
+      </div>
+    </div>
+    <div class="right">
+      <div class="labels">
+        <ul>
+          <li>
+            <label>Date Written</label>
+          </li>
+          <li>
+            <label>Status</label>
+          </li>
+          <li>
+            <label>Decision Date</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @proposal.created_at.strftime("%B %d, %Y") %>
+          </li>
+          <li>
+            <%= @proposal.status %>
+          </li>
+          <li>
+            <%= !@proposal.decision_date.nil? ? @proposal.decision_date.strftime("%B %d, %Y") : " " %>
+          </li>
+        <ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="billing">
+    <div class="labels">
+      <ul>
+        <li>
+          <label>Billing Address</label>
+        </li>
+        <li>
+          <label>Name</label>
+        </li>
+        <li>
+          <label>Address</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>&nbsp;</li>
+        <li>
+          <%= !@proposal.client.billing_name.empty? ? @proposal.client.billing_name : "" %>&nbsp;
+        </li>
+        <li>
+          <%= @proposal.client.billing_address %>
+        </li>
+      <ul>
+    </div>
+  </div>
+
+  <div class="customer_type">
+    <div class="labels">
+      <ul style="margin-top: 0;">
+        <li>
+          <label>Customer Type</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs types">
+      <div class="type">General Contractor <%= @proposal.customer_type == "General Contractor" ? "X" : ""  %></div>
+      <div class="type">Commercial <%= @proposal.customer_type == "Commercial" ? "X" : " "  %></div>
+      <div class="type">Government <%= @proposal.customer_type == "Government" ? "X" : (" " * 10)  %></div>
+      <div class="type">Residential <%= @proposal.customer_type == "Residential" ? "X" : " "  %></div>
+    </div>
+  </div>
+
+  <div class="salesperson">
+    <div class="labels">
+      <ul>
+        <li>
+          <label>Salesperson</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>
+          <%= @proposal.employee.name %>
+        </li>
+      <ul>
+    </div>
+  </div>
+</div>

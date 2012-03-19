@@ -43,14 +43,14 @@ ActiveAdmin.register Employee do
   
   form do |f|
     f.inputs "Details" do
-      f.input :number
       f.input :name
   		f.input :email
       f.input :phone
       f.input :supervisor
 			f.input :department, :required => true, :include_blank => false
-      f.input :admin, :label => "Administrator"
+      f.input :admin, :label => "Administrator", :input_html => { :checked => 'checked' }
       f.input :number, :as => :hidden, :value => f.object.next_id
+
     end
     f.buttons
   end

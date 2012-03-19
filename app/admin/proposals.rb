@@ -17,16 +17,25 @@ ActiveAdmin.register Proposal do
   scope :accepted
   scope :declined
 
-  action_item do
-    link_to "Print PDF", pdf_admin_proposal_path(resource)
+  action_item :only => :show do
+    link_to "Print PDF", pdf_admin_proposal_path(proposal) if proposal.status != "Pending"
   end
 
   member_action :pdf do
-    Proposal.find ( params[:id] )
+    @proposal = Proposal.find(resource)
     respond_to do |format|
-        format.pdf do
-          render_to_string :pdf => "pdf"
+      format.html do
+          render :pdf         => "#{@proposal.number}_#{@proposal.client.name}",
+                 :wkhtmltopdf => '/usr/bin/wkhtmltopdf', # path to binary
+                 :header      => {:center => "text"},
+                 :margin      => {:bottom         => 0,
+                                  :left           => 0,
+                                  :right          => 0}
       end
+#      format.pdf do
+#          render :pdf         => "#{@proposal.number}_#{@proposal.client.name}",
+#                 :layout      => 'pdf.html' # use 'pdf.html' for a pdf.html.erb file
+#      end
     end
   end
 
