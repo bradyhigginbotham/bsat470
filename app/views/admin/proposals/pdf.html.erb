@@ -1,5 +1,5 @@
 <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-
+<% amount = 0 %>
 <div id="document" class="proposal_pdf">
   <div class="header">
     <div class="left">
@@ -60,8 +60,6 @@
     </div>
   </div>
 
-      <%= @proposal.locations.count %>
-
   <div class="billing">
     <div class="labels">
       <ul>
@@ -92,25 +90,62 @@
     </div>
   </div>
 
+  <div class="location_num">
+    <div class="labels">
+      <ul>
+        <li>
+          <label>Locations:</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>
+          <%= @proposal.locations.count %>
+        </li>
+      <ul>
+    </div>
+  </div>
+
   <div class="tasks">
     <!-- Tasks Table -->
-    <table border="1">
+    <table>
       <tr>
-        <th>Title</th>
-        <th>Sq. Feet</th>
-        <th>Price/Sq. Ft.</th>
-        <th>Amount</th>
+        <th class="first">Task</th>
+        <th>Square Feet</th>
+        <th>Price/SqFt</th>
+        <th class="last">Amount</th>
       </tr>
       <% @proposal.locations.each do |location| %>
         <% location.tasks.each do |task| %>
           <tr>
-            <td><%= task.title.capitalize %></td>
+            <td class="first"><%= task.title.titleize %></td>
             <td><%= task.sqft %></td>
-            <td><%= task.price_per_sqft %></td>
-            <td><%= number_to_currency(task.sqft * task.price_per_sqft) %></td>
+            <td><%= number_with_delimiter(number_with_precision(task.price_per_sqft, :precision => 2)) %></td>
+            <td class="last"><%= number_with_delimiter(number_with_precision(task.sqft * task.price_per_sqft, :precision => 2)) %></td>
+            <% amount = amount + (task.sqft * task.price_per_sqft) %>
           </tr>
         <% end %>
       <% end %>
+      <tr height="30"></tr>
+      <tr>
+        <td class="first">Total Before Tax</td>
+        <td></td>
+        <td></td>
+        <td class="last"><%= number_with_delimiter(number_with_precision(amount, :precision => 2)) %></td>
+      </tr>
+      <tr>
+        <td class="first">Tax (8.2%)</td>
+        <td></td>
+        <td></td>
+        <td class="last"><%= number_with_delimiter(number_with_precision(amount*0.082, :precision => 2)) %></td>
+      </tr>
+      <tr>
+        <td class="first">Total</td>
+        <td></td>
+        <td></td>
+        <td class="last"><%= number_to_currency(amount+(amount*0.082)) %></td>
+      </tr>
     </table>
   </div>
 
@@ -123,10 +158,10 @@
       <ul>
     </div>
     <div class="inputs types">
-      <div class="type">General Contractor <%= @proposal.customer_type == "General Contractor" ? "X" : ""  %></div>
-      <div class="type">Commercial <%= @proposal.customer_type == "Commercial" ? "X" : " "  %></div>
-      <div class="type">Government <%= @proposal.customer_type == "Government" ? "X" : (" " * 10)  %></div>
-      <div class="type">Residential <%= @proposal.customer_type == "Residential" ? "X" : " "  %></div>
+      <div class="type">General Contractor <%= raw @proposal.customer_type == "General Contractor" ? "<b>(X)</b>" : ""  %></div>
+      <div class="type">Commercial <%= raw @proposal.customer_type == "Commercial" ? "<b>(X)</b>" : " "  %></div>
+      <div class="type">Government <%= raw @proposal.customer_type == "Government" ? "<b>(X)</b>" : " "  %></div>
+      <div class="type">Residential <%= raw @proposal.customer_type == "Residential" ? "<b>(X)</b>" : " "  %></div>
     </div>
   </div>
 

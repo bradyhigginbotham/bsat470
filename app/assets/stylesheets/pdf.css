@@ -43,8 +43,30 @@ ul {
 .billing {
   float: left;
   width: 760px;
-  height: 80px;
+  height: 110px;
 }
+
+.location_num {
+  float: left;
+  width: 760px;
+}
+
+.tasks {
+  width: 80%;
+  margin: 20px 0 20px 40px;
+}
+
+.tasks table {
+  width: 100%;
+}
+
+.tasks tr.blank {height: 10px}
+
+.tasks table tr th {text-decoration: underline}
+
+.tasks table tr td {width: 25%; text-align: center;}
+.tasks table tr .first {text-align: left;}
+.tasks table tr .last {text-align: right;}
 
 .customer_type {
   float: left;
