@@ -161,7 +161,7 @@ function addLocation(index){
           '<div class="location_fields">' +
             '<ol>' +
 		          '<li id="proposal_locations_attributes_' + index + '_name_input" class="string input optional stringish">' +
-                '<label for="proposal_locations_attributes_' + index + '_name" class=" label">Name</label>' +
+                '<label for="proposal_locations_attributes_' + index + '_name" class=" label">Name<abbr title="required">*</abbr></label>' +
                 '<input type="text" name="proposal[locations_attributes][' + index + '][name]" maxlength="255" id="proposal_locations_attributes_' + index + '_name">' +
               '</li><li id="proposal_locations_attributes_' + index + '_address_input" class="string input required stringish">' +
                 '<label for="proposal_locations_attributes_' + index + '_address" class=" label">Address<abbr title="required">*</abbr></label>' +

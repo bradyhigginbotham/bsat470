@@ -60,6 +60,8 @@
     </div>
   </div>
 
+      <%= @proposal.locations.count %>
+
   <div class="billing">
     <div class="labels">
       <ul>
@@ -83,8 +85,33 @@
         <li>
           <%= @proposal.client.billing_address %>
         </li>
+        <li>
+          <%= "#{@proposal.client.city}, #{@proposal.client.state} #{@proposal.client.zip}"  %>
+        </li>
       <ul>
     </div>
+  </div>
+
+  <div class="tasks">
+    <!-- Tasks Table -->
+    <table border="1">
+      <tr>
+        <th>Title</th>
+        <th>Sq. Feet</th>
+        <th>Price/Sq. Ft.</th>
+        <th>Amount</th>
+      </tr>
+      <% @proposal.locations.each do |location| %>
+        <% location.tasks.each do |task| %>
+          <tr>
+            <td><%= task.title.capitalize %></td>
+            <td><%= task.sqft %></td>
+            <td><%= task.price_per_sqft %></td>
+            <td><%= number_to_currency(task.sqft * task.price_per_sqft) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
   </div>
 
   <div class="customer_type">

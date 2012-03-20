@@ -1,5 +1,6 @@
 #utility_nav span a.current_user {color:#AAA}
 .status.accepted{background:none repeat scroll 0 0 #8DAA92}
+.status.in_progress{background:none repeat scroll 0 0 #E0C80E}
 .status.declined{background:none repeat scroll 0 0 #CC0000}
 a.button {cursor:pointer}
 

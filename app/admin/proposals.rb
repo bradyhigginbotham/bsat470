@@ -17,6 +17,8 @@ ActiveAdmin.register Proposal do
           :number => params[:client][:number],
           :name => params[:client][:name],
           :email => params[:client][:email],
+          :phone => params[:client][:phone],
+          :billing_name => params[:client][:billing_name],
           :billing_address => params[:client][:billing_address],
           :city => params[:client][:city],
           :state => params[:client][:state],
@@ -39,6 +41,8 @@ ActiveAdmin.register Proposal do
           :number => params[:client][:number],
           :name => params[:client][:name],
           :email => params[:client][:email],
+          :phone => params[:client][:phone],
+          :billing_name => params[:client][:billing_name],
           :billing_address => params[:client][:billing_address],
           :city => params[:client][:city],
           :state => params[:client][:state],
@@ -55,6 +59,8 @@ ActiveAdmin.register Proposal do
         :number => params[:client][:number],
         :name => params[:client][:name],
         :email => params[:client][:email],
+        :phone => params[:client][:phone],
+        :billing_name => params[:client][:billing_name],
         :billing_address => params[:client][:billing_address],
         :city => params[:client][:city],
         :state => params[:client][:state],
@@ -71,7 +77,7 @@ ActiveAdmin.register Proposal do
   scope :declined
 
   action_item :only => :show do
-    link_to "Print PDF", pdf_admin_proposal_path(proposal) if proposal.status != "Pending"
+    link_to "Print PDF", pdf_admin_proposal_path(proposal)
   end
 
   member_action :pdf do
@@ -81,9 +87,9 @@ ActiveAdmin.register Proposal do
           render :pdf         => "#{@proposal.number}_#{@proposal.client.name}",
                  :wkhtmltopdf => '/usr/bin/wkhtmltopdf', # path to binary
                  :header      => {:center => "text"},
-                 :margin      => {:bottom         => 0,
-                                  :left           => 0,
-                                  :right          => 0}
+                 :margin      => {:bottom         => 10,
+                                  :left           => 10,
+                                  :right          => 10}
       end
 #      format.pdf do
 #          render :pdf         => "#{@proposal.number}_#{@proposal.client.name}",
@@ -117,6 +123,18 @@ ActiveAdmin.register Proposal do
 			row :created_at
 			row :updated_at
 		end
+
+		panel "Locations" do
+    	table_for proposal.locations do
+				column ("Name") do |resource|
+          link_to(resource.name, admin_location_path(resource))
+        end
+				column :address
+        column :city
+        column :state
+        column :zip
+    	end
+  	end
 
 		panel "Work Orders" do
     	table_for proposal.work_orders do

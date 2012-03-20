@@ -14,7 +14,7 @@ ActiveAdmin.register Client do
 
   show :title => :name do
     attributes_table do
-      row :number
+      row ("Client ID") {resource.number}
       row :name
       row ("Email") do |resource|
         mail_to(resource.email)
@@ -31,9 +31,11 @@ ActiveAdmin.register Client do
 		panel "Locations" do
     	table_for client.locations do
 				column("") do |resource| 
-          link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_location_path(resource))	if controller.current_ability.can? :edit, Location
+          link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_location_path(resource))	if controller.current_ability.can? :manage, Client
         end
-				column :name
+				column ("Name") do |resource|
+          link_to(resource.name, admin_location_path(resource))	if controller.current_ability.can? :manage, Client
+        end
 				column :address
         column :city
         column :state
@@ -48,10 +50,11 @@ ActiveAdmin.register Client do
 		panel "Proposals" do
     	table_for client.proposals do
 				column("") do |resource| 
-          link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :edit, WorkOrder
+          span link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :manage, Proposal
+          span link_to(image_tag('print.png', :title => 'Print'), pdf_admin_proposal_path(resource))	if controller.current_ability.can? :manage, Proposal
         end
 				column ("ID") do |resource|
-          link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :show, Proposal
+          link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :manage, Proposal
         end
         column("Status") {|proposal| status_tag(proposal.status) }
 				column :customer_type

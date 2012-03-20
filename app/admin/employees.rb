@@ -38,21 +38,23 @@ ActiveAdmin.register Employee do
 			row :updated_at
 		end
 
-		panel "Proposals", :if => Proc.new { current_admin_user.department.title == "Sales" }  do
-    	table_for employee.proposals do
-				column ("ID") do |resource|
-          link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :show, Proposal
-        end
-        column("Status") {|proposal| status_tag(proposal.status) }
-				column :customer_type
-				column "Created On", :created_at
-				column :decision_date
-				column("") do |resource| 
-   #       link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :edit, WorkOrder
-        end
+    if resource.department.title == "Sales"
+		  panel "Proposals" do
+      	table_for employee.proposals do
+				  column ("ID") do |resource|
+            link_to(resource.number, admin_proposal_path(resource))	if controller.current_ability.can? :show, Proposal
+          end
+          column("Status") {|proposal| status_tag(proposal.status) }
+				  column :customer_type
+				  column "Created On", :created_at
+				  column :decision_date
+				  column("") do |resource| 
+     #       link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :edit, WorkOrder
+          end
+      	end
+			  link_to "Add Proposal", new_admin_proposal_path().to_s + "?&proposal[employee_id]=#{employee.id}", :class => "panel_button"
     	end
-			link_to "Add Proposal", new_admin_proposal_path().to_s + "?&proposal[employee_id]=#{employee.id}", :class => "panel_button"
-  	end
+    end
 
     active_admin_comments
 	end
