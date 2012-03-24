@@ -1,10 +1,18 @@
-form.work {font-size: 14px;}
+form.work_order {font-size: 14px;}
 
-/*--------------------- Proposal Fields ---------------------*/
+/*--------------------- Work Order Fields ---------------------*/
 #wo_fields {
   width: 96%;
   padding: 0px 20px;
   margin: auto;
+}
+
+#wo_fields .form_header_left {
+  width: 60%;
+}
+
+#wo_fields .form_header_right {
+  width: 40%;
 }
 
 #wo_fields div {float: left;}
@@ -49,40 +57,19 @@ form.work {font-size: 14px;}
   padding-top: 7px;
 }
 
-#proposal_fields .client_information input {width: 400px !important;}
+#wo_fields .location_information input {width: 400px !important;}
 
-#proposal_fields .proposal_middle,
-#proposal_fields .proposal_middle .client_radio,
-#proposal_fields .proposal_middle .client_information {width: 100%}
+#wo_fields .wo_middle {width:100%}
+#wo_fields .wo_middle .location_information {width: 50%}
 
-#proposal_fields .proposal_middle .client_information .client_contact,
-#proposal_fields .proposal_middle .client_information .client_billing {width: 50%}
-
-#proposal_fields .client_radio input[type="radio"] {
-  padding-top: 2px;
-}
-
-#proposal_fields .client_radio ol > li {
-  float: left;
-}
-
-#proposal_fields .client_radio select.client_list {
-  margin: -2px auto 5px -14px;
-}
-
-#proposal_fields .client_radio .radio_label {
-  margin: 0px 10px 0px 5px;
-}
-
-#proposal_fields .client_information {margin: 20px 0}
 #proposal_fields #client_header {text-align: center; margin-bottom: 10px}
 
-#proposal_fields .form_footer label.label {
+#wo_fields .form_footer label.label {
   width: 110px;
   padding: auto;
 }
 
-#proposal_fields .form_header input.plain {
+#wo_fields .form_header input.plain {
   border: none;
   background: none;
   color: #BABDBF;
@@ -101,38 +88,6 @@ form.work {font-size: 14px;}
 #proposal_fields .client_information input.city {width: 170px !important;}
 #proposal_fields .client_information input.state {width: 20px !important;}
 #proposal_fields .client_information input.zip {width: 40px !important;}
-
-/*--------------------- Location Fields ---------------------*/
-div[class*='locations_']{
-  float: left;
-}
-
-.location_fields {
-  float: left;
-  width: 30%;
-}
-
-.location_fields ol > li label.label {
-  width: 100px;
-  margin-left: 8px
-}
-
-.location_fields ol > li input {
-  width: 300px;
-}
-
-.location_fields ol > li[id*= '_city_input'],
-.location_fields ol > li[id*= '_state_input'],
-.location_fields ol > li[id*= '_zip_input'] {float: left;}
-
-.location_fields ol > li[id*='_city_input'] label,
-.location_fields ol > li[id*='_state_input'] label,
-.location_fields ol > li[id*='_zip_input'] label {width: auto;}
-
-.location_fields ol > li input.city {width: 136px !important;}
-.location_fields ol > li input.state {width: 40px !important;}
-.location_fields ol > li input.zip {width: 40px !important;}
-
 
 /*--------------------- Task Fields ---------------------*/
 div[class*='tasks_'] {

@@ -5,7 +5,7 @@
     <div class="form_header">
       <div class="form_header_left">
 		    <ol>
-          <%= f.input :proposal, :as => :select, :collection => Proposal.all.collect{|p| [p.number, p.id]} %>
+          <%= f.input :proposal, :as => :select, :collection => Proposal.all.collect{|p| [p.number, p.id]}, :input_html => {:class => 'proposal_list'} %>
           <li>
             <label class="label">Work Order No.</label>
             <input class="plain" readonly="true" id="work_order_number" name="work_order[number]" value="-">
@@ -14,21 +14,32 @@
       </div>
       <div class="form_header_right">
         <ol>
-          <%= f.input :date_required, :as => :string, :input_html => { :class => "datepicker" } %>
-          <%= f.input :notes %>
+          <li>
+            <label class="label">Date</label>
+            <input class="plain" disabled="disabled" id="proposal_created_at" name="proposal[created_at]" value="<%= Date.today.strftime("%B %d, %Y") %>">
+          </li>
         </ol>
       </div> 
     </div>
 
     <div class="hr"><hr width="50" /></div>
 
-    <div class="wo_middle">
-
+    <div class="wo_middle" <% if f.object.new_record? %>style="display: none"<% end %>>
+      <div class="location_information">
+        <label>Location:</label>
+        <select id="locations_list" class="locations_list">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="notes_box">
+        <%= f.input :notes, :input_html => {:rows => 5, :cols => 20} %>
+      </div>
     </div>
 
     <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
       <ol>
         <%= f.input :employee, :label => "Manager", :as => :select, :collection => Employee.where("department_id = 1").collect{|e| [e.name, e.id]}, :required => true %>
+        <%= f.input :date_required, :as => :string, :input_html => { :class => "datepicker" } %>
 		  </ol>
     </div>
 
@@ -38,3 +49,5 @@
  
 <%= f.buttons :commit %>
 <% end %>
+
+<script src="/assets/work_order_form.js" type="text/javascript"></script>

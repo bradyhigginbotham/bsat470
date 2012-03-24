@@ -229,13 +229,3 @@ function addTask(location_index, task_index){
 
   $("div.tasks_" + location_index + " > .add_task > a.task_button_" + location_index).attr("onClick", "addTask(" + location_index + ", " + (task_index+1) + ");");
 }
-
-
-
-
-
-
-
-
-
-

@@ -8,6 +8,12 @@ Bsat470::Application.routes.draw do
     get :next_id, :on => :collection
   end
 
+	resources :locations do
+    get :list, :on => :collection
+    get :ajax_call, :on => :collection
+#    get :next_id, :on => :collection
+  end
+
   resources :proposals,
             :materials,
             :work_orders,
