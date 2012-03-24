@@ -156,7 +156,7 @@ ActiveAdmin.register Proposal do
     active_admin_comments
   end
 
- form :partial => "form"
+  form :partial => "form"
 
   filter :client
   filter :number, :label => "ID"

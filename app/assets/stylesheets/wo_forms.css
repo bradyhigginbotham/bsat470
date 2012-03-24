@@ -1,0 +1,199 @@
+form.work {font-size: 14px;}
+
+/*--------------------- Proposal Fields ---------------------*/
+#wo_fields {
+  width: 96%;
+  padding: 0px 20px;
+  margin: auto;
+}
+
+#wo_fields div {float: left;}
+
+#wo_fields div.hr {
+  width: 100%;
+  margin: 20px 0px;
+}
+
+#wo_fields abbr {border: none}
+
+#wo_fields ol > li {
+  width: auto;
+  padding: 2px 5px;
+}
+
+#wo_fields ol > li label.label {
+  width: 100px;
+  margin-right: 20px;
+}
+
+#wo_fields ol > li label[for].label {
+  padding-top: 5px;
+}
+
+#wo_fields ol > li label.client_label {
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+#wo_fields .form_header input {
+  width: 85px;
+  height: 15px !important;
+  padding: 5px;
+}
+
+#wo_fields .mini {width: auto !important}
+
+#wo_fields .client_information label.label {
+  width: 60px;
+  margin-left: 25px;
+  padding-top: 7px;
+}
+
+#proposal_fields .client_information input {width: 400px !important;}
+
+#proposal_fields .proposal_middle,
+#proposal_fields .proposal_middle .client_radio,
+#proposal_fields .proposal_middle .client_information {width: 100%}
+
+#proposal_fields .proposal_middle .client_information .client_contact,
+#proposal_fields .proposal_middle .client_information .client_billing {width: 50%}
+
+#proposal_fields .client_radio input[type="radio"] {
+  padding-top: 2px;
+}
+
+#proposal_fields .client_radio ol > li {
+  float: left;
+}
+
+#proposal_fields .client_radio select.client_list {
+  margin: -2px auto 5px -14px;
+}
+
+#proposal_fields .client_radio .radio_label {
+  margin: 0px 10px 0px 5px;
+}
+
+#proposal_fields .client_information {margin: 20px 0}
+#proposal_fields #client_header {text-align: center; margin-bottom: 10px}
+
+#proposal_fields .form_footer label.label {
+  width: 110px;
+  padding: auto;
+}
+
+#proposal_fields .form_header input.plain {
+  border: none;
+  background: none;
+  color: #BABDBF;
+  padding: 0;
+  width: 100px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#proposal_fields .client_information #client_city_input,
+#proposal_fields .client_information #client_state_input,
+#proposal_fields .client_information #client_zip_input {float: left;}
+
+#proposal_fields .client_information #client_state_input label,
+#proposal_fields .client_information #client_zip_input label {width: auto; margin: 0 10px;}
+
+#proposal_fields .client_information input.city {width: 170px !important;}
+#proposal_fields .client_information input.state {width: 20px !important;}
+#proposal_fields .client_information input.zip {width: 40px !important;}
+
+/*--------------------- Location Fields ---------------------*/
+div[class*='locations_']{
+  float: left;
+}
+
+.location_fields {
+  float: left;
+  width: 30%;
+}
+
+.location_fields ol > li label.label {
+  width: 100px;
+  margin-left: 8px
+}
+
+.location_fields ol > li input {
+  width: 300px;
+}
+
+.location_fields ol > li[id*= '_city_input'],
+.location_fields ol > li[id*= '_state_input'],
+.location_fields ol > li[id*= '_zip_input'] {float: left;}
+
+.location_fields ol > li[id*='_city_input'] label,
+.location_fields ol > li[id*='_state_input'] label,
+.location_fields ol > li[id*='_zip_input'] label {width: auto;}
+
+.location_fields ol > li input.city {width: 136px !important;}
+.location_fields ol > li input.state {width: 40px !important;}
+.location_fields ol > li input.zip {width: 40px !important;}
+
+
+/*--------------------- Task Fields ---------------------*/
+div[class*='tasks_'] {
+  float: right;
+  width: 680px;
+  padding: 20px 50px;
+  margin: 10px 20px 0;
+  border: 1px solid #C9D0D6;
+  border-radius: 10px;
+}
+
+.task_labels,
+.task_fields {
+  width: 680px;
+  margin: 0 auto;
+}
+
+.task_labels label.label {
+  width: 150px;
+  text-align: center;
+  border-bottom: 1px solid #5E6469;
+}
+
+.task_labels ol {
+  width: 100%;
+}
+
+.task_labels ol > li,
+.task_fields ol > li {
+  float: left;
+}
+
+.task_fields ol {
+  width: 680px;
+  margin: 0 auto;
+  clear:both
+}
+
+.task_fields ol > li {
+  width: 150px;
+  text-align:center;
+  padding-top: 2px;
+}
+
+.task_fields ol > li input {
+  width: 130px;
+  text-align: center;
+}
+.task_fields ol > li input[type="number"] {
+ border: 1px solid #C9D0D6;
+    border-radius: 3px 3px 3px 3px;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 0.95em;
+    outline: medium none;
+    padding: 8px 10px 7px;
+}
+
+/* Buttons */
+.add_task,
+.add_location {float:left}
+.add_location {width:100%;}
+
+.add_task {width:150px;margin-left:10px;text-align:center}
+.add_task .button {margin:0 !important}

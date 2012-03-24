@@ -1,0 +1,40 @@
+<%= semantic_form_for [:admin, @work_order] do |f| %>
+
+<%= f.inputs "Details" do %>
+	<div id="wo_fields">
+    <div class="form_header">
+      <div class="form_header_left">
+		    <ol>
+          <%= f.input :proposal, :as => :select, :collection => Proposal.all.collect{|p| [p.number, p.id]} %>
+          <li>
+            <label class="label">Work Order No.</label>
+            <input class="plain" readonly="true" id="work_order_number" name="work_order[number]" value="-">
+          </li>
+        </ol>
+      </div>
+      <div class="form_header_right">
+        <ol>
+          <%= f.input :date_required, :as => :string, :input_html => { :class => "datepicker" } %>
+          <%= f.input :notes %>
+        </ol>
+      </div> 
+    </div>
+
+    <div class="hr"><hr width="50" /></div>
+
+    <div class="wo_middle">
+
+    </div>
+
+    <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
+      <ol>
+        <%= f.input :employee, :label => "Manager", :as => :select, :collection => Employee.where("department_id = 1").collect{|e| [e.name, e.id]}, :required => true %>
+		  </ol>
+    </div>
+
+
+	</div>
+<% end %>
+ 
+<%= f.buttons :commit %>
+<% end %>
