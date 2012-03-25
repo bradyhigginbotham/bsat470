@@ -5,11 +5,15 @@
     <div class="form_header">
       <div class="form_header_left">
 		    <ol>
-          <%= f.input :proposal, :as => :select, :collection => Proposal.all.collect{|p| [p.number, p.id]}, :input_html => {:class => 'proposal_list'} %>
           <li>
-            <label class="label">Work Order No.</label>
-            <input class="plain" readonly="true" id="work_order_number" name="work_order[number]" value="-">
+            <label class="label" style="width: 117px">Work Order No.</label>
+            <% if f.object.new_record? %>
+              <input class="plain" readonly="true" id="work_order_number" name="work_order[number]" value="<%= f.object.next_id %>">
+            <% else %>
+              <input class="plain" readonly="true" id="work_order_number" name="work_order[number]" value="<%= f.object.number %>">
+            <% end %>
           </li>
+          <%= f.input :proposal, :as => :select, :collection => Proposal.all.collect{|p| [p.number, p.id]}, :input_html => {:class => 'proposal_list'} %>
         </ol>
       </div>
       <div class="form_header_right">
@@ -18,34 +22,60 @@
             <label class="label">Date</label>
             <input class="plain" disabled="disabled" id="proposal_created_at" name="proposal[created_at]" value="<%= Date.today.strftime("%B %d, %Y") %>">
           </li>
+          <li>
+            <label class="label">Type<abbr title="required">*</abbr></label>
+            <input type="radio" name="work_order[primary]" value="Primary" /><span class="radio_label">Primary</span>
+            <input type="radio" name="work_order[primary]" value="Secondary" /><span class="radio_label">Secondary</span>
+          </li>
         </ol>
       </div> 
     </div>
 
-    <div class="hr"><hr width="50" /></div>
-
     <div class="wo_middle" <% if f.object.new_record? %>style="display: none"<% end %>>
       <div class="location_information">
-        <label>Location:</label>
-        <select id="locations_list" class="locations_list">
-          <option value=""></option>
-        </select>
+        <ol>
+          <li>
+            <label class="label" for="work_order_location_id">Location:</label>
+            <select id="work_order_location_id" class="location_list" name="work_order[location_id]"></select>
+          </li>
+        </ol>
       </div>
       <div class="notes_box">
-        <%= f.input :notes, :input_html => {:rows => 5, :cols => 20} %>
+        <ol>
+          <%= f.input :notes, :input_html => {:rows => 6, :cols => 20} %>
+        </ol>
       </div>
     </div>
 
     <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
       <ol>
         <%= f.input :employee, :label => "Manager", :as => :select, :collection => Employee.where("department_id = 1").collect{|e| [e.name, e.id]}, :required => true %>
-        <%= f.input :date_required, :as => :string, :input_html => { :class => "datepicker" } %>
+        <%= f.input :date_required, :label => "Date Required", :as => :string, :input_html => { :class => "datepicker" } %>
 		  </ol>
     </div>
-
-
 	</div>
 <% end %>
+
+	<%= f.semantic_fields_for :tasks do |t| %>
+    <fieldset class="inputs">
+      <legend><span>Tasks</span></legend>
+      <div class="container_wo_tasks">      
+        <div class="wo_tasks">
+          <div class="task_labels">
+            <ol>
+              <li><label class="label">Task<abbr title="required">*</abbr></label></li>
+              <li><label class="label">Square Feet<abbr title="required">*</abbr></label></li>
+              <li><label class="label">Price($)/SqFt<abbr title="required">*</abbr></label></li>
+              <li><label class="label">Est. Hours</label></li>
+              <li><label class="label">Status</label></li>
+              <li><label class="label">Date Complete</label></li>
+            </ol>
+          </div>
+          <!-- task fields will go here via ajax calls -->
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
  
 <%= f.buttons :commit %>
 <% end %>

@@ -8,11 +8,15 @@ form.work_order {font-size: 14px;}
 }
 
 #wo_fields .form_header_left {
-  width: 60%;
+  width: 50%;
 }
 
 #wo_fields .form_header_right {
-  width: 40%;
+  width: 50%;
+}
+
+#wo_fields .form_header_right label.label { 
+  width: 42px;
 }
 
 #wo_fields div {float: left;}
@@ -30,17 +34,12 @@ form.work_order {font-size: 14px;}
 }
 
 #wo_fields ol > li label.label {
-  width: 100px;
+  width: 102px;
   margin-right: 20px;
 }
 
 #wo_fields ol > li label[for].label {
   padding-top: 5px;
-}
-
-#wo_fields ol > li label.client_label {
-  margin-right: 20px;
-  font-weight: bold;
 }
 
 #wo_fields .form_header input {
@@ -49,25 +48,32 @@ form.work_order {font-size: 14px;}
   padding: 5px;
 }
 
-#wo_fields .mini {width: auto !important}
-
-#wo_fields .client_information label.label {
-  width: 60px;
-  margin-left: 25px;
-  padding-top: 7px;
+#wo_fields .radio_label {
+  margin: 0px 10px 0px 5px;
 }
+
+#wo_fields .wo_middle {
+  width:100%;
+  padding-top: 20px;
+}
+
+#wo_fields .wo_middle .location_information,
+#wo_fields .wo_middle .notes_box
+ {width: 50%}
 
 #wo_fields .location_information input {width: 400px !important;}
 
-#wo_fields .wo_middle {width:100%}
-#wo_fields .wo_middle .location_information {width: 50%}
-
-#proposal_fields #client_header {text-align: center; margin-bottom: 10px}
-
-#wo_fields .form_footer label.label {
-  width: 110px;
-  padding: auto;
+#wo_fields .wo_middle .location_grid {
+  text-transform: capitalize;
+  padding: 20px 15px;
 }
+
+#wo_fields .wo_middle .notes_box label.label {width: auto}
+
+#wo_fields .form_footer {padding-top: 20px}
+
+#wo_fields .form_footer ol > li {width: 400px; float: left}
+#wo_fields .form_footer input {width: 90px; text-align: center}
 
 #wo_fields .form_header input.plain {
   border: none;
@@ -78,71 +84,70 @@ form.work_order {font-size: 14px;}
   font-family: Helvetica, Arial, sans-serif;
 }
 
-#proposal_fields .client_information #client_city_input,
-#proposal_fields .client_information #client_state_input,
-#proposal_fields .client_information #client_zip_input {float: left;}
-
-#proposal_fields .client_information #client_state_input label,
-#proposal_fields .client_information #client_zip_input label {width: auto; margin: 0 10px;}
-
-#proposal_fields .client_information input.city {width: 170px !important;}
-#proposal_fields .client_information input.state {width: 20px !important;}
-#proposal_fields .client_information input.zip {width: 40px !important;}
-
 /*--------------------- Task Fields ---------------------*/
-div[class*='tasks_'] {
-  float: right;
-  width: 680px;
+.container_wo_tasks {
+  float: left;
+  width: 1200px;
+  padding: 0 40px;
+}
+
+.wo_tasks {
+  float: left;
+  width: 1100px;
   padding: 20px 50px;
-  margin: 10px 20px 0;
   border: 1px solid #C9D0D6;
   border-radius: 10px;
 }
 
-.task_labels,
-.task_fields {
-  width: 680px;
-  margin: 0 auto;
+.wo_tasks .task_labels {
+  float: left;
+  width: 1100px;
+  margin: 0;
 }
 
-.task_labels label.label {
-  width: 150px;
+.wo_tasks .task_fields {
+  float: left;
+  width: 1100px;
+  margin: 0;
+}
+
+.wo_tasks .task_labels label.label {
   text-align: center;
   border-bottom: 1px solid #5E6469;
 }
 
-.task_labels ol {
-  width: 100%;
-}
-
-.task_labels ol > li,
-.task_fields ol > li {
+.wo_tasks .task_labels ol {
   float: left;
+  width: 1100px;
 }
 
-.task_fields ol {
-  width: 680px;
+.wo_tasks .task_labels ol > li,
+.wo_tasks .task_fields ol > li {
+  float: left;
+  width: 162px;
+}
+
+.wo_tasks .task_fields ol {
+  width: 1100px;
   margin: 0 auto;
-  clear:both
 }
 
-.task_fields ol > li {
-  width: 150px;
+.wo_tasks .task_fields ol > li {
   text-align:center;
   padding-top: 2px;
 }
 
-.task_fields ol > li input {
-  width: 130px;
+.wo_tasks .task_fields ol > li input {
+  float: left;
   text-align: center;
 }
-.task_fields ol > li input[type="number"] {
- border: 1px solid #C9D0D6;
-    border-radius: 3px 3px 3px 3px;
-    font-family: Helvetica,Arial,sans-serif;
-    font-size: 0.95em;
-    outline: medium none;
-    padding: 8px 10px 7px;
+.wo_tasks .task_fields ol > li input[type="number"] {
+  border: 1px solid #C9D0D6;
+  border-radius: 3px 3px 3px 3px;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 0.95em;
+  outline: medium none;
+  padding: 8px 10px 7px;
 }
 
 /* Buttons */

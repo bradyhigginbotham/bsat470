@@ -4,6 +4,9 @@ class Location < ActiveRecord::Base
 	belongs_to :client
   belongs_to :proposal
 
+	has_many :work_orders, :dependent => :destroy
+  accepts_nested_attributes_for :work_orders, :allow_destroy => true
+
 	has_many :tasks, :dependent => :destroy
 	accepts_nested_attributes_for :tasks, :allow_destroy => true
 
