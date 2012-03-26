@@ -100,7 +100,7 @@ ActiveAdmin.register WorkOrder do
 
   form :partial => "form"
 
-  filter :number, :label => "ID"
+  filter :number, :label => "Work Order ID"
   filter :employee, :label => "Manager"
   filter :level, :as => :select, :collection => ["Primary", "Secondary"]
   filter :proposal

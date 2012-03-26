@@ -89,6 +89,34 @@ ul {
 
 /* Work Order PDF */
 
+.work_location {
+  float: left;
+  width: 510px;
+}
+
+.notes {
+  float: left;
+  width: 250px;
+  margin-bottom: 70px;
+}
+
+.work_order_tasks {
+  width: 80%;
+  margin: 0 0 50px 40px;
+}
+
+.work_order_tasks table {
+  width: 100%;
+}
+
+.work_order_tasks tr.blank {height: 10px}
+
+.work_order_tasks table tr th {text-decoration: underline}
+
+.work_order_tasks table tr td {width: 20%; text-align: center;}
+.work_order_tasks table tr .first {text-align: left;}
+.work_order_tasks table tr .last {text-align: right;}
+
 .manager {
   float: left;
   width: 380px;

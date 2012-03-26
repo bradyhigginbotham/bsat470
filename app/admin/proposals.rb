@@ -162,7 +162,7 @@ ActiveAdmin.register Proposal do
 
   form :partial => "form"
 
-  filter :number, :label => "ID"
+  filter :number, :label => "Proposal ID"
   filter :client
   filter :status, :as => :select, :collection => ["Pending", "Accepted", "Declined"]
   filter :employee, :label => "Salesperson"

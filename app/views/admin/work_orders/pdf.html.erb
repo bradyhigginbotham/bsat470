@@ -1,5 +1,4 @@
 <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-<% amount = 0 %>
 <div id="document" class="work_order_pdf">
   <div class="header">
     <div class="left">
@@ -25,7 +24,7 @@
       </div>
     </div>
     <div class="right">
-      <div class="labels">
+      <div class="labels" style="width: 50px;">
         <ul>
           <li>
             <label>Date</label>
@@ -60,10 +59,10 @@
       <ul>
         <li>&nbsp;</li>
         <li>
-          <%= @work_order.location.name %>
+          <%= @work_order.location.name.titleize %>
         </li>
         <li>
-          <%= @work_order.location.address %>
+          <%= @work_order.location.address.titleize %>
         </li>
         <li>
           <%= "#{@work_order.location.city}, #{@work_order.location.state} #{@work_order.location.zip}"  %>
@@ -72,45 +71,42 @@
     </div>
   </div>
 
-  <div class="tasks">
+  <div class="notes">
+    <div class="labels" style="width: 50px; height: 35px;">
+      <ul>
+        <li>
+          <label>Notes</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul style="margin: 0px">
+        <li>
+          <%= @work_order.notes %>
+        </li>
+      <ul>
+    </div>
+  </div>
+
+  <div class="work_order_tasks">
     <!-- Tasks Table -->
     <table>
       <tr>
         <th class="first">Task</th>
         <th>Square Feet</th>
-        <th>Price/SqFt</th>
-        <th class="last">Amount</th>
+        <th>Est. Hours</th>
+        <th>Status</th>
+        <th class="last">Date Complete</th>
       </tr>
-      <% @proposal.locations.each do |location| %>
-        <% location.tasks.each do |task| %>
-          <tr>
-            <td class="first"><%= task.title.titleize %></td>
-            <td><%= task.sqft %></td>
-            <td><%= number_with_delimiter(number_with_precision(task.price_per_sqft, :precision => 2)) %></td>
-            <td class="last"><%= number_with_delimiter(number_with_precision(task.sqft * task.price_per_sqft, :precision => 2)) %></td>
-            <% amount = amount + (task.sqft * task.price_per_sqft) %>
-          </tr>
-        <% end %>
+      <% @work_order.location.tasks.each do |task| %>
+        <tr>
+          <td class="first"><%= task.title.titleize %></td>
+          <td><%= task.sqft %></td>
+          <td><%= task.est_hours %></td>
+          <td><%= task.status %></td>
+          <td class="last"><%= raw task.date_completed.nil? ? "--" : task.date_completed %></td>
+        </tr>
       <% end %>
-      <tr height="30"></tr>
-      <tr>
-        <td class="first">Total Before Tax</td>
-        <td></td>
-        <td></td>
-        <td class="last"><%= number_with_delimiter(number_with_precision(amount, :precision => 2)) %></td>
-      </tr>
-      <tr>
-        <td class="first">Tax (8.2%)</td>
-        <td></td>
-        <td></td>
-        <td class="last"><%= number_with_delimiter(number_with_precision(amount*0.082, :precision => 2)) %></td>
-      </tr>
-      <tr>
-        <td class="first">Total</td>
-        <td></td>
-        <td></td>
-        <td class="last"><%= number_to_currency(amount+(amount*0.082)) %></td>
-      </tr>
     </table>
   </div>
 
@@ -142,7 +138,7 @@
     <div class="inputs">
       <ul>
         <li>
-          <%= @work_order.date_required %>
+          <%= @work_order.date_required.strftime("%B %d, %Y") %>
         </li>
       <ul>
     </div>
