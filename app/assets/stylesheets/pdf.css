@@ -20,8 +20,6 @@ ul {
   margin-left: 10px;
 }
 
-/* Proposal PDF */
-
 .header {
   float: left;
   width: 760px;
@@ -39,6 +37,8 @@ ul {
   width: 250px;
   height: 100px;
 }
+
+/* Proposal PDF */
 
 .billing {
   float: left;
@@ -85,4 +85,16 @@ ul {
 .salesperson {
   float: left;
   width: 760px;
+}
+
+/* Work Order PDF */
+
+.manager {
+  float: left;
+  width: 380px;
+}
+
+.date_required {
+  float: left;
+  width: 380px;
 }

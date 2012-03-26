@@ -136,21 +136,25 @@ ActiveAdmin.register Proposal do
     	end
   	end
 
-		panel "Work Orders" do
+	  panel "Work Orders" do
     	table_for proposal.work_orders do
-				column ("ID") do |resource|
+			  column("") do |resource| 
+          span link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_work_order_path(resource))	if controller.current_ability.can? :edit, WorkOrder
+          span link_to(image_tag('print.png', :title => 'Print'), pdf_admin_work_order_path(resource))	if controller.current_ability.can? :manage, WorkOrder
+        end
+			  column ("ID") do |resource|
           link_to(resource.number, admin_work_order_path(resource))	if controller.current_ability.can? :show, WorkOrder
         end
-				column "Manager", :employee
-        column :date_required
-        column :notes
-				column "Created On", :created_at
-				column("") do |resource| 
-   #       link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_proposal_path(resource))	if controller.current_ability.can? :edit, WorkOrder
-        end
+			  column :level
+        column :location
+			  column :date_required
+			  column "Created On", :created_at
+			  column "Updated On", :updated_at
     	end
-			link_to "Add Work Order", new_admin_work_order_path().to_s + "?&work_order[proposal_id]=#{proposal.id}", :class => "panel_button"
-  	end
+      div do
+		    link_to "Add Work Order", new_admin_work_order_path().to_s + "?&work_order[proposal_id]=#{proposal.id}", :class => "panel_button"
+    	end
+    end
 
 
     active_admin_comments
@@ -158,15 +162,15 @@ ActiveAdmin.register Proposal do
 
   form :partial => "form"
 
-  filter :client
   filter :number, :label => "ID"
-  filter :status
-  filter :decision_date
+  filter :client
+  filter :status, :as => :select, :collection => ["Pending", "Accepted", "Declined"]
+  filter :employee, :label => "Salesperson"
   filter :est_method
-  filter :customer_type
-  filter :employee
-  filter :created_at
-  filter :updated_at
+  filter :customer_type, :as => :check_boxes, :collection => ["Residential", "Commercial", "Government", "General Contractor"]
+  filter :decision_date
+  filter :created_at, :label => "Created On"
+  filter :updated_at, :label => "Updated On"
 
 
 end

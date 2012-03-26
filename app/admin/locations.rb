@@ -21,6 +21,8 @@ ActiveAdmin.register Location do
         column :sqft
         column :price_per_sqft
         column :est_hours
+        column ("Created On") {|task| task.created_at.strftime("%B %d, %Y")}
+        column ("Updated On") {|task| task.updated_at.strftime("%B %d, %Y")}
     	end
   	end
 
