@@ -1,5 +1,13 @@
 form.work_order {font-size: 14px;}
 
+form.work_order input[readonly="readonly"],
+form.work_order input[disabled="disabled"]
+{
+  background: none;
+  border: none;
+  color: "#000";
+}
+
 /*--------------------- Work Order Fields ---------------------*/
 #wo_fields {
   width: 96%;

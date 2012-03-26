@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
   accepts_nested_attributes_for :material_assignments
 
   attr_accessible :title, :status, :sqft, :price_per_sqft, :est_hours, :date_completed, :location_id
-  validates_presence_of :title, :sqft, :price_per_sqft
+  validates_presence_of :title, :sqft, :price_per_sqft, :location_id
 
   def defaults
     self[:status] = "Pending"

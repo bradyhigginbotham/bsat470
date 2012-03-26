@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325073103) do
+ActiveRecord::Schema.define(:version => 20120325230804) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(:version => 20120325073103) do
   create_table "tasks", :force => true do |t|
     t.string   "title",                                         :null => false
     t.string   "status"
-    t.integer  "sqft"
-    t.decimal  "price_per_sqft", :precision => 10, :scale => 0
+    t.integer  "sqft",                                          :null => false
+    t.decimal  "price_per_sqft", :precision => 10, :scale => 2, :null => false
     t.integer  "est_hours"
     t.date     "date_completed"
     t.datetime "created_at"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20120325073103) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "number",        :null => false
-    t.string   "primary",       :null => false
+    t.string   "level",         :null => false
     t.integer  "location_id",   :null => false
   end
 

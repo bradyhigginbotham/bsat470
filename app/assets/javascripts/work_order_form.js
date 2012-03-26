@@ -1,4 +1,4 @@
-function ajaxCalls(type, value){
+function ajaxCalls(type, value, form){
   if (type === "location_list"){
     $.ajax({
 		  url: "/locations/list?id=" + value,
@@ -11,7 +11,11 @@ function ajaxCalls(type, value){
 	        alert("An error has occurred.");
           return;
         } else {
-          fillLocationList(data);
+          if (form === 'edit') {
+            fillLocationList(data, true);
+          } else {
+            fillLocationList(data, false);
+          }
         }
       }
 	  });
@@ -46,9 +50,9 @@ function ajaxCalls(type, value){
 	        alert("An error has occurred.");
           return;
         } else {
-          alert(data.length);
-          createTaskGrid(data.length);
-          updateTaskGrid(data);
+          var tasks = eval('(' + data + ')');
+          createTaskGrid(tasks.length);
+          updateTaskGrid(tasks);
         }
       }
 	  });
@@ -60,13 +64,16 @@ $("select.proposal_list").change(function() {
   if($(this).val()) {
     if($("div.location_grid").length)
       clearLocationGrid();
-    ajaxCalls("location_list", $(this).val());
+    ajaxCalls("location_list", $(this).val(), 'new');
     showMiddle();
     showFooter();
   } else {
     hideMiddle();
     hideFooter();
   }
+
+  if ($("fieldset.wo_task_inputs").length)
+    $("fieldset.wo_task_inputs").remove();
 });
 
 // when location is selected
@@ -74,21 +81,31 @@ $("select.location_list").change(function() {
   if($(this).val()) {
     if($("div.location_grid").length)
       clearLocationGrid();
-    ajaxCalls("location_info", $(this).val());
-    ajaxCalls("task_grid", $(this).val());
+    ajaxCalls("location_info", $(this).val(), 'new');
+
+    // tasks
+    if (!$("fieldset.wo_task_inputs").length)
+      createTaskContainer();
+    ajaxCalls("task_grid", $(this).val(), 'new');
   } else {
     clearLocationGrid();
     clearTaskGrid();
   }
 });
 
-function fillLocationList(data){
+function fillLocationList(data, isEdit){
   var locations = eval('(' + data + ')');
 
   $("select.location_list").empty();
   $("select.location_list").append('<option value=""></option>');
   for (var i = 0; i < locations.length; i++) {
     $("select.location_list").append('<option value="' + locations[i].id + '">' + locations[i].name + '</option>');
+  }
+  if(isEdit){
+    setLocation();
+    createTaskContainer();
+    ajaxCalls("location_info", $('#work_order_location_id').val(), 'new');
+    ajaxCalls("task_grid", $('#work_order_location_id').val(), 'new');
   }
 }
 
@@ -110,20 +127,60 @@ function clearLocationGrid(){
   $("div.location_grid").remove();
 }
 
+function createTaskContainer(){
+  $("fieldset.buttons").before(
+    '<fieldset class="inputs wo_task_inputs">' +
+      '<legend><span>Tasks</span></legend>' +
+      '<div class="container_wo_tasks">' +      
+        '<div class="wo_tasks">' +
+          '<div class="task_labels">' +
+            '<ol>' +
+              '<li><label class="label">Task<abbr title="required">*</abbr></label></li>' +
+              '<li><label class="label">Square Feet<abbr title="required">*</abbr></label></li>' +
+              '<li><label class="label">Price($)/SqFt<abbr title="required">*</abbr></label></li>' +
+              '<li><label class="label">Est. Hours</label></li>' +
+              '<li><label class="label">Status</label></li>' +
+              '<li><label class="label">Date Complete</label></li>' +
+            '</ol>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</fieldset>'
+  );
+
+  
+}
+
 function createTaskGrid(count){
+  if ($("div.task_fields").length)
+    $("div.task_fields").remove();
   $("div.wo_tasks").append('<div class="task_fields"></div>');
 
   for (var i = 0; i < count; i++){
     $("div.wo_tasks .task_fields").append(
       '<ol>' +
-        '<li id="work_order_tasks_attributes_0_title_input" class="string input required stringish"><input type="text" name="work_order[tasks_attributes][0][title]" maxlength="255" id="work_order_tasks_attributes_0_title"></li>' +
-        '<li id="work_order_tasks_attributes_0_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="work_order[tasks_attributes][0][sqft]" id="work_order_tasks_attributes_0_sqft"></li>' +
-        '<li id="work_order_tasks_attributes_0_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="work_order[tasks_attributes][0][price_per_sqft]" id="work_order_tasks_attributes_0_price_per_sqft"></li>' +
-        '<li id="work_order_tasks_attributes_0_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="work_order[tasks_attributes][0][est_hours]" id="work_order_tasks_attributes_0_est_hours"></li>' +
-        '<li id="work_order_tasks_attributes_0_status_input" class="string input optional stringish"><input type="text" value="Pending" readonly="readonly" name="work_order[tasks_attributes][0][status]" maxlength="255" id="work_order_tasks_attributes_0_status" class="plain"></li>' +
-        '<li id="work_order_tasks_attributes_0_date_completed_input" class="string input optional stringish"><input type="text" name="work_order[tasks_attributes][0][date_completed]" id="work_order_tasks_attributes_0_date_completed" class="datepicker hasDatepicker"></li>' +
+        '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title"></li>' +
+        '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft"></li>' +
+        '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft"></li>' +
+        '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours"></li>' +
+        '<li id="tasks_' + i + '_status_input" class="string input optional stringish"><input type="text"  readonly="readonly" name="tasks[' + i + '][status]" maxlength="255" id="tasks_' + i + '_status"></li>' +
+        '<li id="tasks_' + i + '_date_completed_input" class="string input optional stringish"><input type="text" name="tasks[' + i + '][date_completed]" id="tasks_' + i + '_date_completed" disabled="disabled" value="--"></li>' +
+        '<input type="hidden" name="tasks[' + i + '][id]" id="tasks_' + i + '_id">' +
+        '<input type="hidden" name="tasks[' + i + '][location_id]" id="tasks_' + i + '_location_id">' +
       '</ol>'
     );
+  }
+}
+
+function updateTaskGrid(tasks){
+  for (var i = 0; i < tasks.length; i++){
+    $("input#tasks_" + i + "_title").val(tasks[i].title);
+    $("input#tasks_" + i + "_sqft").val(tasks[i].sqft);
+    $("input#tasks_" + i + "_price_per_sqft").val(tasks[i].price_per_sqft);
+    $("input#tasks_" + i + "_est_hours").val(tasks[i].est_hours);
+    $("input#tasks_" + i + "_status").val(tasks[i].status);
+    $("input#tasks_" + i + "_id").val(tasks[i].id);
+    $("input#tasks_" + i + "_location_id").val(tasks[i].location_id);
   }
 }
 

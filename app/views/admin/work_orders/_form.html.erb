@@ -13,7 +13,7 @@
               <input class="plain" readonly="true" id="work_order_number" name="work_order[number]" value="<%= f.object.number %>">
             <% end %>
           </li>
-          <%= f.input :proposal, :as => :select, :collection => Proposal.all.collect{|p| [p.number, p.id]}, :input_html => {:class => 'proposal_list'} %>
+          <%= f.input :proposal, :label => "Proposal No.", :as => :select, :collection => Proposal.where("status = ?", "Accepted").collect{|p| [p.number, p.id]}, :input_html => {:class => 'proposal_list'} %>
         </ol>
       </div>
       <div class="form_header_right">
@@ -24,8 +24,13 @@
           </li>
           <li>
             <label class="label">Type<abbr title="required">*</abbr></label>
-            <input type="radio" name="work_order[primary]" value="Primary" /><span class="radio_label">Primary</span>
-            <input type="radio" name="work_order[primary]" value="Secondary" /><span class="radio_label">Secondary</span>
+            <% if f.object.new_record? %>
+              <input type="radio" name="work_order[level]" value="Primary" /><span class="radio_label">Primary</span>
+              <input type="radio" name="work_order[level]" value="Secondary" /><span class="radio_label">Secondary</span>
+            <% else %>
+              <input type="radio" name="work_order[level]" value="Primary" <% if f.object.level == "Primary" %>checked="checked"<% end %> /><span class="radio_label">Primary</span>
+              <input type="radio" name="work_order[level]" value="Secondary" <% if f.object.level == "Secondary" %>checked="checked"<% end %>/><span class="radio_label">Secondary</span>
+            <% end %>
           </li>
         </ol>
       </div> 
@@ -35,7 +40,7 @@
       <div class="location_information">
         <ol>
           <li>
-            <label class="label" for="work_order_location_id">Location:</label>
+            <label class="label" for="work_order_location_id">Location<abbr title="required">*</abbr></label>
             <select id="work_order_location_id" class="location_list" name="work_order[location_id]"></select>
           </li>
         </ol>
@@ -56,28 +61,23 @@
 	</div>
 <% end %>
 
-	<%= f.semantic_fields_for :tasks do |t| %>
-    <fieldset class="inputs">
-      <legend><span>Tasks</span></legend>
-      <div class="container_wo_tasks">      
-        <div class="wo_tasks">
-          <div class="task_labels">
-            <ol>
-              <li><label class="label">Task<abbr title="required">*</abbr></label></li>
-              <li><label class="label">Square Feet<abbr title="required">*</abbr></label></li>
-              <li><label class="label">Price($)/SqFt<abbr title="required">*</abbr></label></li>
-              <li><label class="label">Est. Hours</label></li>
-              <li><label class="label">Status</label></li>
-              <li><label class="label">Date Complete</label></li>
-            </ol>
-          </div>
-          <!-- task fields will go here via ajax calls -->
-        </div>
-      </div>
-    </fieldset>
-  <% end %>
+<!-- tasks container (ajax) -->
  
 <%= f.buttons :commit %>
+
+  <!-- script for 'edit' form -->
+  <script type="text/javascript">
+  $(document).ready(function(){
+    if($("select.proposal_list option:selected").val().length) {
+      ajaxCalls("location_list", $("select.proposal_list option:selected").val(), 'edit');
+    }
+  });    
+
+  function setLocation(){
+    $('#work_order_location_id').val(<%= f.object.location_id %>);
+  }
+  </script>
+
 <% end %>
 
 <script src="/assets/work_order_form.js" type="text/javascript"></script>

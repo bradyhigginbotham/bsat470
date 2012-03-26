@@ -6,11 +6,8 @@ class WorkOrder < ActiveRecord::Base
   has_many :assignments
   accepts_nested_attributes_for :assignments
 
-  has_many :tasks, :through => :location
-  accepts_nested_attributes_for :tasks
-
-  attr_accessible       :number, :notes, :date_required, :primary, :employee_id, :proposal_id, :location_id, :tasks_attributes
-  validates_presence_of :number, :date_required, :primary, :employee_id, :proposal_id, :location_id
+  attr_accessible       :number, :notes, :date_required, :level, :employee_id, :proposal_id, :location_id
+  validates_presence_of :number, :date_required, :level, :employee_id, :proposal_id, :location_id
 
   def next_id
     if last_wo = WorkOrder.last
