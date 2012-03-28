@@ -1,0 +1,56 @@
+<%= semantic_form_for [:admin, @assignment] do |f| %>
+
+<%= f.inputs "Details" do %>
+	<div id="assignment_fields">
+    <div class="form_header">
+      <div class="form_header_left">
+		    <ol>
+          <li>
+            <label class="label">Assignment No.</label>
+            <% if f.object.new_record? %>
+              <input class="plain" readonly="true" id="assignment_number" name="assignment[number]" value="<%= f.object.next_id %>">
+            <% else %>
+              <input class="plain" readonly="true" id="assignment_number" name="assignment[number]" value="<%= f.object.number %>">
+            <% end %>
+          </li>
+          <%= f.input :work_order, :label => "Work Order No.", :as => :select, :collection => WorkOrder.all.collect{|wo| [wo.number, wo.id]}, :input_html => {:class => 'work_order_list', :style => 'width: 117px'} %>
+        </ol>
+      </div>
+      <div class="form_header_right">
+        <ol>
+          <%= f.input :start_date, :label => "Start Date", :as => :string, :input_html => {:class => "datepicker"} %>
+          <% if f.object.new_record? %>
+            <%= f.input :end_date, :label => "Finish Date", :as => :string, :input_html => {:class => "datepicker", :disabled => 'disabled'} %>
+          <% else %>
+            <%= f.input :end_date, :label => "Finish Date", :as => :string, :input_html => {:class => "datepicker"} %>
+          <% end %>
+        </ol>
+      </div> 
+    </div>
+
+    <div class="assignment_middle" <% if f.object.new_record? %>style="display: none"<% end %>>
+      <div class="location_information">
+        <!-- entered through ajax -->
+      </div>
+      <ol>
+        <%= f.input :employee, :label => "Supervisor", :as => :select, :collection => Employee.where("department_id = 3").collect{|e| [e.name, e.id]}, :required => true %>
+        <%= f.input :vehicle_id, :label => "Vehicle", :as => :select, :collection => Vehicle.where("checked_out = ?", false).order('vehicles.make').collect{|v| ["#{v.make} #{v.model} (#{v.year})", v.id]} %>
+		  </ol>
+    </div>
+
+    <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
+      <ol style="clear: both">
+        <%= f.input :created_by, :label => "Authorized By:", :input_html => {:class => 'plain', :value => current_employee.name, :readonly => true} %>
+        <%= f.input :created_at, :label => "Authorization Date:", :as => :string, :input_html => {:class => 'plain datepicker', :value => Date.today.strftime('%B %d, %Y'), :disabled => true} %>
+      </ol>
+    </div>
+	</div>
+<% end %>
+
+<!-- material, labor containers (ajax) -->
+ 
+<%= f.buttons :commit %>
+
+<% end %>
+
+<script src="/assets/assignment_form.js" type="text/javascript"></script>

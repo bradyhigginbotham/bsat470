@@ -49,10 +49,10 @@
             <% end %>
             <% if f.object.new_record? && !params[:proposal] %>
               <input type="radio" name="client_record" value="existing" /><span class="radio_label">Existing</span>
-              <%= f.input :client, :label => false, :as => :select, :collection => Client.all.collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list", :disabled => "disabled"} %>
+              <%= f.input :client, :label => false, :as => :select, :collection => Client.all(:order => "clients.name").collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list", :disabled => "disabled"} %>
             <% else %>
               <input type="radio" name="client_record" value="existing" checked="checked" /><span class="radio_label">Existing</span>
-              <%= f.input :client, :label => false, :as => :select, :collection => Client.all.collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list"} %>
+              <%= f.input :client, :label => false, :as => :select, :collection => Client.all(:order => "clients.name").collect{|c| [c.name, c.id]}, :input_html => {:class => "client_list"} %>
             <% end %>
           </li>
         </ol>

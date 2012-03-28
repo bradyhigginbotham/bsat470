@@ -8,6 +8,10 @@ Bsat470::Application.routes.draw do
     get :next_id, :on => :collection
   end
 
+	resources :work_orders do
+    get :get_location, :on => :collection
+  end
+
 	resources :locations do
     get :list, :on => :collection
     get :ajax_call, :on => :collection
@@ -19,7 +23,6 @@ Bsat470::Application.routes.draw do
 
   resources :proposals,
             :materials,
-            :work_orders,
             :assignments,
             :material_assignments,
             :labor_assignments

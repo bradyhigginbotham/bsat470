@@ -3,7 +3,7 @@ class WorkOrder < ActiveRecord::Base
   belongs_to :location
   belongs_to :employee
 
-  has_many :assignments
+  has_many :assignments, :dependent => :destroy
   accepts_nested_attributes_for :assignments
 
   attr_accessible       :number, :notes, :date_required, :level, :employee_id, :proposal_id, :location_id

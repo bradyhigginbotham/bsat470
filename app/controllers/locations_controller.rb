@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
 	def list
-		if @locations = Location.select('id, name').where("proposal_id = ?", params[:id])
+		if @locations = Location.select('id, name').where("proposal_id = ?", params[:id]).order('locations.name')
 			render :json => @locations
 		else
 			render :text => "record_not_found"

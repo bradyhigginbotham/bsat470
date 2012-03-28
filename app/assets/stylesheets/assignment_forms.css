@@ -1,0 +1,88 @@
+form.assignment {font-size: 14px;}
+
+form.assignment input[readonly="readonly"]
+{
+  background: none;
+  border: none;
+  color: "#000";
+}
+
+/*--------------------- Assignment Fields ---------------------*/
+#assignment_fields {
+  width: 96%;
+  padding: 0px 20px;
+  margin: auto;
+}
+
+#assignment_fields .form_header_left {
+  width: 50%;
+}
+
+#assignment_fields .form_header_right {
+  width: 50%;
+}
+
+#assignment_fields .form_header_right label.label { 
+  width: 102px;
+}
+
+#assignment_fields div {float: left;}
+
+#assignment_fields abbr {border: none}
+
+#assignment_fields ol > li {
+  width: auto;
+  padding: 2px 5px;
+}
+
+#assignment_fields ol > li label.label {
+  margin-right: 20px;
+}
+
+#assignment_fields ol > li label[for].label {
+  padding-top: 5px;
+}
+
+#assignment_fields .form_header input {
+  width: 85px;
+  height: 15px !important;
+  padding: 5px;
+}
+
+#assignment_fields .assignment_middle {
+  width:100%;
+  padding-top: 20px;
+}
+
+#assignment_fields .assignment_middle ol > li {float: left}
+#assignment_fields .assignment_middle ol > li label.label {width: auto}
+#assignment_fields .assignment_middle .location_information {width: 100%}
+
+#assignment_fields .location_information input {width: 400px !important;}
+
+#assignment_fields .assignment_middle .location_grid {
+  text-transform: capitalize;
+  padding: 20px 15px;
+}
+
+#assignment_fields .form_footer {padding-top: 20px}
+
+#assignment_fields .form_footer ol > li {width: 400px; float: left}
+#assignment_fields .form_footer ol > li label.label {width: 124px}
+#assignment_fields .form_footer input {width: auto}
+#assignment_fields .form_footer input.plain {
+  width: auto;
+  font-size: 14px;
+  padding-top: 5px;
+}
+
+#assignment_fields input.plain {
+  border: none;
+  background: none;
+  color: #BABDBF;
+  padding: 0;
+  width: 100px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/*--------------------- Material & Labor Fields ---------------------*/

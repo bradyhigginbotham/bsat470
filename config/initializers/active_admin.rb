@@ -122,14 +122,13 @@ ActiveAdmin.setup do |config|
   config.register_stylesheet 'custom.css'
   config.register_stylesheet 'proposal_forms.css'
   config.register_stylesheet 'wo_forms.css'
+  config.register_stylesheet 'assignment_forms.css'
   
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
   #
   # To load a javascript file:
-  config.register_javascript 'proposal_form.js'
-  config.register_javascript 'work_order_form.js'
   config.register_javascript 'highcharts/js/highcharts.js'
   config.register_javascript 'highcharts/js/themes/gray.js'
   config.register_javascript 'dashboard_buttons.js'

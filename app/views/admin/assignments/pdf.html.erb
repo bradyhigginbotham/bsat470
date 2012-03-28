@@ -1,0 +1,146 @@
+<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+<div id="document" class="work_order_pdf">
+  <div class="header">
+    <div class="left">
+      <div class="labels">
+        <ul>
+          <li>
+            <label>Work Order No.</label>
+          </li>
+          <li>
+            <label>Proposal No.</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @work_order.number %>
+          </li>
+          <li>
+            <%= @work_order.proposal.number %>
+          </li>
+        <ul>
+      </div>
+    </div>
+    <div class="right">
+      <div class="labels" style="width: 50px;">
+        <ul>
+          <li>
+            <label>Date</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @work_order.created_at.strftime("%B %d, %Y") %>
+          </li>
+        <ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="work_location">
+    <div class="labels">
+      <ul>
+        <li>
+          <label>Work Location</label>
+        </li>
+        <li>
+          <label>Name</label>
+        </li>
+        <li>
+          <label>Address</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>&nbsp;</li>
+        <li>
+          <%= @work_order.location.name.titleize %>
+        </li>
+        <li>
+          <%= @work_order.location.address.titleize %>
+        </li>
+        <li>
+          <%= "#{@work_order.location.city}, #{@work_order.location.state} #{@work_order.location.zip}"  %>
+        </li>
+      <ul>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="labels" style="width: 50px; height: 35px;">
+      <ul>
+        <li>
+          <label>Notes</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul style="margin: 0px">
+        <li>
+          <%= @work_order.notes %>
+        </li>
+      <ul>
+    </div>
+  </div>
+
+  <div class="work_order_tasks">
+    <!-- Tasks Table -->
+    <table>
+      <tr>
+        <th class="first">Task</th>
+        <th>Square Feet</th>
+        <th>Est. Hours</th>
+        <th>Status</th>
+        <th class="last">Date Complete</th>
+      </tr>
+      <% @work_order.location.tasks.each do |task| %>
+        <tr>
+          <td class="first"><%= task.title.titleize %></td>
+          <td><%= task.sqft %></td>
+          <td><%= task.est_hours %></td>
+          <td><%= task.status %></td>
+          <td class="last"><%= raw task.date_completed.nil? ? "--" : task.date_completed %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="manager">
+    <div class="labels">
+      <ul>
+        <li>
+          <label>Manager</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>
+          <%= @work_order.employee.name %>
+        </li>
+      <ul>
+    </div>
+  </div>
+
+  <div class="date_required">
+    <div class="labels">
+      <ul>
+        <li>
+          <label>Date Required</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>
+          <%= @work_order.date_required.strftime("%B %d, %Y") %>
+        </li>
+      <ul>
+    </div>
+  </div>
+</div>

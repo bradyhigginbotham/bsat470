@@ -5,6 +5,7 @@ class Employee < ActiveRecord::Base
 
   has_many :proposals
   has_many :work_orders
+  has_many :assignments
   has_many :labor_assignments
 
   # self-referencing relationships
