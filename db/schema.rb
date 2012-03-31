@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328042710) do
+ActiveRecord::Schema.define(:version => 20120331203915) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20120328042710) do
   add_index "employees", ["email"], :name => "index_employees_on_email", :unique => true
   add_index "employees", ["reset_password_token"], :name => "index_employees_on_reset_password_token", :unique => true
 
-  create_table "labor_assignments", :id => false, :force => true do |t|
+  create_table "labor_assignments", :force => true do |t|
     t.integer  "task_id",                                      :null => false
     t.integer  "employee_id",                                  :null => false
     t.integer  "assignment_id",                                :null => false
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20120328042710) do
     t.string   "rate_type",                                    :null => false
     t.integer  "est_hours",                                    :null => false
     t.integer  "used_hours"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   create_table "locations", :force => true do |t|
@@ -108,14 +108,14 @@ ActiveRecord::Schema.define(:version => 20120328042710) do
     t.string   "zip",         :limit => 5, :null => false
   end
 
-  create_table "material_assignments", :id => false, :force => true do |t|
+  create_table "material_assignments", :force => true do |t|
     t.integer  "task_id",       :null => false
     t.integer  "material_id",   :null => false
     t.integer  "assignment_id", :null => false
     t.integer  "qty_sent",      :null => false
     t.integer  "qty_used"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "materials", :force => true do |t|

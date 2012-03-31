@@ -1,6 +1,6 @@
 class CreateLaborAssignments < ActiveRecord::Migration
-  def change
-    create_table :labor_assignments, :id => false do |t|
+  def up
+    create_table :labor_assignments do |t|
       t.integer :task_id,       :null => false
       t.integer :employee_id,   :null => false
       t.integer :assignment_id, :null => false
@@ -11,5 +11,9 @@ class CreateLaborAssignments < ActiveRecord::Migration
 
       t.timestamps
     end
+  end
+
+  def down
+    drop_table :labor_assignments
   end
 end
