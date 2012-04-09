@@ -33,7 +33,7 @@
         <!-- entered through ajax -->
       </div>
       <ol>
-        <%= f.input :employee, :label => "Supervisor", :as => :select, :collection => Employee.where("department_id = 3").collect{|e| [e.name, e.id]}, :required => true %>
+        <%= f.input :employee, :label => "Supervisor", :as => :select, :collection => Employee.where("department_id = 3").collect{|e| [e.name, e.id]}, :required => true, :input_html => {:style => "margin-right: 50px"} %>
         <%= f.input :vehicle_id, :label => "Vehicle", :as => :select, :collection => Vehicle.where("checked_out = ?", false).order('vehicles.make').collect{|v| ["#{v.make} #{v.model} (#{v.year})", v.id]} %>
 		  </ol>
     </div>
@@ -41,7 +41,7 @@
     <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
       <ol style="clear: both">
         <%= f.input :created_by, :label => "Authorized By:", :input_html => {:class => 'plain', :value => current_employee.name, :readonly => true} %>
-        <%= f.input :created_at, :label => "Authorization Date:", :as => :string, :input_html => {:class => 'plain datepicker', :value => Date.today.strftime('%B %d, %Y'), :disabled => true} %>
+        <%= f.input :created_at, :label => "Authorized Date:", :as => :string, :input_html => {:class => 'plain datepicker', :value => Date.today.strftime('%B %d, %Y'), :disabled => true} %>
       </ol>
     </div>
 	</div>
@@ -49,14 +49,14 @@
 
 <!-- materials -->
 	<%= f.semantic_fields_for :material_assignments do |l| %>
-    <fieldset class="inputs">
+    <fieldset class="materials_box inputs">
       <legend><span>Materials</span></legend>
     </fieldset>
   <% end %>
 
 <!-- labor -->
 	<%= f.semantic_fields_for :labor_assignments do |l| %>
-    <fieldset class="inputs">
+    <fieldset class="labor_box inputs">
       <legend><span>Labor</span></legend>
     </fieldset>
   <% end %>

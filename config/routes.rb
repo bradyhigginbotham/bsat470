@@ -19,11 +19,16 @@ Bsat470::Application.routes.draw do
 
 	resources :tasks do
     get :ajax_call, :on => :collection
+    get :assignments_ajax_call, :on => :collection
+  end
+
+  resources :assignments do
+    get :ajax_materials, :on => :collection
+    get :ajax_labor, :on => :collection
   end
 
   resources :proposals,
             :materials,
-            :assignments,
             :material_assignments,
             :labor_assignments
 
