@@ -1,47 +1,53 @@
 <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-<div id="document" class="work_order_pdf">
+<div id="document" class="assignment_pdf">
   <div class="header">
     <div class="left">
-      <div class="labels">
+      <div class="labels" style="width: 150px;">
         <ul>
           <li>
-            <label>Work Order No.</label>
+            <label>Assignment No.</label>
           </li>
           <li>
-            <label>Proposal No.</label>
+            <label>Work Order:</label>
           </li>
         <ul>
       </div>
       <div class="inputs">
         <ul>
           <li>
-            <%= @work_order.number %>
+            <%= @assignment.number %>
           </li>
           <li>
-            <%= @work_order.proposal.number %>
+            <%= @assignment.work_order.number %>
           </li>
         <ul>
       </div>
     </div>
     <div class="right">
-      <div class="labels" style="width: 50px;">
+      <div class="labels">
         <ul>
           <li>
-            <label>Date</label>
+            <label>Start Date</label>
+          </li>
+          <li>
+            <label>Finish Date</label>
           </li>
         <ul>
       </div>
       <div class="inputs">
         <ul>
           <li>
-            <%= @work_order.created_at.strftime("%B %d, %Y") %>
+            <%= @assignment.start_date.strftime("%B %d, %Y") %>
+          </li>
+          <li>
+            <%= @assignment.end_date.nil? ? "--" : @assignment.end_date.strftime("%B %d, %Y") %>
           </li>
         <ul>
       </div>
     </div>
   </div>
 
-  <div class="work_location">
+  <div class="assignment_location">
     <div class="labels">
       <ul>
         <li>
@@ -59,86 +65,125 @@
       <ul>
         <li>&nbsp;</li>
         <li>
-          <%= @work_order.location.name.titleize %>
+          <%= @assignment.work_order.location.name.titleize %>
         </li>
         <li>
-          <%= @work_order.location.address.titleize %>
+          <%= @assignment.work_order.location.address.titleize %>
         </li>
         <li>
-          <%= "#{@work_order.location.city}, #{@work_order.location.state} #{@work_order.location.zip}"  %>
+          <%= "#{@assignment.work_order.location.city}, #{@assignment.work_order.location.state} #{@assignment.work_order.location.zip}"  %>
         </li>
       <ul>
     </div>
   </div>
 
-  <div class="notes">
-    <div class="labels" style="width: 50px; height: 35px;">
+  <div class="supervisor_vehicle">
+    <div class="labels">
       <ul>
         <li>
-          <label>Notes</label>
+          <label>Supervisor:</label>
         </li>
       <ul>
     </div>
     <div class="inputs">
-      <ul style="margin: 0px">
+      <ul>
         <li>
-          <%= @work_order.notes %>
+          <%= @assignment.employee.name %>
+        </li>
+      <ul>
+    </div>
+    <div class="labels" style="margin-left: 100px">
+      <ul>
+        <li>
+          <label>Vehicle:</label>
+        </li>
+      <ul>
+    </div>
+    <div class="inputs">
+      <ul>
+        <li>
+          <%= @assignment.vehicle.nil? ? "--" : "#{@assignment.vehicle.make} #{@assignment.vehicle.model} (#{@assignment.vehicle.year})" %>
         </li>
       <ul>
     </div>
   </div>
 
-  <div class="work_order_tasks">
-    <!-- Tasks Table -->
+  <div class="material_assignments">
+    <!-- Material Assignments Table -->
     <table>
+      <tr><th class="assignment_header" colspan="5">Material Assignments</th></tr>
       <tr>
         <th class="first">Task</th>
-        <th>Square Feet</th>
-        <th>Est. Hours</th>
-        <th>Status</th>
-        <th class="last">Date Complete</th>
+        <th>Material</th>
+        <th>Unit Cost</th>
+        <th>Qty Sent</th>
+        <th class="last">Qty Used</th>
       </tr>
-      <% @work_order.location.tasks.each do |task| %>
+      <% @assignment.material_assignments.each do |ma| %>
         <tr>
-          <td class="first"><%= task.title.titleize %></td>
-          <td><%= task.sqft %></td>
-          <td><%= task.est_hours %></td>
-          <td><%= task.status %></td>
-          <td class="last"><%= raw task.date_completed.nil? ? "--" : task.date_completed %></td>
+          <td class="first"><%= ma.task.title.titleize %></td>
+          <td><%= ma.material.name %></td>
+          <td><%= number_to_currency(ma.material.unit_cost) %></td>
+          <td><%= ma.qty_sent %></td>
+          <td class="last"><%= ma.qty_used.nil? ? "--" : ma.qty_used %></td>
         </tr>
       <% end %>
     </table>
   </div>
 
-  <div class="manager">
+  <div class="labor_assignments">
+    <!-- Labor Assignments Table -->
+    <table>
+      <tr><th class="assignment_header" colspan="5">Labor Assignments</th></tr>
+      <tr>
+        <th class="first">Task</th>
+        <th>Employee</th>
+        <th>Rate</th>
+        <th>Est. Hours</th>
+        <th class="last">Hrs Used</th>
+      </tr>
+      <% @assignment.labor_assignments.each do |la| %>
+        <tr>
+          <td class="first"><%= la.task.title.titleize %></td>
+          <td><%= la.employee.name %></td>
+          <td><%= number_to_currency(la.rate) %></td>
+          <td><%= la.est_hours %></td>
+          <td class="last"><%= la.used_hours.nil? ? "--" : la.used_hours %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+
+  <div class="auth_by">
     <div class="labels">
       <ul>
         <li>
-          <label>Manager</label>
+          <label>Authorized By:</label>
         </li>
       <ul>
     </div>
     <div class="inputs">
       <ul>
         <li>
-          <%= @work_order.employee.name %>
+          <%= @auther.name %>
         </li>
       <ul>
     </div>
   </div>
 
-  <div class="date_required">
+  <div class="auth_date">
     <div class="labels">
       <ul>
         <li>
-          <label>Date Required</label>
+          <label>Authorization Date:</label>
         </li>
       <ul>
     </div>
     <div class="inputs">
       <ul>
         <li>
-          <%= @work_order.date_required.strftime("%B %d, %Y") %>
+          <%= @assignment.created_at.strftime("%B %d, %Y") %>
         </li>
       <ul>
     </div>

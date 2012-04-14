@@ -53,16 +53,58 @@
 <% end %>
 
 <!-- materials -->
-	<%= f.semantic_fields_for :material_assignments do |l| %>
+	<%= f.semantic_fields_for :material_assignments do |ma| %>
     <fieldset class="material_assignments inputs">
       <legend><span>Materials</span></legend>
+      <% if !f.object.new_record? %>
+        <div class="materials_grid">
+          <ol class="material_assignment_labels">
+            <li><label class="label">Task<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Material<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Qty Sent<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Qty Used</label></li>
+          </ol>
+          <ol id="material_assignment_0">
+            <%= ma.input :task, :label => false %>
+            <%= ma.input :material, :label => false %>
+            <%= ma.input :qty_sent, :label => false %>
+            <%= ma.input :qty_used, :label => false %>
+          </ol>
+
+          <div class="add_material_assignment">
+            <a class="button material_assignment_button" onclick="addMaterial(<%= f.object.material_assignments.count %>);">Add</a>
+          </div>
+        </div>
+      <% end %>
     </fieldset>
   <% end %>
 
 <!-- labor -->
-	<%= f.semantic_fields_for :labor_assignments do |l| %>
+	<%= f.semantic_fields_for :labor_assignments do |la| %>
     <fieldset class="labor_assignments inputs">
       <legend><span>Labor</span></legend>
+      <% if !f.object.new_record? %>
+        <div class="labor_grid">
+          <ol class="labor_assignment_labels">
+            <li><label class="label">Task<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Employee<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Rate<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Est. Hours<abbr title="required">*</abbr></label></li>
+            <li><label class="label">Hrs Used</label></li>
+          </ol>
+          <ol id="labor_assignment_0">
+            <%= la.input :task, :label => false %>
+            <%= la.input :employee, :label => false %>
+            <%= la.input :rate, :label => false %>
+            <%= la.input :est_hours, :label => false %>
+            <%= la.input :used_hours, :label => false %>
+          </ol>
+
+          <div class="add_labor_assignment">
+            <a class="button labor_assignment_button" onclick="addLabor(<%= f.object.labor_assignments.count %>);">Add</a>
+          </div>
+        </div>
+      <% end %>
     </fieldset>
   <% end %>
 

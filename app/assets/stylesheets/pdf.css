@@ -126,3 +126,59 @@ ul {
   float: left;
   width: 380px;
 }
+
+/* Assignment PDF */
+
+.assignment_location {
+  float: left;
+  width: 100%;
+}
+
+.supervisor_vehicle {
+  float: left;
+  width: 760px;
+}
+
+.material_assignments {
+  width: 100%;
+  margin: 0 0 50px 40px;
+}
+
+.labor_assignments {
+  width: 100%;
+  margin: 0 0 50px 40px;
+}
+
+.material_assignments table {width: 100%;}
+.labor_assignments table {width: 100%;}
+
+.material_assignments table tr th {text-decoration: underline}
+.labor_assignments table tr th {text-decoration: underline}
+
+.material_assignments table tr th.assignment_header {
+  text-decoration: none;
+  padding: 10px 0;
+}
+
+.labor_assignments table tr th.assignment_header {
+  text-decoration: none;
+  padding: 10px 0;
+}
+
+.material_assignments table tr td {width: 20%; text-align: center;}
+.material_assignments table tr .first {text-align: left;}
+.material_assignments table tr .last {text-align: right;}
+
+.labor_assignments table tr td {width: 20%; text-align: center;}
+.labor_assignments table tr .first {text-align: left;}
+.labor_assignments table tr .last {text-align: right;}
+
+.auth_by {
+  float: left;
+  width: 380px;
+}
+
+.auth_date {
+  float: left;
+  width: 400px;
+}

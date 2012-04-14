@@ -82,6 +82,26 @@ ActiveAdmin.register WorkOrder do
       row :notes
 		end
 
+		panel "Assignments" do
+    	table_for work_order.assignments do
+			  column ("ID") do |resource|
+          link_to(resource.number, admin_assignment_path(resource))	if controller.current_ability.can? :show, Assignment
+        end
+			  column ("Vehicle") do |a|
+          link_to("#{a.vehicle.make} #{a.vehicle.model} (#{a.vehicle.year})", admin_vehicle_path(a.vehicle))
+        end
+			  column ("Supervisor") do |resource|
+          link_to(resource.employee.name, admin_employee_path(resource.employee))	if controller.current_ability.can? :show, Employee
+        end
+			  column ("Authorized By") do |resource|
+          auther = Employee.find(resource.created_by)
+          link_to(auther.name, admin_employee_path(auther))	if controller.current_ability.can? :show, Employee
+        end
+        column :start_date
+        column ("Finish Date") {|a| a.end_date}
+    	end
+  	end
+
 		panel "Tasks" do
     	table_for work_order.location.tasks do
         column :title
@@ -94,6 +114,8 @@ ActiveAdmin.register WorkOrder do
 			  column "Updated On", :updated_at
     	end
   	end
+
+    active_admin_comments
   end
 
 

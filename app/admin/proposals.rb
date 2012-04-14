@@ -86,7 +86,7 @@ ActiveAdmin.register Proposal do
       format.html do
           render :pdf         => "#{@proposal.number}_#{@proposal.client.name}",
                  :wkhtmltopdf => '/usr/bin/wkhtmltopdf', # path to binary
-                 :header      => {:center => "text"},
+                 :header      => {:center => "Proposal for #{@proposal.client.name}"},
                  :margin      => {:bottom         => 10,
                                   :left           => 10,
                                   :right          => 10}
@@ -155,7 +155,6 @@ ActiveAdmin.register Proposal do
 		    link_to "Add Work Order", new_admin_work_order_path().to_s + "?&work_order[proposal_id]=#{proposal.id}", :class => "panel_button"
     	end
     end
-
 
     active_admin_comments
   end

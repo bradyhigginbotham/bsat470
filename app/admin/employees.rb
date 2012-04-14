@@ -81,7 +81,6 @@ ActiveAdmin.register Employee do
       end
     end
 
-
     active_admin_comments
 	end
   

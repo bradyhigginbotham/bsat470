@@ -10,6 +10,15 @@ ActiveAdmin.register Assignment do
       end
     end
 
+    def create
+      if params[:assignment][:vehicle_id] != '' # if a vehicle was selected
+        @vehicle = Vehicle.find(params[:assignment][:vehicle_id])
+        @vehicle.update_attributes(:checked_out => true)
+      end
+
+      super
+    end
+
     def update
       emp = Employee.find_by_name(params[:assignment][:created_by])
       params[:assignment][:created_by] = emp.id
@@ -28,7 +37,7 @@ ActiveAdmin.register Assignment do
 
   member_action :pdf do
     @assignment = Assignment.find(resource)
-#    @work_order = WorkOrder.find(@assignment.work_order_id)
+    @auther = Employee.find(@assignment.created_by)
     respond_to do |format|
       format.html do
           render :pdf         => "#{@assignment.number}_#{@assignment.work_order.location.name}",
@@ -66,14 +75,14 @@ ActiveAdmin.register Assignment do
 	show :title => :number do
 		attributes_table do
 			row ("Assignment ID") {resource.number}
+      row ("Work Order") do |resource|
+        raw link_to("#{resource.work_order.number}", admin_work_order_path(resource.work_order))
+      end
       row ("Supervisor") {resource.employee}
 			row :start_date
 			row :end_date
       row ("Vehicle") do |resource|
         raw link_to("#{resource.vehicle.make} #{resource.vehicle.model} (#{resource.vehicle.year})", admin_vehicle_path(resource.vehicle))
-      end
-      row ("Work Order") do |resource|
-        raw link_to("#{resource.work_order.number}", admin_work_order_path(resource.work_order))
       end
       row ("Authorized By") do |resource|
         auther = Employee.find(resource.created_by)
@@ -84,6 +93,9 @@ ActiveAdmin.register Assignment do
 
 		panel "Materials" do
     	table_for assignment.material_assignments do
+			  column("") do |resource| 
+          span link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_material_assignment_path(resource))	if controller.current_ability.can? :edit, MaterialAssignment
+        end
         column :task
         column :material
         column :qty_sent
@@ -95,6 +107,9 @@ ActiveAdmin.register Assignment do
 
 		panel "Labor" do
     	table_for assignment.labor_assignments do
+			  column("") do |resource| 
+          span link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_labor_assignment_path(resource))	if controller.current_ability.can? :edit, LaborAssignment
+        end
         column :task
         column :employee
         column ("Est. Hours") {|l| l.est_hours}
@@ -103,6 +118,8 @@ ActiveAdmin.register Assignment do
 			  column "Updated On", :updated_at
     	end
   	end
+
+    active_admin_comments
   end
 
   form :partial => "form"
