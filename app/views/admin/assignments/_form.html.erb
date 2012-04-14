@@ -40,8 +40,13 @@
 
     <div class="form_footer" <% if f.object.new_record? %>style="display: none"<% end %>>
       <ol style="clear: both">
-        <%= f.input :created_by, :label => "Authorized By:", :input_html => {:class => 'plain', :value => current_employee.name, :readonly => true} %>
-        <%= f.input :created_at, :label => "Authorized Date:", :as => :string, :input_html => {:class => 'plain datepicker', :value => Date.today.strftime('%B %d, %Y'), :disabled => true} %>
+        <% if f.object.new_record? %>
+          <%= f.input :created_by, :label => "Authorized By:", :input_html => {:class => 'plain', :value => current_employee.name, :readonly => true} %>
+          <%= f.input :created_at, :label => "Authorized Date:", :as => :string, :input_html => {:class => 'plain datepicker', :value => Date.today.strftime('%B %d, %Y'), :disabled => true} %>
+        <% else %>
+          <%= f.input :created_by, :label => "Authorized By:", :input_html => {:class => 'plain', :value => Employee.find(f.object.created_by).name, :readonly => true} %>
+          <%= f.input :created_at, :label => "Authorized Date:", :as => :string, :input_html => {:class => 'plain datepicker', :value => f.object.created_at.strftime('%B %d, %Y'), :disabled => true} %>
+        <% end %>
       </ol>
     </div>
 	</div>

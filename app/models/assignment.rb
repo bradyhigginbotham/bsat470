@@ -15,6 +15,9 @@ class Assignment < ActiveRecord::Base
                   :material_assignments_attributes, :labor_assignments_attributes
   validates_presence_of :number, :start_date, :created_by, :work_order_id, :employee_id
 
+  scope :in_progress, where("assignments.end_date IS NULL")
+  scope :completed, where("assignments.end_date IS NOT NULL")
+
   def next_id
     if last_assignment = Assignment.last
       id = last_assignment.number
