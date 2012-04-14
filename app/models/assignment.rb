@@ -1,4 +1,6 @@
 class Assignment < ActiveRecord::Base
+  before_create :default_values
+
   belongs_to :work_order
   belongs_to :employee
   belongs_to :vehicle
@@ -9,7 +11,8 @@ class Assignment < ActiveRecord::Base
   has_many :material_assignments, :dependent => :destroy
 	accepts_nested_attributes_for :material_assignments, :allow_destroy => true
 
-  attr_accessible :number, :start_date, :end_date, :created_by, :work_order_id, :employee_id, :vehicle_id
+  attr_accessible :number, :start_date, :end_date, :created_by, :work_order_id, :employee_id, :vehicle_id,
+                  :material_assignments_attributes, :labor_assignments_attributes
   validates_presence_of :number, :start_date, :created_by, :work_order_id, :employee_id
 
   def next_id
@@ -25,5 +28,10 @@ class Assignment < ActiveRecord::Base
     else
       next_id = "A001" # first assignment
     end
+  end
+
+  def default_values
+    authorizer = Employee.find_by_name(self[:created_by])
+    self[:created_by] = authorizer.id
   end
 end

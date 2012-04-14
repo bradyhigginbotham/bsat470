@@ -144,6 +144,7 @@ form.work_order input[disabled="disabled"]
   float: left;
   text-align: center;
 }
+
 .wo_tasks .task_fields ol > li input[type="number"] {
   border: 1px solid #C9D0D6;
   border-radius: 3px 3px 3px 3px;

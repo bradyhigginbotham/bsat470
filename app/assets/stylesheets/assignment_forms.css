@@ -86,3 +86,74 @@ form.assignment input[readonly="readonly"]
 }
 
 /*--------------------- Material & Labor Fields ---------------------*/
+
+div.materials_grid {
+  width: 900px;
+  padding: 20px 40px 0 60px;
+  margin: 10px auto;
+  border: 1px solid #C9D0D6;
+  border-radius: 10px;
+}
+
+div.labor_grid {
+  width: 1120px;
+  padding: 20px 20px 0 80px;
+  margin: 10px auto;
+  border: 1px solid #C9D0D6;
+  border-radius: 10px;
+}
+
+.materials_grid ol {
+  float: left;
+  width: 860px;
+  margin: 0;
+}
+
+.labor_grid ol {
+  float: left;
+  width: 1080px;
+  margin: 0;
+}
+
+.materials_grid ol > li,
+.labor_grid ol > li {
+  float: left;
+  margin: 0;
+  padding-bottom: 2px;
+  width: 184px;
+  text-align: center;
+}
+
+.materials_grid ol > li.material_delete,
+.labor_grid ol > li.labor_delete {
+  width: 24px;
+  padding-top: 15px;
+}
+
+.materials_grid ol > li.material_delete img:hover,
+.labor_grid ol > li.labor_delete img:hover {cursor: pointer}
+
+.materials_grid ol.material_assignment_labels label.label,
+.labor_grid ol.labor_assignment_labels label.label {
+  width: inherit;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #5E6469;
+}
+
+.materials_grid select,
+.labor_grid select {width: 184px;}
+
+.materials_grid ol > li input[type="number"],
+.labor_grid ol > li input[type="number"] {
+  border: 1px solid #C9D0D6;
+  border-radius: 3px 3px 3px 3px;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 0.95em;
+  outline: medium none;
+  padding: 8px 14px 7px;
+  text-align: center;
+}
+
+.add_material_assignment,
+.add_labor_assignment {margin: 10px}

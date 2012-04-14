@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120331203915) do
+ActiveRecord::Schema.define(:version => 20120414002950) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(:version => 20120331203915) do
     t.integer  "task_id",                                      :null => false
     t.integer  "employee_id",                                  :null => false
     t.integer  "assignment_id",                                :null => false
-    t.decimal  "rate",          :precision => 10, :scale => 0, :null => false
-    t.string   "rate_type",                                    :null => false
+    t.decimal  "rate",          :precision => 10, :scale => 2, :null => false
+    t.string   "rate_type"
     t.integer  "est_hours",                                    :null => false
     t.integer  "used_hours"
     t.datetime "created_at",                                   :null => false
@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20120331203915) do
 
   create_table "materials", :force => true do |t|
     t.string   "name",                                      :null => false
-    t.decimal  "unit_cost",  :precision => 10, :scale => 0, :null => false
+    t.decimal  "unit_cost",  :precision => 10, :scale => 2, :null => false
     t.integer  "quantity",                                  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
