@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.2'
 gem "mongrel", '>= 1.2.0.pre2' 
 
+gem 'mysql2'
 gem 'cancan'
 gem 'wicked_pdf'
 
@@ -34,11 +35,4 @@ gem 'therubyracer' # JS Compiler from Chrome
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
-end
-
-group :development, :test do
-  gem 'mysql2'
-end
-group :production do
-  gem 'pg'
 end
