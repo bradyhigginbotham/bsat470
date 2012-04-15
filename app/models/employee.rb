@@ -54,4 +54,8 @@ class Employee < ActiveRecord::Base
   def default_number
     self[:number] = self.next_id
   end
+
+  def supervisors
+     supervisors = Employee.where("department_id != 2")
+  end
 end

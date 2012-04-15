@@ -125,7 +125,7 @@ ActiveAdmin.register Assignment do
   form :partial => "form"
 
   filter :number, :label => "Assignment ID"
-  #filter :employee, :label => "Supervisor", :as => :select, :collection => Employee.where("department_id != 2").collect{|emp| [emp.name, emp.id]}
+  filter :employee, :label => "Supervisor", :as => :select, :collection => proc { Employee.all }
   #filter :vehicle, :as => :select, :collection => Vehicle.all.collect{|v| ["#{v.make} #{v.model} (#{v.year})", v.id]}
   #filter :work_order, :as => :select, :collection => WorkOrder.all.collect{|wo| ["#{wo.number} - #{wo.location.name}", wo.id]}
   filter :start_date

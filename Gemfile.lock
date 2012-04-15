@@ -108,8 +108,8 @@ GEM
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
     multi_json (1.1.0)
+    mysql2 (0.3.11)
     orm_adapter (0.0.6)
-    pg (0.13.2)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -179,7 +179,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   mongrel (>= 1.2.0.pre2)
-  pg
+  mysql2
   rails (= 3.2.2)
   sass-rails (~> 3.2.3)
   therubyracer
