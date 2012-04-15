@@ -51,15 +51,27 @@ ActiveAdmin.register Proposal do
       )
 
       params[:proposal][:locations_attributes].each do |key, location|
-        @location = Location.create!(
-          :name => location[:name],
-          :address => location[:address],
-          :city => location[:city],
-          :state => location[:state],
-          :zip => location[:zip],
-          :client_id => location[:client_id],
-          :proposal_id => @proposal.id
-        )
+        if params[:client_record] == 'new'
+          @location = Location.create!(
+            :name => location[:name],
+            :address => location[:address],
+            :city => location[:city],
+            :state => location[:state],
+            :zip => location[:zip],
+            :client_id => @client.id,
+            :proposal_id => @proposal.id
+          )
+        else
+          @location = Location.create!(
+            :name => location[:name],
+            :address => location[:address],
+            :city => location[:city],
+            :state => location[:state],
+            :zip => location[:zip],
+            :client_id => location[:client_id],
+            :proposal_id => @proposal.id
+          )
+        end
 
         location[:tasks_attributes].each do |key, task|
           @task = Task.create!(
