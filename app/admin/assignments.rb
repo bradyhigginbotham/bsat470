@@ -50,6 +50,14 @@ ActiveAdmin.register Assignment do
     end
   end
 
+  collection_action :mobile do
+    if @assignments = Assignment.where("employee_id = ?", current_employee.id)
+			render :json => @assignments
+		else
+			render :text => "record_not_found"
+		end
+  end
+
   index do
     selectable_column
     column "ID", :sortable => :number do |a|
