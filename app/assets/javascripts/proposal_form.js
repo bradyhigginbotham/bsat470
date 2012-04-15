@@ -224,6 +224,7 @@ function addTask(location_index, task_index){
           '<input type="number" step="any" name="proposal[locations_attributes][' + location_index + '][tasks_attributes][' + task_index + '][price_per_sqft]" id="proposal_locations_attributes_' + location_index + '_tasks_attributes_' + task_index + '_price_per_sqft"></li>' +
         '<li id="proposal_locations_attributes_' + location_index + '_tasks_attributes_' + task_index + '_est_hours_input" class="number input optional numeric stringish">' +
           '<input type="number" step="any" name="proposal[locations_attributes][' + location_index + '][tasks_attributes][' + task_index + '][est_hours]" id="proposal_locations_attributes_' + location_index + '_tasks_attributes_' + task_index + '_est_hours"></li>' +
+          '<input type="hidden" id="proposal_locations_attributes_' + location_index + '_tasks_attributes_' + task_index + '_location_id" name="proposal[locations_attributes][' + location_index + '][tasks_attributes][' + task_index + '][location_id]">' +
       '</ol>'
   );
 

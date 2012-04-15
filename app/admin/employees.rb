@@ -92,8 +92,11 @@ ActiveAdmin.register Employee do
       f.input :supervisor
 			f.input :department, :required => true, :include_blank => false
       f.input :admin, :label => "Administrator", :input_html => { :checked => 'checked' }
-      f.input :number, :as => :hidden, :value => f.object.next_id
-
+      if f.object.new_record?
+        f.input :number, :as => :hidden, :value => f.object.next_id
+      else
+        f.input :number, :as => :hidden, :value => f.object.number
+      end
     end
     f.buttons
   end

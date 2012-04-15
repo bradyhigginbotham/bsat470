@@ -15,7 +15,7 @@ class Location < ActiveRecord::Base
 
   def defaults
     self[:state] = self.state.upcase
-    self[:city] = self.city.upcase
+    self[:city] = self.city.titleize
   end
 
 end

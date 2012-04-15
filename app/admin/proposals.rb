@@ -25,16 +25,6 @@ ActiveAdmin.register Proposal do
           :zip => params[:client][:zip]
         )
 
-        @proposal = Proposal.create!(
-          :number => params[:proposal][:number],
-          :status => params[:proposal][:status],
-          :decision_date => params[:proposal][:decision_date],
-          :est_method => params[:proposal][:est_method],
-          :customer_type => params[:proposal][:customer_type],
-          :client_id => @client.id,
-          :employee_id => params[:proposal][:employee_id]
-        )
-
       else # existing
         @client = Client.find(params[:client][:id])
         @client.update_attributes(
@@ -48,6 +38,39 @@ ActiveAdmin.register Proposal do
           :state => params[:client][:state],
           :zip => params[:client][:zip]
         )
+      end
+
+      @proposal = Proposal.create!(
+        :number => params[:proposal][:number],
+        :status => params[:proposal][:status],
+        :decision_date => params[:proposal][:decision_date],
+        :est_method => params[:proposal][:est_method],
+        :customer_type => params[:proposal][:customer_type],
+        :client_id => @client.id,
+        :employee_id => params[:proposal][:employee_id]
+      )
+
+      params[:proposal][:locations_attributes].each do |key, location|
+        @location = Location.create!(
+          :name => location[:name],
+          :address => location[:address],
+          :city => location[:city],
+          :state => location[:state],
+          :zip => location[:zip],
+          :client_id => location[:client_id],
+          :proposal_id => @proposal.id
+        )
+
+        location[:tasks_attributes].each do |key, task|
+          @task = Task.create!(
+            :title => task[:title],
+            :status => task[:status],
+            :sqft => task[:sqft],
+            :price_per_sqft => task[:price_per_sqft],
+            :est_hours => task[:est_hours],
+            :location_id => @location.id
+          )
+        end
       end
 
       super
