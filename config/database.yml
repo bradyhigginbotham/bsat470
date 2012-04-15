@@ -19,7 +19,7 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: heroku_00169b7707707bd
-  username: bbaa8289c5515b
-  password: faaf2342
-  host: http://bsat470.herokuapp.com
+  database: insulation_unlimited_production
+  username: root
+  password: saints637
+  host: localhost
