@@ -3,8 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.2'
 gem "mongrel", '>= 1.2.0.pre2' 
 
-gem 'pg'
-#gem 'mysql2'
 gem 'cancan'
 gem 'wicked_pdf'
 
@@ -32,6 +30,14 @@ gem 'therubyracer' # JS Compiler from Chrome
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :production do
+  gem 'pg'
+end
+
+group :development do
+  gem 'mysql2'
+end
 
 group :test do
   # Pretty printed test output
