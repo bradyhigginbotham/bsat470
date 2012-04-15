@@ -79,5 +79,5 @@ Bsat470::Application.configure do
 		:password => "saints4gmail",
 	}
 
-  config.action_mailer.default_url_options = { :host => 'http://bsat470.heroku.com' }
+  config.action_mailer.default_url_options = { :host => 'http://bsat470.herokuapp.com' }
 end

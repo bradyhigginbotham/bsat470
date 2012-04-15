@@ -54,7 +54,7 @@ module Bsat470
     config.assets.enabled = true
 
     # halt rake migrations on heroku precompilation
-    config.assets.initialize_on_precompile = false
+    #config.assets.initialize_on_precompile = false
     
     config.assets.precompile += %w[ active_admin.css.scss active_admin.js ]
 
