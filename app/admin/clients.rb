@@ -72,7 +72,6 @@ ActiveAdmin.register Client do
 
   form do |f|
     f.inputs "Details" do
-      f.input :number, :as => :hidden
       f.input :name
   		f.input :email
       f.input :phone
@@ -81,6 +80,11 @@ ActiveAdmin.register Client do
       f.input :city
       f.input :state
       f.input :zip
+      if f.object.new_record?
+        f.input :number, :as => :hidden, :value => f.object.next_id
+      else
+        f.input :number, :as => :hidden, :value => f.object.number
+      end
     end
 
     f.semantic_fields_for :locations do |p|
