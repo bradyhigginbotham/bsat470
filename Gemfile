@@ -3,8 +3,8 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.2'
 gem "mongrel", '>= 1.2.0.pre2' 
 
-#gem 'pg'
-gem 'mysql2'
+gem 'pg'
+#gem 'mysql2'
 gem 'cancan'
 gem 'wicked_pdf'
 
