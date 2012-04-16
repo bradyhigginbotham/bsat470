@@ -47,7 +47,7 @@ ActiveAdmin.register WorkOrder do
     respond_to do |format|
       format.html do
           render :pdf         => "#{@work_order.number}_#{@work_order.location.name}",
-                 :wkhtmltopdf => '/usr/bin/wkhtmltopdf', # path to binary
+                 :wkhtmltopdf => Rails.root.join('bin', 'wkhtmltopdf').to_s, # path to binary
                  :header      => {:center => "#{@work_order.level} Work Order"},
                  :margin      => {:bottom         => 10,
                                   :left           => 10,
