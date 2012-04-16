@@ -81,7 +81,11 @@ ActiveAdmin.register Assignment do
 			row :start_date
 			row :end_date
       row ("Vehicle") do |resource|
-        raw link_to("#{resource.vehicle.make} #{resource.vehicle.model} (#{resource.vehicle.year})", admin_vehicle_path(resource.vehicle))
+        if resource.vehicle
+          raw link_to("#{resource.vehicle.make} #{resource.vehicle.model} (#{resource.vehicle.year})", admin_vehicle_path(resource.vehicle))
+        else
+          "N/A"
+        end
       end
       row ("Authorized By") do |resource|
         auther = Employee.find(resource.created_by)

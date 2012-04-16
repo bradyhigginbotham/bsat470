@@ -1,5 +1,6 @@
 class Assignment < ActiveRecord::Base
   before_create :default_values
+  before_update :vehicle_return
 
   belongs_to :work_order
   belongs_to :employee
@@ -41,5 +42,12 @@ class Assignment < ActiveRecord::Base
       vehicle = Vehicle.find(self[:vehicle_id])
       vehicle.update_attributes(:checked_out => true)
     end
+  end
+
+  def vehicle_return
+    if self[:end_date]
+      vehicle = Vehicle.find(self[:vehicle_id])
+      vehicle.update_attributes(:checked_out => false)
+    end      
   end
 end

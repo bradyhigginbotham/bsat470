@@ -34,7 +34,11 @@
       </div>
       <ol>
         <%= f.input :employee, :label => "Supervisor", :as => :select, :collection => Employee.where("department_id = 3").collect{|e| [e.name, e.id]}, :required => true, :input_html => {:style => "margin-right: 50px"} %>
-        <%= f.input :vehicle_id, :label => "Vehicle", :as => :select, :collection => Vehicle.where("checked_out = ?", false).order('vehicles.make').collect{|v| ["#{v.make} #{v.model} (#{v.year})", v.id]} %>
+        <% if f.object.new_record? %>        
+          <%= f.input :vehicle_id, :label => "Vehicle", :as => :select, :collection => Vehicle.where("checked_out = ?", false).order('vehicles.make').collect{|v| ["#{v.make} #{v.model} (#{v.year})", v.id]} %>
+        <% else %>
+          <%= f.input :vehicle_id, :label => "Vehicle", :as => :select, :collection => Vehicle.where("id = ? OR checked_out = ?", f.object.vehicle_id, false).collect{|v| ["#{v.make} #{v.model} (#{v.year})", v.id]} %>
+        <% end %>
 		  </ol>
     </div>
 
@@ -53,7 +57,6 @@
 <% end %>
 
 <!-- materials -->
-	<%= f.semantic_fields_for :material_assignments do |ma| %>
     <fieldset class="material_assignments inputs">
       <legend><span>Materials</span></legend>
       <% if !f.object.new_record? %>
@@ -64,12 +67,19 @@
             <li><label class="label">Qty Sent<abbr title="required">*</abbr></label></li>
             <li><label class="label">Qty Used</label></li>
           </ol>
-          <ol id="material_assignment_0">
-            <%= ma.input :task, :label => false %>
-            <%= ma.input :material, :label => false %>
-            <%= ma.input :qty_sent, :label => false %>
-            <%= ma.input :qty_used, :label => false %>
-          </ol>
+          <% count = 0 %>
+        	<%= f.semantic_fields_for :material_assignments do |ma| %>
+            <ol id="material_assignment_<%= count %>">
+              <%= ma.input :task, :label => false %>
+              <%= ma.input :material, :label => false %>
+              <%= ma.input :qty_sent, :label => false %>
+              <%= ma.input :qty_used, :label => false %>
+              <li class="material_delete">
+                <a onclick="deleteMaterial(<%= count %>);"><img src="/assets/delete.png"></a>
+              </li>
+            </ol>
+            <% count += 1 %>
+          <% end %>
 
           <div class="add_material_assignment">
             <a class="button material_assignment_button" onclick="addMaterial(<%= f.object.material_assignments.count %>);">Add</a>
@@ -77,10 +87,8 @@
         </div>
       <% end %>
     </fieldset>
-  <% end %>
 
 <!-- labor -->
-	<%= f.semantic_fields_for :labor_assignments do |la| %>
     <fieldset class="labor_assignments inputs">
       <legend><span>Labor</span></legend>
       <% if !f.object.new_record? %>
@@ -92,13 +100,20 @@
             <li><label class="label">Est. Hours<abbr title="required">*</abbr></label></li>
             <li><label class="label">Hrs Used</label></li>
           </ol>
-          <ol id="labor_assignment_0">
-            <%= la.input :task, :label => false %>
-            <%= la.input :employee, :label => false %>
-            <%= la.input :rate, :label => false %>
-            <%= la.input :est_hours, :label => false %>
-            <%= la.input :used_hours, :label => false %>
-          </ol>
+          <% count = 0 %>
+        	<%= f.semantic_fields_for :labor_assignments do |la| %>
+            <ol id="labor_assignment_<%= count %>">
+              <%= la.input :task, :label => false %>
+              <%= la.input :employee, :label => false %>
+              <%= la.input :rate, :label => false %>
+              <%= la.input :est_hours, :label => false %>
+              <%= la.input :used_hours, :label => false %>
+              <li class="labor_delete">
+                <a onclick="deleteLabor(<%= count %>);"><img src="/assets/delete.png"></a>
+              </li>
+            </ol>
+            <% count += 1 %>
+          <% end %>
 
           <div class="add_labor_assignment">
             <a class="button labor_assignment_button" onclick="addLabor(<%= f.object.labor_assignments.count %>);">Add</a>
@@ -106,7 +121,6 @@
         </div>
       <% end %>
     </fieldset>
-  <% end %>
 
  
 <%= f.buttons :commit %>
