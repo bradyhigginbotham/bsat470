@@ -64,7 +64,9 @@ ActiveAdmin.register WorkOrder do
     column :level
     column "Manager", :employee
     column :date_required
-    column :proposal
+    column "Proposal", :sortable => :proposal do |wo|
+      link_to wo.proposal.number, admin_proposal_path(a.proposal)
+    end
     column :location
     column "Created On", :created_at
     column "Updated On", :updated_at
@@ -104,7 +106,7 @@ ActiveAdmin.register WorkOrder do
     	end
 
       div do
-	      link_to "Add Assignment", new_admin_assignment_path().to_s + "?&assignment[work_order_id]=#{work_order.id}", :class => "panel_button"
+	      link_to "Add Assignment", new_admin_assignment_path().to_s #+ "?&assignment[work_order_id]=#{work_order.id}", :class => "panel_button"
     	end
   	end
 

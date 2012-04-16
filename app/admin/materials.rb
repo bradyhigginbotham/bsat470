@@ -11,7 +11,15 @@ ActiveAdmin.register Material do
       link_to mat.name, admin_material_path(mat)
     end	
     column :unit_cost
-    column :quantity
+    column "Quantity", :sortable => :quantity do |mat|
+      if mat.quantity < 10      
+        div :style => "font-weight: bold; color: red" do        
+          mat.quantity
+        end
+      else
+        mat.quantity
+      end
+    end	
   end
 
   show :title => :name do
