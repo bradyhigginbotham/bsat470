@@ -186,9 +186,12 @@ ActiveAdmin.register Proposal do
 			  column "Created On", :created_at
 			  column "Updated On", :updated_at
     	end
-      div do
-		    link_to "Add Work Order", new_admin_work_order_path().to_s + "?&work_order[proposal_id]=#{proposal.id}", :class => "panel_button"
-    	end
+
+      if resource.status == "Accepted"
+        div do
+		      link_to "Add Work Order", new_admin_work_order_path().to_s + "?&work_order[proposal_id]=#{proposal.id}", :class => "panel_button"
+      	end
+      end
     end
 
     active_admin_comments

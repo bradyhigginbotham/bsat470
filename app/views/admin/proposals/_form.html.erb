@@ -29,7 +29,11 @@
         <ol>
           <li>
             <label class="label">Date Written</label>
-            <input class="plain" disabled="disabled" id="proposal_created_at" name="proposal[created_at]" value="<%= Date.today.strftime("%B %d, %Y") %>">
+            <% if f.object.new_record? %>
+              <input class="plain" disabled="disabled" id="proposal_created_at" name="proposal[created_at]" value="<%= Date.today.strftime("%B %d, %Y") %>">
+            <% else %>
+              <input class="plain" disabled="disabled" id="proposal_created_at" name="proposal[created_at]" value="<%= f.object.created_at.strftime("%B %d, %Y") %>">
+            <% end %>
           </li>
 			    <%= f.input :decision_date, :label => "Decision Date", :as => :string, :input_html => { :class => "datepicker" } %>
           <%= f.input :status, :as => :select, :collection => ["Pending", "Accepted", "Declined"], :include_blank => false %>
@@ -112,7 +116,11 @@
 			            <%= t.input :sqft, :label => false %>
 			            <%= t.input :price_per_sqft, :label => false %>
 			            <%= t.input :est_hours, :label => false %>
-                  <input id="proposal_locations_attributes_0_tasks_attributes_0_location_id" type="hidden" name="proposal[locations_attributes][0][tasks_attributes][0][location_id]">
+                  <% if f.object.new_record? %>
+                    <input id="proposal_locations_attributes_0_tasks_attributes_0_location_id" type="hidden" name="proposal[locations_attributes][0][tasks_attributes][0][location_id]">
+                  <% else %>
+                    <%= t.input :location_id, :as => :hidden, :wrapper_html => {:style => "width: 0px; padding: 0px"} %>
+                  <% end %>
 		            <% end %>
               </ol>
             </div>
