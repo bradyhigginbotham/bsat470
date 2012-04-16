@@ -1,0 +1,93 @@
+<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+<div id="document" class="assignment_pdf">
+  <div class="header">
+    <div class="left">
+      <div class="labels" style="width: 150px;">
+        <ul>
+          <li>
+            <label>Invoice No.</label>
+          </li>
+          <li>
+            <label>Proposal No.</label>
+          </li>
+          <li>
+            <label>Start Date</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @invoice.number %>
+          </li>
+          <li>
+            <%= @invoice.work_order.proposal.number %>
+          </li>
+          <li>
+            <%= @invoice.start_date.strftime("%B %d, %Y") %>
+          </li>
+        <ul>
+      </div>
+    </div>
+    <div class="right">
+      <div class="labels">
+        <ul>
+          <li>
+            <label>Date</label>
+          </li>
+          <li>
+            <label>Finish Date</label>
+          </li>
+        <ul>
+      </div>
+      <div class="inputs">
+        <ul>
+          <li>
+            <%= @invoice.created_at.strftime("%B %d, %Y") %>
+          </li>
+          <li>
+            <%= @invoice.end_date.nil? ? "--" : @invoice.end_date.strftime("%B %d, %Y") %>
+          </li>
+        <ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="work_order_tasks">
+    <!-- Tasks Table -->
+    <table>
+      <tr>
+        <th class="first">Task</th>
+        <th>Location</th>
+        <th>Amount</th>
+        <th class="last">Date Complete</th>
+      </tr>
+      <% @invoices.tasks.each do |task| %>
+        <tr>
+          <td class="first"><%= task.title.titleize %></td>
+          <td><%= task.location.name %></td>
+          <td><%= task.est_hours %></td>
+          <td class="last"><%= task.date_completed %></td>
+        </tr>
+      <% end %>
+        <tr>
+          <td></td>
+          <td>Total Before Tax</td>
+          <td><%= number_to_currency(bt_total) %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Tax</td>
+          <td><%= number_to_currency(bt_total * 0.08) %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Total After Tax</td>
+          <td><%= number_to_currency(at_total) %></td>
+          <td></td>
+        </tr>
+    </table>
+  </div>
