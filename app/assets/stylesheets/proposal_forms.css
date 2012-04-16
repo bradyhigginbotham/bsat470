@@ -182,13 +182,19 @@ div[class*='tasks_'] {
   width: 130px;
   text-align: center;
 }
+
 .task_fields ol > li input[type="number"] {
- border: 1px solid #C9D0D6;
-    border-radius: 3px 3px 3px 3px;
-    font-family: Helvetica,Arial,sans-serif;
-    font-size: 0.95em;
-    outline: medium none;
-    padding: 8px 10px 7px;
+  border: 1px solid #C9D0D6;
+  border-radius: 3px 3px 3px 3px;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 0.95em;
+  outline: medium none;
+  padding: 8px 10px 7px;
+}
+
+.task_fields ol > li input[type="number"]:focus {
+    border: 1px solid #99A2AA;
+    box-shadow: 0 0 4px #99A2AA;
 }
 
 /* Buttons */

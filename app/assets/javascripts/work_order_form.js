@@ -51,7 +51,12 @@ function ajaxCalls(type, value, form){
           return;
         } else {
           var tasks = eval('(' + data + ')');
-          createTaskGrid(tasks.length);
+          var pending_count = 0;
+          for (var i = 0; i < tasks.length; i++){
+            if (tasks[i].status == "Pending")
+              pending_count++;
+          }
+          createTaskGrid(tasks.length, pending_count);
           updateTaskGrid(tasks);
         }
       }
@@ -140,7 +145,7 @@ function createTaskContainer(){
               '<li><label class="label">Price($)/SqFt<abbr title="required">*</abbr></label></li>' +
               '<li><label class="label">Est. Hours</label></li>' +
               '<li><label class="label">Status</label></li>' +
-              '<li><label class="label">Date Complete</label></li>' +
+              '<li><label class="label">Completed</label></li>' +
             '</ol>' +
           '</div>' +
         '</div>' +
@@ -151,24 +156,46 @@ function createTaskContainer(){
   
 }
 
-function createTaskGrid(count){
+function createTaskGrid(count, pending){
   if ($("div.task_fields").length)
     $("div.task_fields").remove();
   $("div.wo_tasks").append('<div class="task_fields"></div>');
 
-  for (var i = 0; i < count; i++){
-    $("div.wo_tasks .task_fields").append(
-      '<ol>' +
-        '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title"></li>' +
-        '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft"></li>' +
-        '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft"></li>' +
-        '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours"></li>' +
-        '<li id="tasks_' + i + '_status_input" class="string input optional stringish"><input type="text"  readonly="readonly" name="tasks[' + i + '][status]" maxlength="255" id="tasks_' + i + '_status"></li>' +
-        '<li id="tasks_' + i + '_date_completed_input" class="string input optional stringish"><input type="text" name="tasks[' + i + '][date_completed]" id="tasks_' + i + '_date_completed" disabled="disabled" value="--"></li>' +
-        '<input type="hidden" name="tasks[' + i + '][id]" id="tasks_' + i + '_id">' +
-        '<input type="hidden" name="tasks[' + i + '][location_id]" id="tasks_' + i + '_location_id">' +
-      '</ol>'
-    );
+  if (pending > 0) {
+    for (var i = 0; i < count; i++){
+      $("div.wo_tasks .task_fields").append(
+        '<ol>' +
+          '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title"></li>' +
+          '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft"></li>' +
+          '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft"></li>' +
+          '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours"></li>' +
+          '<li id="tasks_' + i + '_status_input" class="string input optional stringish"><input type="text"  readonly="readonly" name="tasks[' + i + '][status]" maxlength="255" id="tasks_' + i + '_status"></li>' +
+          '<li id="tasks_' + i + '_date_completed_input" class="string input optional stringish"><input type="text" name="tasks[' + i + '][date_completed]" id="tasks_' + i + '_date_completed" disabled="disabled" value="--"></li>' +
+          '<input type="hidden" name="tasks[' + i + '][id]" id="tasks_' + i + '_id">' +
+          '<input type="hidden" name="tasks[' + i + '][location_id]" id="tasks_' + i + '_location_id">' +
+        '</ol>'
+      );
+    }
+  } else {
+    for (var i = 0; i < count; i++){
+      $("div.wo_tasks .task_fields").append(
+        '<ol>' +
+          '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title"></li>' +
+          '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft"></li>' +
+          '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft"></li>' +
+          '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours"></li>' +
+          '<li id="tasks_' + i + '_status_input" class="string input optional stringish">' +
+            '<select name="tasks[' + i + '][status]" id="tasks_' + i + '_status">' +
+              '<option value="In Progress">In Progress</option>' +
+              '<option value="Completed">Completed</option>' +
+            '</select>' +
+          '</li>' +
+          '<li id="tasks_' + i + '_date_completed_input" class="string input optional stringish"><input type="text" name="tasks[' + i + '][date_completed]" id="tasks_' + i + '_date_completed" disabled="disabled" value="--"></li>' +
+          '<input type="hidden" name="tasks[' + i + '][id]" id="tasks_' + i + '_id">' +
+          '<input type="hidden" name="tasks[' + i + '][location_id]" id="tasks_' + i + '_location_id">' +
+        '</ol>'
+      );
+    }
   }
 }
 
@@ -178,9 +205,28 @@ function updateTaskGrid(tasks){
     $("input#tasks_" + i + "_sqft").val(tasks[i].sqft);
     $("input#tasks_" + i + "_price_per_sqft").val(tasks[i].price_per_sqft);
     $("input#tasks_" + i + "_est_hours").val(tasks[i].est_hours);
-    $("input#tasks_" + i + "_status").val(tasks[i].status);
     $("input#tasks_" + i + "_id").val(tasks[i].id);
     $("input#tasks_" + i + "_location_id").val(tasks[i].location_id);
+
+    if (tasks[i].status == "Pending") {
+      $("input#tasks_" + i + "_status").val(tasks[i].status);
+    } else {
+      $("select#tasks_" + i + "_status").val(tasks[i].status);
+
+      if (tasks[i].status == "Completed") {
+        $("select#tasks_" + i + "_status").replaceWith('<input type="text" readonly="readonly" name="tasks[' + i + '][status]" id="tasks_' + i + '_status" style="color: green">');
+        $("input#tasks_" + i + "_status").val(tasks[i].status);
+        $("input#tasks_" + i + "_date_completed").val(tasks[i].date_completed);
+
+        $("input#tasks_" + i + "_title").attr("readonly", "readonly");
+        $("input#tasks_" + i + "_sqft").attr("readonly", "readonly");
+        $("input#tasks_" + i + "_price_per_sqft").attr("readonly", "readonly");
+        $("input#tasks_" + i + "_est_hours").attr("readonly", "readonly");
+
+
+        
+      }
+    }
   }
 }
 

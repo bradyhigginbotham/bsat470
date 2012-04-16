@@ -4,7 +4,16 @@ form.work_order input[readonly="readonly"],
 form.work_order input[disabled="disabled"]
 {
   background: none;
-  border: none;
+  border: none !important;
+  color: "#000";
+}
+
+form.work_order input[readonly="readonly"]:focus,
+form.work_order input[disabled="disabled"]:focus
+{
+  background: none;
+  border: none !important;
+  box-shadow: none !important;
   color: "#000";
 }
 
@@ -152,6 +161,11 @@ form.work_order input[disabled="disabled"]
   font-size: 0.95em;
   outline: medium none;
   padding: 8px 10px 7px;
+}
+
+.wo_tasks .task_fields ol > li input[type="number"]:focus {
+    border: 1px solid #99A2AA;
+    box-shadow: 0 0 4px #99A2AA;
 }
 
 /* Buttons */

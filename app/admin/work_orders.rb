@@ -23,15 +23,26 @@ ActiveAdmin.register WorkOrder do
     def update
       params[:tasks].each do |key, task|
         @task = Task.find(task[:id])
-        @task.update_attributes(
-          :title => task[:title],
-          :status => task[:status],
-          :sqft => task[:sqft],
-          :price_per_sqft => task[:price_per_sqft],
-          :est_hours => task[:est_hours],
-          :date_completed => task[:date_completed],
-          :location_id => task[:location_id]
-        )
+        if !@task.date_completed && task[:status] == "Completed"
+          @task.update_attributes(
+            :title => task[:title],
+            :status => task[:status],
+            :sqft => task[:sqft],
+            :price_per_sqft => task[:price_per_sqft],
+            :est_hours => task[:est_hours],
+            :date_completed => Date.today,
+            :location_id => task[:location_id]
+          )
+        else
+          @task.update_attributes(
+            :title => task[:title],
+            :status => task[:status],
+            :sqft => task[:sqft],
+            :price_per_sqft => task[:price_per_sqft],
+            :est_hours => task[:est_hours],
+            :location_id => task[:location_id]
+          )
+        end
       end
 
       super

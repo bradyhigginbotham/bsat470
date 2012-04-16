@@ -1,4 +1,6 @@
 ActiveAdmin.register Proposal do
+  #actions :all, :except => :edit, :if => resource.status == "Accepted"
+
   menu :priority => 4, :if => proc{ can?(:manage, Proposal) }     
   controller.authorize_resource
 
