@@ -47,7 +47,7 @@ ActiveAdmin.register WorkOrder do
     respond_to do |format|
       format.html do
           render :pdf         => "#{@work_order.number}_#{@work_order.location.name}",
-                 :wkhtmltopdf => Rails.root.join('bin', 'wkhtmltopdf').to_s, # path to binary
+                 :wkhtmltopdf => '/usr/bin/wkhtmltopdf', # path to binary
                  :header      => {:center => "#{@work_order.level} Work Order"},
                  :margin      => {:bottom         => 10,
                                   :left           => 10,
@@ -101,6 +101,10 @@ ActiveAdmin.register WorkOrder do
         end
         column :start_date
         column ("Finish Date") {|a| a.end_date}
+    	end
+
+      div do
+	      link_to "Add Assignment", new_admin_assignment_path().to_s + "?&assignment[work_order_id]=#{work_order.id}", :class => "panel_button"
     	end
   	end
 
