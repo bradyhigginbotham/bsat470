@@ -75,7 +75,9 @@ ActiveAdmin.register WorkOrder do
 			row ("Work Order ID") {resource.number}
       row ("Manager") {resource.employee}
 			row :level
-			row :proposal
+      row ("Proposal") do |resource|
+        raw link_to(resource.proposal.number, admin_proposal_path(resource.proposal))
+      end
 			row :location
 			row ("Created On") {resource.created_at}
 			row ("Updated On") {resource.updated_at}
