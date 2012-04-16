@@ -36,5 +36,10 @@ class Assignment < ActiveRecord::Base
   def default_values
     authorizer = Employee.find_by_name(self[:created_by])
     self[:created_by] = authorizer.id
+
+    if self[:vehicle_id] != "" # if vehicle was selected
+      vehicle = Vehicle.find(self[:vehicle_id])
+      vehicle.update_attributes(:checked_out => true)
+    end
   end
 end

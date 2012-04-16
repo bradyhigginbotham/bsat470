@@ -106,7 +106,8 @@ ActiveAdmin.register WorkOrder do
     	end
 
       div do
-	      link_to "Add Assignment", new_admin_assignment_path().to_s #+ "?&assignment[work_order_id]=#{work_order.id}", :class => "panel_button"
+	      link_to "Add Assignment", new_admin_assignment_path(), :class => "panel_button"
+	      #link_to "Add Assignment", new_admin_assignment_path().to_s + "?&assignment[work_order_id]=#{work_order.id}", :class => "panel_button"
     	end
   	end
 

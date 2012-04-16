@@ -10,15 +10,6 @@ ActiveAdmin.register Assignment do
       end
     end
 
-    def create
-      if params[:assignment][:vehicle_id] != '' # if a vehicle was selected
-        @vehicle = Vehicle.find(params[:assignment][:vehicle_id])
-        @vehicle.update_attributes(:checked_out => true)
-      end
-
-      super
-    end
-
     def update
       emp = Employee.find_by_name(params[:assignment][:created_by])
       params[:assignment][:created_by] = emp.id
