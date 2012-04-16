@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   def ajax_materials
-    if @materials = Material.where("quantity > 9")
+    if @materials = Material.where("quantity > 19")
 			render :json => @materials
 		else
 			render :text => "record_not_found"

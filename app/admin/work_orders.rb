@@ -65,7 +65,7 @@ ActiveAdmin.register WorkOrder do
     column "Manager", :employee
     column :date_required
     column "Proposal", :sortable => :proposal do |wo|
-      link_to wo.proposal.number, admin_proposal_path(a.proposal)
+      link_to wo.proposal.number, admin_proposal_path(wo.proposal)
     end
     column :location
     column "Created On", :created_at
