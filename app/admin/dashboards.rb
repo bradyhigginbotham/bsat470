@@ -1,9 +1,9 @@
 ActiveAdmin::Dashboards.build do
-#  section "Sales", :priority => 1, :if => Proc.new { current_admin_user.department.title == "Management" } do
-#    div :id => "chart_container" do
-#      render 'invoices'
-#		end
-#  end
+  section "Sales", :priority => 1, :if => Proc.new { current_admin_user.department.title == "Management" } do
+    div :id => "chart_container" do
+      render 'invoices'
+		end
+  end
 
   section "Records", :priority => 2, :if => Proc.new { current_admin_user.department.title != "Labor" } do
     div :id => "chart_container" do
