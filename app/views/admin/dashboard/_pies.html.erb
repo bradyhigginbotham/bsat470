@@ -117,7 +117,7 @@ $(document).ready(function() {
          type: 'pie',
          name: 'Work Orders',
          data: [
-            ['In Progress',   <%= WorkOrder.select("DISTINCT work_orders.number").where("invoice_id IS NOT NULL").count.to_f %>],
+            ['In Progress',   <%= WorkOrder.select("DISTINCT work_orders.number").where("invoice_id IS NULL").count.to_f %>],
             ['Completed',   <%= WorkOrder.select("DISTINCT work_orders.number").where("invoice_id IS NOT NULL").count.to_f %>]
          ]
       }]

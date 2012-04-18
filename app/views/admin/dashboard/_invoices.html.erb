@@ -14,13 +14,21 @@ $(document).ready(function() {
 			text: ''	
 		},
 		xAxis: {
+//    	categories: [
+//				'<%= 	Date::ABBR_MONTHNAMES[5.months.ago.month]  %>',
+//				'<%= 	Date::ABBR_MONTHNAMES[4.months.ago.month] %>',
+//				'<%= 	Date::ABBR_MONTHNAMES[3.month.ago.month].to_s + ", " + 3.months.ago.year.to_s %>',
+//				'<%= 	Date::ABBR_MONTHNAMES[2.months.ago.month] %>',
+//				'<%= 	Date::ABBR_MONTHNAMES[1.months.ago.month] %>',
+//				'<%= 	Date::ABBR_MONTHNAMES[Time.now.month] %>'
+//			]
     	categories: [
-				'<%= 	Date::ABBR_MONTHNAMES[5.months.ago.month]  %>',
-				'<%= 	Date::ABBR_MONTHNAMES[4.months.ago.month] %>',
-				'<%= 	Date::ABBR_MONTHNAMES[3.month.ago.month].to_s + ", " + 3.months.ago.year.to_s %>',
-				'<%= 	Date::ABBR_MONTHNAMES[2.months.ago.month] %>',
-				'<%= 	Date::ABBR_MONTHNAMES[1.months.ago.month] %>',
-				'<%= 	Date::ABBR_MONTHNAMES[Time.now.month] %>'
+				'Nov',
+				'Dec',
+				'Jan, 2012',
+				'Feb',
+				'Mar',
+				'Apr'
 			]
 		},
 		yAxis: {
