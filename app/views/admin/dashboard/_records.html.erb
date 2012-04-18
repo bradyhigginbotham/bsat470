@@ -59,11 +59,21 @@ $(document).ready(function() {
 		}, {
 			name: 'Work Orders',
 			data: [<%= WorkOrder.select("DISTINCT work_orders.id").count %>]
-
 		}, {
 			name: 'Assignments',
 			data: [<%= Assignment.select("DISTINCT assignments.id").count %>]
-
+		}, {
+			name: 'Employees',
+			data: [<%= Employee.select("DISTINCT employees.id").count %>]
+		}, {
+			name: 'Materials',
+			data: [<%= Material.select("DISTINCT materials.id").count %>]
+		}, {
+			name: 'Vehicles',
+			data: [<%= Vehicle.select("DISTINCT vehicles.id").count %>]
+		}, {
+			name: 'Invoices',
+			data: [<%= Invoice.select("DISTINCT invoices.id").count %>]
 		}]
 	});
 	

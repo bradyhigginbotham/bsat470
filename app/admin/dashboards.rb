@@ -1,19 +1,23 @@
 ActiveAdmin::Dashboards.build do
+  section "Sales", :priority => 1, :if => Proc.new { current_admin_user.department.title == "Management" } do
+    div :id => "chart_container" do
+      render 'invoices'
+		end
+  end
 
-  section "Records", :if => Proc.new { current_admin_user.department.title != "Labor" } do
+  section "Records", :priority => 2, :if => Proc.new { current_admin_user.department.title != "Labor" } do
     div :id => "chart_container" do
       render 'records'
 		end
   end
 
-
-	section "Proposals", :if => Proc.new { current_admin_user.department.title != "Labor" } do
+	section "Pie Charts", :priority => 3, :if => Proc.new { current_admin_user.department.title != "Labor" } do
 		div :id => "chart_container" do
-			render 'proposals'
+			render 'pies'
 		end
 	end
 
-	section "Account Information", :if => Proc.new { current_admin_user.department.title == "Labor" } do
+	section "Account Information", :priority => 1, :if => Proc.new { current_admin_user.department.title == "Labor" } do
     div :style => "width: 625px" do
       ul :style => "list-style-type: none" do
         li raw "<b>ID:</b> " + current_employee.number
@@ -26,17 +30,14 @@ ActiveAdmin::Dashboards.build do
   end
 
   section "Current Assignments", :priority => 2, :if => Proc.new { current_admin_user.department.title == "Labor" } do
-    table_for LaborAssignment.where("labor_assignments.employee_id, ?", current_employee.id).order('assignment_id desc').each do |assignment|
-      column :rate
+    table_for LaborAssignment.where("employee_id = ?", current_employee.id) do
+      column ("Assignment") {|la| link_to(la.assignment.number, admin_assignment_path(la.assignment))}
+      column ("Task") {|la| la.task.title}
+      column ("Rate") {|la| number_to_currency(la.rate)}
+      column :est_hours
+      column :used_hours
     end
   end
-
-
-#	section "Recent Proposals" do
-#	  Proposal.all.collect do |p|
-#	    div link_to(p.proposal_num, admin_proposal_path(p))
-#	  end
-#	end
   
   # == Render Partial Section
   # The block is rendered within the context of the view, so you can

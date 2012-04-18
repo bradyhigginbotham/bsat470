@@ -1,18 +1,33 @@
 #utility_nav span a.current_user {color:#AAA}
-.status.accepted{background:none repeat scroll 0 0 #8DAA92}
+.status.accepted,
+.status.paid{background:none repeat scroll 0 0 #8DAA92}
 .status.in_progress{background:none repeat scroll 0 0 #E0C80E}
-.status.declined{background:none repeat scroll 0 0 #CC0000}
+.status.declined,
+.status.unpaid{background:none repeat scroll 0 0 #CC0000}
 a.button {cursor:pointer}
 
 /* Dashboard Charts */
 table.dashboard {
-	width: auto;
+	//width: auto;
 }
 
-#records_chart,
-#proposals_chart {
-	width: 600px;
+#chart_container {height: 300px}
+
+#sales_chart,
+#records_chart {
+	width: 100%;
 	height: 300px;
+}
+
+#proposals_chart,
+#work_orders_chart,
+#assignments_chart,
+#invoices_chart {
+  float: left;
+  width: 21%;
+  height: 300px;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 /* Panel Buttons */

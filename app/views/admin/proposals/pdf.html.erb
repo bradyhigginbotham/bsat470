@@ -141,10 +141,10 @@
         <td class="last"><%= number_with_delimiter(number_with_precision(amount*0.082, :precision => 2)) %></td>
       </tr>
       <tr>
-        <td class="first">Total</td>
+        <td class="first"><b>Total</b></td>
         <td></td>
         <td></td>
-        <td class="last"><%= number_to_currency(amount+(amount*0.082)) %></td>
+        <td class="last"><b><%= number_to_currency(amount+(amount*0.082)) %></b></td>
       </tr>
     </table>
   </div>

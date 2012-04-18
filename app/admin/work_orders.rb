@@ -13,7 +13,8 @@ ActiveAdmin.register WorkOrder do
           :price_per_sqft => task[:price_per_sqft],
           :est_hours => task[:est_hours],
           :date_completed => task[:date_completed],
-          :location_id => task[:location_id]
+          :location_id => task[:location_id],
+          :work_order_id => WorkOrder.last.id + 1
         )
       end
 
@@ -49,6 +50,9 @@ ActiveAdmin.register WorkOrder do
     end
   end
 
+  scope :all, :default => true
+  scope :completed
+
   action_item :only => :show do
     link_to "Print PDF", pdf_admin_work_order_path(work_order)
   end
@@ -74,6 +78,13 @@ ActiveAdmin.register WorkOrder do
     end
     column :level
     column "Manager", :employee
+    column "Current State", :sortable => :invoice do |wo|
+      if wo.invoice
+        status_tag("Complete")
+      else
+        status_tag("Incomplete")
+      end
+    end
     column :date_required
     column "Proposal", :sortable => :proposal do |wo|
       link_to wo.proposal.number, admin_proposal_path(wo.proposal)
@@ -95,6 +106,11 @@ ActiveAdmin.register WorkOrder do
 			row ("Created On") {resource.created_at}
 			row ("Updated On") {resource.updated_at}
       row :notes
+      row ("Invoice") do |resource|
+        if resource.invoice
+          raw link_to(resource.invoice.number, admin_invoice_path(resource.invoice))
+        end
+      end
 		end
 
 		panel "Assignments" do
@@ -123,7 +139,7 @@ ActiveAdmin.register WorkOrder do
   	end
 
 		panel "Tasks" do
-    	table_for work_order.location.tasks do
+    	table_for work_order.tasks do
         column :title
         column("Status") {|task| status_tag(task.status) }
         column :sqft

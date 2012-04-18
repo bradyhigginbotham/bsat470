@@ -1,0 +1,255 @@
+<!-- Proposals -->
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'proposals_chart',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+		  credits: {
+		      enabled: false
+		  },
+      title: {
+         text: 'Proposals'
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.y + ' (' + this.percentage.toFixed(0) +'%)';
+         }
+      },
+		  legend: {
+				itemWidth: 84
+		  },
+      plotOptions: {
+         pie: {
+						size: '100%',
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: false
+            },
+            showInLegend: true
+         }
+      },
+		  navigation: {
+		      buttonOptions: {
+		          backgroundColor: {
+		              linearGradient: [0, 0, 0, 20],
+		              stops: [
+		                 [0.4, '#606060'],
+		                 [0.6, '#333333']
+		              ]
+		          }
+		      }
+		  },
+       series: [{
+         type: 'pie',
+         name: 'Proposals',
+         data: [
+            ['Pending',   <%= Proposal.select("DISTINCT proposals.number").where("status = 'Pending'").count.to_f %>],
+            ['Accepted',   <%= Proposal.select("DISTINCT proposals.number").where("status = 'Accepted'").count.to_f %>],
+            ['Declined',   <%= Proposal.select("DISTINCT proposals.number").where("status = 'Declined'").count.to_f %>]
+         ]
+      }]
+   });
+});
+</script>
+<div id="proposals_chart"></div>
+
+
+
+
+
+
+
+<!-- Work Orders -->
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'work_orders_chart',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+      colors: ['#64E572', '#FF9655'],
+		  credits: {
+		      enabled: false
+		  },
+      title: {
+         text: 'Work Orders'
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.y + ' (' + this.percentage.toFixed(0) +'%)';
+         }
+      },
+		  legend: {
+				itemWidth: 90
+		  },
+      plotOptions: {
+         pie: {
+						size: '100%',
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: false
+            },
+            showInLegend: true
+         }
+      },
+		  navigation: {
+		      buttonOptions: {
+		          backgroundColor: {
+		              linearGradient: [0, 0, 0, 20],
+		              stops: [
+		                 [0.4, '#606060'],
+		                 [0.6, '#333333']
+		              ]
+		          }
+		      }
+		  },
+       series: [{
+         type: 'pie',
+         name: 'Work Orders',
+         data: [
+            ['In Progress',   <%= WorkOrder.select("DISTINCT work_orders.number").where("invoice_id IS NOT NULL").count.to_f %>],
+            ['Completed',   <%= WorkOrder.select("DISTINCT work_orders.number").where("invoice_id IS NOT NULL").count.to_f %>]
+         ]
+      }]
+   });
+});
+</script>
+<div id="work_orders_chart"></div>
+
+
+
+
+<!-- Assignments -->
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'assignments_chart',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+      colors: ['#FFF263', '#6AF9C4'],
+		  credits: {
+		      enabled: false
+		  },
+      title: {
+         text: 'Assignments'
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.y + ' (' + this.percentage.toFixed(0) +'%)';
+         }
+      },
+		  legend: {
+				itemWidth: 90
+		  },
+      plotOptions: {
+         pie: {
+						size: '100%',
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: false
+            },
+            showInLegend: true
+         }
+      },
+		  navigation: {
+		      buttonOptions: {
+		          backgroundColor: {
+		              linearGradient: [0, 0, 0, 20],
+		              stops: [
+		                 [0.4, '#606060'],
+		                 [0.6, '#333333']
+		              ]
+		          }
+		      }
+		  },
+       series: [{
+         type: 'pie',
+         name: 'Assignments',
+         data: [
+            ['In Progress',   <%= Assignment.select("DISTINCT assignments.number").where("end_date IS NULL").count.to_f %>],
+            ['Completed',   <%= Assignment.select("DISTINCT assignments.number").where("end_date IS NOT NULL").count.to_f %>]
+         ]
+      }]
+   });
+});
+</script>
+<div id="assignments_chart"></div>
+
+
+
+
+<!-- Assignments -->
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'invoices_chart',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+      colors: ['#50B432', '#ED561B'],
+		  credits: {
+		      enabled: false
+		  },
+      title: {
+         text: 'Invoices'
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.y + ' (' + this.percentage.toFixed(0) +'%)';
+         }
+      },
+		  legend: {
+				itemWidth: 90
+		  },
+      plotOptions: {
+         pie: {
+						size: '100%',
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: false
+            },
+            showInLegend: true
+         }
+      },
+		  navigation: {
+		      buttonOptions: {
+		          backgroundColor: {
+		              linearGradient: [0, 0, 0, 20],
+		              stops: [
+		                 [0.4, '#606060'],
+		                 [0.6, '#333333']
+		              ]
+		          }
+		      }
+		  },
+       series: [{
+         type: 'pie',
+         name: 'Invoices',
+         data: [
+            ['Paid',   <%= Invoice.select("DISTINCT invoices.number").where("paid = true").count.to_f %>],
+            ['Unpaid',   <%= Invoice.select("DISTINCT invoices.number").where("paid = false").count.to_f %>]
+         ]
+      }]
+   });
+});
+</script>
+<div id="invoices_chart"></div>

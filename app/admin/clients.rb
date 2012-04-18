@@ -67,6 +67,28 @@ ActiveAdmin.register Client do
       end
   	end
 
+		panel "Invoices" do
+    	table_for client.invoices do |invoice|
+				column("") do |resource| 
+          span link_to(image_tag('print.png', :title => 'Print'), pdf_admin_invoice_path(resource))	if controller.current_ability.can? :manage, Invoice
+        end
+				column ("ID") do |resource|
+          link_to(resource.number, admin_invoice_path(resource))	if controller.current_ability.can? :manage, Invoice
+        end
+        column ("Status") do |resource|
+          if resource.paid
+            status_tag("Paid")
+          else
+            status_tag("Unpaid")
+          end
+        end
+				column :start_date
+				column :end_date
+				column "Created On", :created_at
+				column "Updated On", :updated_at
+    	end
+  	end
+
     active_admin_comments
   end
 
