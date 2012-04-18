@@ -63,8 +63,8 @@ module Bsat470
     
     config.action_mailer.default_url_options = { :host => "bsat470.herokuapp.com" }
 
-  #  Dir.glob("#{Rails.root.to_s}/lib/ActiveAdmin/Views/Pages/*.rb").each do |f|
-  #    require f
-  #  end
+    Dir.glob("#{Rails.root.to_s}/lib/ActiveAdmin/Views/Pages/*.rb").each do |f|
+      require f
+    end
   end
 end
