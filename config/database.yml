@@ -19,7 +19,7 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: insulation_unlimited_production
+  database: insulation_unlimited
   username: root
   password: saints637
   host: localhost

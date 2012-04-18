@@ -56,15 +56,15 @@ module Bsat470
     # halt rake migrations on heroku precompilation
     #config.assets.initialize_on_precompile = false
     
-    config.assets.precompile += %w[ active_admin.css.scss active_admin.js ]
+    config.assets.precompile += %w[active_admin.css.scss active_admin.js]
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
     config.action_mailer.default_url_options = { :host => "bsat470.herokuapp.com" }
 
-    Dir.glob("#{Rails.root.to_s}/lib/ActiveAdmin/Views/Pages/*.rb").each do |f|
-      require f
-    end
+  #  Dir.glob("#{Rails.root.to_s}/lib/ActiveAdmin/Views/Pages/*.rb").each do |f|
+  #    require f
+  #  end
   end
 end
