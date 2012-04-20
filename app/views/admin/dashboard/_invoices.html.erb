@@ -49,11 +49,11 @@ $(document).ready(function() {
       name: 'Sales',
       data: [
         <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
-        <%= Invoice.where("paid = true").count %>,
-        <%= Invoice.where("paid = true").count %>,
-        <%= Invoice.where("paid = true").count %>,
-        <%= Invoice.where("paid = true").count %>,
-        <%= Invoice.where("paid = true").count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
       ]
     }]
   });
