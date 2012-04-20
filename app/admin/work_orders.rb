@@ -4,18 +4,34 @@ ActiveAdmin.register WorkOrder do
 
   controller do
     def create
-      params[:tasks].each do |key, task|
-        @task = Task.find(task[:id])
-        @task.update_attributes(
-          :title => task[:title],
-          :status => task[:status],
-          :sqft => task[:sqft],
-          :price_per_sqft => task[:price_per_sqft],
-          :est_hours => task[:est_hours],
-          :date_completed => task[:date_completed],
-          :location_id => task[:location_id],
-          :work_order_id => WorkOrder.last.id + 1
-        )
+      if wo = WorkOrder.last
+        params[:tasks].each do |key, task|
+          @task = Task.find(task[:id])
+          @task.update_attributes(
+            :title => task[:title],
+            :status => task[:status],
+            :sqft => task[:sqft],
+            :price_per_sqft => task[:price_per_sqft],
+            :est_hours => task[:est_hours],
+            :date_completed => task[:date_completed],
+            :location_id => task[:location_id],
+            :work_order_id => wo.id + 1
+          )
+        end
+      else
+        params[:tasks].each do |key, task|
+          @task = Task.find(task[:id])
+          @task.update_attributes(
+            :title => task[:title],
+            :status => task[:status],
+            :sqft => task[:sqft],
+            :price_per_sqft => task[:price_per_sqft],
+            :est_hours => task[:est_hours],
+            :date_completed => task[:date_completed],
+            :location_id => task[:location_id],
+            :work_order_id => 1
+          )
+        end
       end
 
       super
