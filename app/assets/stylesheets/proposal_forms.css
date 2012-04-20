@@ -201,7 +201,7 @@ div[class*='tasks_'] {
 .add_task,
 .add_location {float:left}
 .add_location {width:auto; margin-right: 10px}
-.delete_location {float: left, width: 75%}
+.delete_location {float: left; width: 75%}
 .delete_location a {
     -moz-border-bottom-colors: none;
     -moz-border-image: none;
