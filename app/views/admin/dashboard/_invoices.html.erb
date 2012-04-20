@@ -53,7 +53,7 @@ $(document).ready(function() {
         <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
         <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
         <%= Invoice.select("DISTINCT invoices.id").where("paid = true").count %>,
-        <%= Invoice.select("DISTINCT invoices.id").where("extract(year from created_at) = 2012").count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", Date.today.month).count %>,
       ]
     }]
   });
