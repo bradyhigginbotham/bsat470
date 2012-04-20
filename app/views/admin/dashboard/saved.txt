@@ -1,0 +1,64 @@
+<script>
+var chart;
+$(document).ready(function() {
+chart = new Highcharts.Chart({
+chart: {
+renderTo: 'sales_chart',
+type: 'areaspline'
+},
+    colors: ['yellow'],
+title: {
+text: ''
+},
+subtitle: {
+text: ''
+},
+xAxis: {
+     categories: [
+'<%= Date::ABBR_MONTHNAMES[5.months.ago.month] %>',
+'<%= Date::ABBR_MONTHNAMES[4.months.ago.month] %>',
+'<%= Date::ABBR_MONTHNAMES[3.month.ago.month].to_s + ", " + 3.months.ago.year.to_s %>',
+'<%= Date::ABBR_MONTHNAMES[2.months.ago.month] %>',
+'<%= Date::ABBR_MONTHNAMES[1.months.ago.month] %>',
+'<%= Date::ABBR_MONTHNAMES[Time.now.month] %>'
+]
+},
+yAxis: {
+title: {
+text: 'Totals'
+},
+min: 0
+},
+tooltip: {
+formatter: function() {
+return '<b>'+ this.series.name +'</b>: ' + this.y;
+}
+},
+    navigation: {
+        buttonOptions: {
+            backgroundColor: {
+                linearGradient: [0, 0, 0, 20],
+                stops: [
+                   [0.4, '#606060'],
+                   [0.6, '#333333']
+                ]
+            }
+        }
+    },
+series: [{
+name: 'Sales',
+data: [
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND MONTH(created_at) = 11", 5.months.ago.month).count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND MONTH(created_at) = 12", 4.months.ago.month).count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND MONTH(created_at) = 1", 3.months.ago.month).count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND MONTH(created_at) = 2", 2.months.ago.month).count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND MONTH(created_at) = ?", 1.months.ago.month).count %>,
+        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND MONTH(created_at) = ?", Time.now.month).count %>,
+      ]
+}]
+});
+
+
+});
+</script>
+<div id="sales_chart"></div>
