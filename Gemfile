@@ -5,6 +5,7 @@ gem "mongrel", '>= 1.2.0.pre2'
 
 gem 'cancan'
 gem 'wicked_pdf'
+gem 'admin_data', '>= 1.1.16'
 
 # Active Admin
 gem 'activeadmin', :git => 'https://github.com/gregbell/active_admin.git'
