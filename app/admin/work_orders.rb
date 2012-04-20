@@ -82,16 +82,16 @@ ActiveAdmin.register WorkOrder do
       if wo.invoice
         status_tag("Complete")
       else
-        status_tag("Incomplete")
+        status_tag("In Progress")
       end
     end
-    column :date_required
+    column :location
     column "Proposal", :sortable => :proposal do |wo|
       link_to wo.proposal.number, admin_proposal_path(wo.proposal)
     end
-    column :location
+    column :date_required
     column "Created On", :created_at
-    column "Updated On", :updated_at
+   # column "Updated On", :updated_at
   end
 
 	show :title => :number do
@@ -115,6 +115,9 @@ ActiveAdmin.register WorkOrder do
 
 		panel "Assignments" do
     	table_for work_order.assignments do
+				column("") do |resource| 
+          span link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_assignment_path(resource))	if controller.current_ability.can? :manage, Assignment
+        end
 			  column ("ID") do |resource|
           link_to(resource.number, admin_assignment_path(resource))	if controller.current_ability.can? :show, Assignment
         end

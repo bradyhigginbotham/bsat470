@@ -81,13 +81,13 @@
       <tr>
         <td></td>
         <td class="first">Total Before Tax</td>
-        <td class="last"><%= number_with_delimiter(number_with_precision(amount, :precision => 2)) %></td>
+        <td class="last"><%= number_to_currency(amount) %></td>
         <td></td>
       </tr>
       <tr>
         <td></td>
         <td class="first">Tax (8.2%)</td>
-        <td class="last"><%= number_with_delimiter(number_with_precision(amount*0.082, :precision => 2)) %></td>
+        <td class="last"><%= number_to_currency(amount*0.082) %></td>
         <td></td>
       </tr>
       <tr>

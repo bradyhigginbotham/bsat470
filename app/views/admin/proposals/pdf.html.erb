@@ -121,8 +121,8 @@
           <tr>
             <td class="first"><%= task.title.titleize %></td>
             <td><%= task.sqft %></td>
-            <td><%= number_with_delimiter(number_with_precision(task.price_per_sqft, :precision => 2)) %></td>
-            <td class="last"><%= number_with_delimiter(number_with_precision(task.sqft * task.price_per_sqft, :precision => 2)) %></td>
+            <td><%= number_to_currency(task.price_per_sqft) %></td>
+            <td class="last"><%= number_to_currency(task.sqft * task.price_per_sqft) %></td>
             <% amount = amount + (task.sqft * task.price_per_sqft) %>
           </tr>
         <% end %>
@@ -132,13 +132,13 @@
         <td class="first">Total Before Tax</td>
         <td></td>
         <td></td>
-        <td class="last"><%= number_with_delimiter(number_with_precision(amount, :precision => 2)) %></td>
+        <td class="last"><%= number_to_currency(amount) %></td>
       </tr>
       <tr>
         <td class="first">Tax (8.2%)</td>
         <td></td>
         <td></td>
-        <td class="last"><%= number_with_delimiter(number_with_precision(amount*0.082, :precision => 2)) %></td>
+        <td class="last"><%= number_to_currency(amount*0.082) %></td>
       </tr>
       <tr>
         <td class="first"><b>Total</b></td>

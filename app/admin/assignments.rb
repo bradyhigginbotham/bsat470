@@ -33,7 +33,7 @@ ActiveAdmin.register Assignment do
       format.html do
           render :pdf         => "#{@assignment.number}_#{@assignment.work_order.location.name}",
                  :wkhtmltopdf => '/usr/bin/wkhtmltopdf', # path to binary
-                 :header      => {:center => "#{@assignment.number} Assignment"},
+                 :header      => {:center => "Work Assignment"},
                  :margin      => {:bottom         => 10,
                                   :left           => 10,
                                   :right          => 10}
@@ -55,6 +55,13 @@ ActiveAdmin.register Assignment do
       link_to a.number, admin_assignment_path(a)
     end
     column "Supervisor", :employee
+    column "Current State", :sortable => :end_date do |a|
+      if a.end_date
+        status_tag("Completed")
+      else
+        status_tag("In Progress")
+      end
+    end
     column "Vehicle", :sortable => :vehicle do |a|
       link_to "#{a.vehicle.make} #{a.vehicle.model} (#{a.vehicle.year})", admin_vehicle_path(a.vehicle)
     end
