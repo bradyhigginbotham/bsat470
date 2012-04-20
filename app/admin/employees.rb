@@ -9,6 +9,7 @@ ActiveAdmin.register Employee do
 
   index do
     selectable_column
+    column :id
     column "ID", :number
     column "Name", :sortable => :name do |emp|
       link_to emp.name, admin_employee_path(emp)
