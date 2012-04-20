@@ -1,83 +1,48 @@
 <script>
 var chart;
 $(document).ready(function() {
-	chart = new Highcharts.Chart({
-		chart: {
-			renderTo: 'sales_chart',
-			type: 'column'
-		},
-    credits: {
-        enabled: false
+  chart = new Highcharts.Chart({
+    chart: {
+      renderTo: 'sales_chart',
+      type: 'areaspline'
     },
-		title: {
-			text: ''
-		},
-		subtitle: {
-			text: ''	
-		},
-    legend: {
-			layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-			shadow: true,
-      //backgroundColor: '#000',
-      x: -10,
-      y: 50,
-      floating: true
+    colors: ['yellow'],
+    title: {
+      text: ''
     },
-		xAxis: {
-    	categories: ['']
-		},
-		yAxis: {
-			title: {
-				text: 'Totals'
-			},
-			min: 0
-		},
-		tooltip: {
-			formatter: function() {
-	                return '<b>'+ this.series.name +'</b>: ' + this.y;
-			}
-		},
+    subtitle: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['Nov','Dec','Jan','Feb','Mar','Apr']
+    },
+    yAxis: {
+      title: {
+        text: 'Totals'
+      },
+      min: 0
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>'+ this.series.name +'</b>: ' + this.y;
+      }
+    },
     navigation: {
-        buttonOptions: {
-            backgroundColor: {
-                linearGradient: [0, 0, 0, 20],
-                stops: [
-                   [0.4, '#606060'],
-                   [0.6, '#333333']
-                ]
-            }
+      buttonOptions: {
+        backgroundColor: {
+          linearGradient: [0, 0, 0, 20],
+          stops: [
+           [0.4, '#606060'],
+           [0.6, '#333333']
+          ]
         }
+      }
     },
-		series: [{
-			name: 'Clients',
-			data: [<%= Client.select("DISTINCT clients.number").count %>]
-		}, {
-			name: 'Proposals',
-			data: [<%= Proposal.select("DISTINCT proposals.number").count %>]
-		}, {
-			name: 'Work Orders',
-			data: [<%= WorkOrder.select("DISTINCT work_orders.id").count %>]
-		}, {
-			name: 'Assignments',
-			data: [<%= Assignment.select("DISTINCT assignments.id").count %>]
-		}, {
-			name: 'Employees',
-			data: [<%= Employee.select("DISTINCT employees.id").count %>]
-		}, {
-			name: 'Materials',
-			data: [<%= Material.select("DISTINCT materials.id").count %>]
-		}, {
-			name: 'Vehicles',
-			data: [<%= Vehicle.select("DISTINCT vehicles.id").count %>]
-		}, {
-			name: 'Invoices',
-			data: [<%= Invoice.select("DISTINCT invoices.id").count %>]
-		}]
-	});
-	
-	
+    series: [{
+      name: 'Sales',
+      data: [1,2,3,4,6,4]
+    }]
+  });
 });
 </script>
 <div id="sales_chart"></div>
