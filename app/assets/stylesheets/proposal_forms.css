@@ -200,7 +200,63 @@ div[class*='tasks_'] {
 /* Buttons */
 .add_task,
 .add_location {float:left}
-.add_location {width:100%;}
+.add_location {width:auto; margin-right: 10px}
+.delete_location {float: left, width: 75%}
+.delete_location a {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: -moz-linear-gradient(-90deg, #FFFFFF, #E7E7E7) repeat scroll 0 0 transparent;
+    border-color: #D3D3D3 #C7C7C7 #C2C2C2;
+    border-radius: 200px 200px 200px 200px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(255, 255, 255, 0.8) inset;
+    color: #5E6469;
+    display: inline-block;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 14px;
+    margin-right: 3px;
+    padding: 7px 16px 4px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.delete_location a:hover {
+  background: -moz-linear-gradient(-90deg, #FFFFFF, #F1F1F1) repeat scroll 0 0 transparent !important;
+}
 
-.add_task {width:150px;margin-left:10px;text-align:center}
+
+.add_task {width:auto;margin-left:10px;text-align:left}
 .add_task .button {margin:0 !important}
+
+.delete_task {float: left; width:auto;margin-left:10px;text-align:left}
+.delete_task a {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: -moz-linear-gradient(-90deg, #FFFFFF, #E7E7E7) repeat scroll 0 0 transparent;
+    border-color: #D3D3D3 #C7C7C7 #C2C2C2;
+    border-radius: 200px 200px 200px 200px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(255, 255, 255, 0.8) inset;
+    color: #5E6469;
+    display: inline-block;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 14px;
+    margin-right: 3px;
+    padding: 7px 16px 4px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.delete_task a:hover {
+  background: -moz-linear-gradient(-90deg, #FFFFFF, #F1F1F1) repeat scroll 0 0 transparent !important;
+}

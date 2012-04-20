@@ -1,5 +1,7 @@
 ActiveAdmin.register Invoice do
   actions :all, :except => :new
+
+  menu :if => proc{ can?(:manage, Invoice) }     
   controller.authorize_resource
 
   action_item :only => :show do

@@ -29,4 +29,17 @@ ActiveAdmin.register Location do
     active_admin_comments
   end
 
+  form do |f|
+    f.inputs "Details" do
+      f.input :client
+      f.input :name
+      f.input :address
+      f.input :city
+      f.input :state
+      f.input :zip
+    end
+
+    f.buttons
+  end
+
 end

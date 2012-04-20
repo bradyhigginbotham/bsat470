@@ -204,6 +204,9 @@ function addLocation(index){
             '<div class="add_task">' +
               '<a class="button task_button_' + index + '" onClick="addTask(' + index + ', 1);">Add Task</a>' +
             '</div>' +
+            '<div class="delete_task">' +
+              '<a class="button task_delete_' + index + '" onClick="$(\'div.tasks_' + index + ' .task_fields ol\').last().remove();">Delete</a>' +
+            '</div>' +
           '</div>' +
         '</div>' +
       '</div>' +

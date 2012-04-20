@@ -24,18 +24,26 @@ ActiveAdmin::Dashboards.build do
         li raw "<b>Name:</b> " + current_employee.name
         li raw "<b>Phone:</b> " + current_employee.phone
         li raw "<b>Department:</b> " + current_employee.department.title
-        li raw "<b>Supervisor:</b> " + current_employee.supervisor.name
+        if current_employee.supervisor
+          li raw "<b>Supervisor:</b> " + current_employee.supervisor.name
+        else
+          li raw "<b>Supervisor:</b> N/A"
+        end
       end
     end
   end
 
   section "Current Assignments", :priority => 2, :if => Proc.new { current_admin_user.department.title == "Labor" } do
-    table_for LaborAssignment.where("employee_id = ?", current_employee.id) do
-      column ("Assignment") {|la| link_to(la.assignment.number, admin_assignment_path(la.assignment))}
-      column ("Task") {|la| la.task.title}
-      column ("Rate") {|la| number_to_currency(la.rate)}
-      column :est_hours
-      column :used_hours
+    if current_employee.labor_assignments.any?
+      table_for LaborAssignment.where("employee_id = ?", current_employee.id) do
+        column ("Assignment") {|la| link_to(la.assignment.number, admin_assignment_path(la.assignment))}
+        column ("Task") {|la| la.task.title}
+        column ("Rate") {|la| number_to_currency(la.rate)}
+        column :est_hours
+        column :used_hours
+      end
+    else
+      div "#{current_employee.name} has no assignments at the moment."
     end
   end
   

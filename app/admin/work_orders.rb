@@ -67,6 +67,7 @@ ActiveAdmin.register WorkOrder do
   end
 
   scope :all, :default => true
+  scope :in_progress
   scope :completed
 
   action_item :only => :show do

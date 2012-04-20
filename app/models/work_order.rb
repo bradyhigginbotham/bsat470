@@ -13,6 +13,7 @@ class WorkOrder < ActiveRecord::Base
   attr_accessible       :number, :notes, :date_required, :level, :employee_id, :proposal_id, :location_id, :invoice_id
   validates_presence_of :number, :date_required, :level, :employee_id, :proposal_id, :location_id
 
+  scope :in_progress, where("work_orders.invoice_id IS NULL")
   scope :completed, where("work_orders.invoice_id IS NOT NULL")
 
   def next_id
