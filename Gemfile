@@ -16,7 +16,7 @@ end
 
 gem 'sass-rails',   '~> 3.2.3'
 
-gem "twitter-bootstrap-rails"
+#gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
 gem 'therubyracer' # JS Compiler from Chrome
 
