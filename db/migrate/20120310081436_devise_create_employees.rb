@@ -48,9 +48,6 @@ class DeviseCreateEmployees < ActiveRecord::Migration
       t.timestamps
     end
 
-    # Create a default user
-    Employee.create!(:number => 'E001', :name => 'Brady Higginbotham', :phone => '(123) 456-7890', :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password', :admin => true, :department_id => "1")
-
     add_index :employees, :email,                :unique => true
     add_index :employees, :reset_password_token, :unique => true
     # add_index :employees, :confirmation_token,   :unique => true

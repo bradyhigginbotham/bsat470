@@ -4,9 +4,5 @@ class CreateDepartments < ActiveRecord::Migration
       t.string :title, :null => false
       t.timestamps
     end
-
-    Department.create!(:title => 'Management')
-    Department.create!(:title => 'Sales')
-    Department.create!(:title => 'Labor')
   end
 end

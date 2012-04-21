@@ -154,7 +154,7 @@ $("select.client_list").change(function() {
 // Locations and Tasks
 function addLocation(index){
   $("div.add_location").before(
-    '<fieldset class="inputs">' +
+    '<fieldset class="locational inputs">' +
       '<legend><span>Location ' + (index+1) + '</span></legend>' +
       '<div id="locations_box">' +
         '<div class="locations_' + index + '">' +
