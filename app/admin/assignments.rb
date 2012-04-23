@@ -42,7 +42,7 @@ ActiveAdmin.register Assignment do
   end
 
   collection_action :mobile do
-    if @assignments = Assignment.where("employee_id = ?", current_employee.id)
+    if @assignments = Assignment.where("employee_id = ? and end_date IS NOT NULL", current_employee.id)
 			render :json => @assignments
 		else
 			render :text => "record_not_found"
