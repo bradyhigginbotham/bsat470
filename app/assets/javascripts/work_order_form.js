@@ -165,9 +165,9 @@ function createTaskGrid(count, pending){
     for (var i = 0; i < count; i++){
       $("div.wo_tasks .task_fields").append(
         '<ol>' +
-          '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title"></li>' +
-          '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft"></li>' +
-          '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft"></li>' +
+          '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title" readonly="readonly" style="text-align: left"></li>' +
+          '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft" readonly="readonly"></li>' +
+          '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft" readonly="readonly"></li>' +
           '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours"></li>' +
           '<li id="tasks_' + i + '_status_input" class="string input optional stringish"><input type="text"  readonly="readonly" name="tasks[' + i + '][status]" maxlength="255" id="tasks_' + i + '_status"></li>' +
           '<li id="tasks_' + i + '_date_completed_input" class="string input optional stringish"><input type="text" name="tasks[' + i + '][date_completed]" id="tasks_' + i + '_date_completed" disabled="disabled" value="--"></li>' +
@@ -180,10 +180,10 @@ function createTaskGrid(count, pending){
     for (var i = 0; i < count; i++){
       $("div.wo_tasks .task_fields").append(
         '<ol>' +
-          '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title"></li>' +
-          '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft"></li>' +
-          '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft"></li>' +
-          '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours"></li>' +
+          '<li id="tasks_' + i + '_title_input" class="string input required stringish"><input type="text"  name="tasks[' + i + '][title]" maxlength="255" id="tasks_' + i + '_title" readonly="readonly"></li>' +
+          '<li id="tasks_' + i + '_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][sqft]" id="tasks_' + i + '_sqft" readonly="readonly"></li>' +
+          '<li id="tasks_' + i + '_price_per_sqft_input" class="number input required numeric stringish"><input type="number" step="any" name="tasks[' + i + '][price_per_sqft]" id="tasks_' + i + '_price_per_sqft" readonly="readonly"></li>' +
+          '<li id="tasks_' + i + '_est_hours_input" class="number input optional numeric stringish"><input type="number" step="any" name="tasks[' + i + '][est_hours]" id="tasks_' + i + '_est_hours" readonly="readonly"></li>' +
           '<li id="tasks_' + i + '_status_input" class="string input optional stringish">' +
             '<select name="tasks[' + i + '][status]" id="tasks_' + i + '_status">' +
               '<option value="In Progress">In Progress</option>' +

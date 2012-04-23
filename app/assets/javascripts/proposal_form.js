@@ -176,16 +176,16 @@ function addLocation(index){
                 '<label for="proposal_locations_attributes_' + index + '_zip" class="label">Zip<abbr title="required">*</abbr></label><br />' +
                 '<input type="text" name="proposal[locations_attributes][' + index + '][zip]" maxlength="5" id="proposal_locations_attributes_' + index + '_zip" class="zip">' +
               '</li><li id="proposal_locations_attributes_' + index + '_client_id_input" class="hidden input optional">' +
-                '<input type="hidden" name="proposal[locations_attributes][' + index + '][client_id]" id="proposal_locations_attributes_' + index + '_client_id">' +
+                '<input type="hidden" name="proposal[locations_attributes][' + index + '][client_id]" id="proposal_locations_attributes_' + index + '_client_id" class="location_client_id">' +
               '</li>' +
             '</ol>' +
           '</div>' +
           '<div class="tasks_' + index + '">' +
             '<div class="task_labels">' +
               '<ol>' +
-                '<li><label class="label">Task</label></li>' +
-                '<li><label class="label">Square Feet</label></li>' +
-                '<li><label class="label">Price/SqFt</label></li>' +
+                '<li><label class="label">Task<abbr title="required">*</abbr></label></li>' +
+                '<li><label class="label">Square Feet<abbr title="required">*</abbr></label></li>' +
+                '<li><label class="label">Price/SqFt<abbr title="required">*</abbr></label></li>' +
                 '<li><label class="label">Est. Hours</label></li>' +
               '</ol>' +
             '</div>' +
@@ -214,6 +214,8 @@ function addLocation(index){
   );
 
   $(".add_location a.button").attr("onClick", "addLocation(" + (index+1) + ");");
+
+  updateClientID($("select.client_list").val());
 }
 
 function addTask(location_index, task_index){

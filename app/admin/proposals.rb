@@ -191,7 +191,8 @@ ActiveAdmin.register Proposal do
 
       if resource.status == "Accepted"
         div do
-		      link_to "Add Work Order", new_admin_work_order_path().to_s + "?&work_order[proposal_id]=#{proposal.id}", :class => "panel_button"
+		      link_to "Add Work Order", new_admin_work_order_path().to_s, # + "?&work_order[proposal_id]=#{proposal.id}"
+            :class => "panel_button"
       	end
       end
     end

@@ -13,7 +13,7 @@
               <input class="plain" readonly="true" id="assignment_number" name="assignment[number]" value="<%= f.object.number %>">
             <% end %>
           </li>
-          <%= f.input :work_order, :label => "Work Order No.", :as => :select, :collection => WorkOrder.all.collect{|wo| [wo.number, wo.id]}, :input_html => {:class => 'work_order_list', :style => 'width: 117px'} %>
+          <%= f.input :work_order, :label => "Work Order No.", :as => :select, :collection => WorkOrder.where("invoice_id IS NULL").collect{|wo| [wo.number, wo.id]}, :input_html => {:class => 'work_order_list', :style => 'width: 117px'} %>
         </ol>
       </div>
       <div class="form_header_right">
