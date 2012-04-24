@@ -4,6 +4,12 @@ ActiveAdmin.register MaterialAssignment do
 
   collection_action :mobile_get do
     if @materials = MaterialAssignment.where("assignment_id = ?", params[:id])
+      @materials.each do |material|
+        task = Task.find(material[:task_id])
+        material[:task_name] = task.title
+        mat = Material.find(material[:material_id])
+        material[:mat_name] = mat.name
+      end
 			render :json => @materials
 		else
 			render :text => "record_not_found"
@@ -12,7 +18,7 @@ ActiveAdmin.register MaterialAssignment do
 
   collection_action :mobile_set do
     params[:materials].each do |key, material|
-      @material = Material.find(material[:id])
+      @material = MaterialAssignment.find(material[:id])
       @material.update_attributes(:qty_used => material[:qty_used])
 
       if material[:task][:completed] == true

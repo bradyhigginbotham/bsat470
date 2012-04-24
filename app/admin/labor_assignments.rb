@@ -12,7 +12,7 @@ ActiveAdmin.register LaborAssignment do
 
   collection_action :mobile_set do
     params[:labor].each do |key, labor|
-      @labor = Labor.find(labor[:id])
+      @labor = LaborAssignment.find(labor[:id])
       @labor.update_attributes(:hrs_used => labor[:hrs_used])
 
       if labor[:task][:completed] == true
