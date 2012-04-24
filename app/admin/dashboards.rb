@@ -1,7 +1,46 @@
 ActiveAdmin::Dashboards.build do
   section "Sales", :priority => 1, :if => Proc.new { current_admin_user.department.title == "Management" } do
+    @totals = []
+
+    months = Invoice.select('extract(month from updated_at)').where("paid = true AND extract(month from updated_at) > ?", 6.months.ago.month)
+
+    months.each do |month|
+      @work_orders = WorkOrder.where("invoice_id = ?", invoice.id)
+
+      @work_orders.each do |wo|
+        wo_tasks = Task.where("work_order_id = ?", wo.id)
+
+        case 4
+          when 5.months.ago.month
+            wo_tasks.each do |task|      
+              @totals[0] += task.sqft*task.price_per_sqft
+            end
+          when 4.months.ago.month
+            wo_tasks.each do |task|      
+              @totals[1] += task.sqft*task.price_per_sqft
+            end
+          when 3.months.ago.month
+            wo_tasks.each do |task|      
+              @totals[2] += task.sqft*task.price_per_sqft
+            end
+          when 2.months.ago.month
+            wo_tasks.each do |task|      
+              @totals[3] += task.sqft*task.price_per_sqft
+            end
+          when 1.months.ago.month
+            wo_tasks.each do |task|      
+              @totals[4] += task.sqft*task.price_per_sqft
+            end
+          when Date.today.month
+            wo_tasks.each do |task|      
+              @totals[5] += task.sqft*task.price_per_sqft
+            end
+        end
+      end
+    end
+
     div :id => "chart_container" do
-      render 'invoices'
+      render 'invoices', { :totals => @totals }
 		end
   end
 

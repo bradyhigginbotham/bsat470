@@ -31,7 +31,7 @@ $(document).ready(function() {
     },
     tooltip: {
       formatter: function() {
-        return '<b>'+ this.series.name +'</b>: ' + this.y;
+        return '<b>'+ this.series.name +'</b>: $' + this.y;
       }
     },
     navigation: {
@@ -47,14 +47,7 @@ $(document).ready(function() {
     },
     series: [{
       name: 'Sales',
-      data: [
-        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", 5.months.ago.month).count %>,
-        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", 4.months.ago.month).count %>,
-        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", 3.months.ago.month).count %>,
-        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", 2.months.ago.month).count %>,
-        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", 1.months.ago.month).count %>,
-        <%= Invoice.select("DISTINCT invoices.id").where("paid = true AND extract(month from created_at) = ?", Date.today.month).count %>,
-      ]
+      data: [<%= totals[0] =>, <%= totals[1] =>, <%= totals[2] =>, <%= totals[3] =>, <%= totals[4] =>, <%= totals[5] =>]
     }]
   });
 
