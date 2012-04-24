@@ -3,7 +3,7 @@ ActiveAdmin.register MaterialAssignment do
   controller.authorize_resource
 
   collection_action :mobile_get do
-    if @materials = MaterialAssignment.where("assignment_id = ?", params[:id])
+    if @materials = MaterialAssignment.where("assignment_id = ?", params[:id]).order("task_id")
       @materials.each do |material|
         task = Task.find(material[:task_id])
         material[:task_name] = task.title

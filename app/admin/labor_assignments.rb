@@ -4,6 +4,12 @@ ActiveAdmin.register LaborAssignment do
 
   collection_action :mobile_get do
     if @labor = LaborAssignment.where("assignment_id = ?", params[:id])
+      @labor.each do |labor|
+        task = Task.find(labor[:task_id])
+        labor[:task_name] = task.title
+        emp = Employee.find(labor[:employee_id])
+        labor[:emp_name] = emp.name
+      end
 			render :json => @labor
 		else
 			render :text => "record_not_found"
