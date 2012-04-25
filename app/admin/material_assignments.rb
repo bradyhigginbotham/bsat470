@@ -23,7 +23,7 @@ ActiveAdmin.register MaterialAssignment do
     materials = JSON.parse(params[:materials])
     materials.each do |key, material|
       @material = MaterialAssignment.find(material[:id])
-      @material.update_attributes(:qty_used => material[:qty_used])
+      @material.update_attributes(:qty_used => 2)
     end
   end
 
