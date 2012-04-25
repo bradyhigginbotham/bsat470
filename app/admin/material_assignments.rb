@@ -20,11 +20,6 @@ ActiveAdmin.register MaterialAssignment do
     params[:materials].each do |key, material|
       @material = MaterialAssignment.find(material[:id])
       @material.update_attributes(:qty_used => material[:qty_used])
-
-      if material[:task][:completed] == true
-        @task = Task.find(material[:task][:id])
-        @task.update_attributes(:status => "Completed", :date_completed => Date.today)
-      end
     end
   end
 

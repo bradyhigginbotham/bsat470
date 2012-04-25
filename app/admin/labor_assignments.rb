@@ -20,11 +20,6 @@ ActiveAdmin.register LaborAssignment do
     params[:labor].each do |key, labor|
       @labor = LaborAssignment.find(labor[:id])
       @labor.update_attributes(:hrs_used => labor[:hrs_used])
-
-      if labor[:task][:completed] == true
-        @task = Task.find(labor[:task][:id])
-        @task.update_attributes(:status => "Completed", :date_completed => Date.today)
-      end
     end
   end
 

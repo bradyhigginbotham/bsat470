@@ -64,6 +64,18 @@ ActiveAdmin.register WorkOrder do
 
       super
     end
+
+    def mobile_update
+      params[:tasks].each do |key, task|
+        if (task.completed)        
+          @task = Task.find(task[:id])
+          @task.update_attributes(
+            :status => "Completed",
+            :date_completed => Date.today
+          )
+        end
+      end
+    end
   end
 
   scope :all, :default => true
