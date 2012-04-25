@@ -7,6 +7,9 @@ ActiveAdmin.register MaterialAssignment do
       @materials.each do |material|
         task = Task.find(material[:task_id])
         material[:task_name] = task.title
+        if task.status == "Completed"
+          material[:completed] = true
+        end
         mat = Material.find(material[:material_id])
         material[:mat_name] = mat.name
       end
