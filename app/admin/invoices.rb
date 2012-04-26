@@ -80,7 +80,7 @@ ActiveAdmin.register Invoice do
         column :level
         column ("Status") {status_tag("Complete")}
         column :location
-        column "Supervisor", :employee
+        column "Manager", :employee
 			  column "Created On", :created_at
 			  column "Updated On", :updated_at
     	end

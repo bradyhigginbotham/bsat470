@@ -7,7 +7,7 @@ ActiveAdmin.register LaborAssignment do
       @labor.each do |labor|
         task = Task.find(labor[:task_id])
         labor[:task_name] = task.title
-        if task.date_completed
+        if task.status == "Completed"
           labor[:completed] = true
         end
         emp = Employee.find(labor[:employee_id])

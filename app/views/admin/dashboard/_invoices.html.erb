@@ -1,4 +1,9 @@
 <script>
+Number.prototype.formatMoney = function(c, d, t){
+var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
+
 var chart;
 $(document).ready(function() {
   chart = new Highcharts.Chart({
@@ -31,7 +36,7 @@ $(document).ready(function() {
     },
     tooltip: {
       formatter: function() {
-        return '<b>'+ this.series.name +'</b>: $' + this.y;
+        return '<b>'+ this.series.name +'</b>: $' + this.y.formatMoney(0, '.', ',');
       }
     },
     navigation: {
@@ -47,7 +52,7 @@ $(document).ready(function() {
     },
     series: [{
       name: 'Sales',
-      data: [<%= totals[0] =>, <%= totals[1] =>, <%= totals[2] =>, <%= totals[3] =>, <%= totals[4] =>, <%= totals[5] =>]
+      data: [<%= totals[0] %>,<%= totals[1] %>,<%= totals[2] %>,<%= totals[3] %>,<%= totals[4] %>,<%= totals[5] %>]
     }]
   });
 

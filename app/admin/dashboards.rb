@@ -1,46 +1,58 @@
 ActiveAdmin::Dashboards.build do
   section "Sales", :priority => 1, :if => Proc.new { current_admin_user.department.title == "Management" } do
-    @totals = []
+    totals = []
+    totals0 = 0
+    totals1 = 0
+    totals2 = 0
+    totals3 = 0
+    totals4 = 0
+    totals5 = 0
 
-    months = Invoice.select('extract(month from updated_at)').where("paid = true AND extract(month from updated_at) > ?", 6.months.ago.month)
+    invoices = Invoice.select([:id, :updated_at]).where("paid = true")
 
-    months.each do |month|
+    invoices.each do |invoice|
       @work_orders = WorkOrder.where("invoice_id = ?", invoice.id)
-
       @work_orders.each do |wo|
         wo_tasks = Task.where("work_order_id = ?", wo.id)
 
-        case 4
+        case invoice.updated_at.month
           when 5.months.ago.month
             wo_tasks.each do |task|      
-              @totals[0] += task.sqft*task.price_per_sqft
+              totals0 += task.sqft*task.price_per_sqft
             end
           when 4.months.ago.month
             wo_tasks.each do |task|      
-              @totals[1] += task.sqft*task.price_per_sqft
+              totals1 += task.sqft*task.price_per_sqft
             end
           when 3.months.ago.month
             wo_tasks.each do |task|      
-              @totals[2] += task.sqft*task.price_per_sqft
+              totals2 += task.sqft*task.price_per_sqft
             end
           when 2.months.ago.month
             wo_tasks.each do |task|      
-              @totals[3] += task.sqft*task.price_per_sqft
+              totals3 += task.sqft*task.price_per_sqft
             end
           when 1.months.ago.month
             wo_tasks.each do |task|      
-              @totals[4] += task.sqft*task.price_per_sqft
+              totals4 += task.sqft*task.price_per_sqft
             end
           when Date.today.month
             wo_tasks.each do |task|      
-              @totals[5] += task.sqft*task.price_per_sqft
+              totals5 += task.sqft*task.price_per_sqft
             end
         end
       end
     end
 
+    totals.push(totals0)
+    totals.push(totals1)
+    totals.push(totals2)
+    totals.push(totals3)
+    totals.push(totals4)
+    totals.push(totals5)
+
     div :id => "chart_container" do
-      render 'invoices', { :totals => @totals }
+      render 'invoices', { :totals => totals }
 		end
   end
 

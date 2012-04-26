@@ -20,11 +20,13 @@ ActiveAdmin.register MaterialAssignment do
   end
 
   collection_action :mobile_set do
-    materials = JSON.parse(params[:materials])
-    materials.each do |key, material|
+    #materials = JSON.parse(params[:materials])
+    params[:materials].each do |key, material|
       @material = MaterialAssignment.find(material[:id])
       @material.update_attributes(:qty_used => 2)
     end
+
+    render :text => "Assignment successfully updated."
   end
 
   form do |f|
