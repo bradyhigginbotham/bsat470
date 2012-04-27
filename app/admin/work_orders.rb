@@ -146,6 +146,7 @@ ActiveAdmin.register WorkOrder do
     	table_for work_order.assignments do
 				column("") do |resource| 
           span link_to(image_tag('application_edit.png', :title => 'Edit'), edit_admin_assignment_path(resource))	if controller.current_ability.can? :manage, Assignment
+          span link_to(image_tag('print.png', :title => 'Print'), pdf_admin_assignment_path(resource)) if controller.current_ability.can? :manage, Assignment
         end
 			  column ("ID") do |resource|
           link_to(resource.number, admin_assignment_path(resource))	if controller.current_ability.can? :show, Assignment
